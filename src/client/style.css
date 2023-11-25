@@ -1,0 +1,47 @@
+.App {
+  font-family: sans-serif;
+  text-align: center;
+}
+
+.atp-clock-btn {
+  display: none !important;
+}
+
+
+
+.mat-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.atp-time {
+  background-color: #3d91ff  !important;
+  text-align: center !important;
+  font-size: 35px;
+}
+
+.atp-color--primary {
+  background-color: #6eadff;
+}
+
+
+
+.atp-clock {
+  background-color: black !important;
+  border-radius: 50%;
+}
+
+.atp-face-color {
+  background-color: #3d91ff !important;
+}
+
+.atp-n {
+  color: rgb(255, 255, 255) !important;
+}
+
+.atp-h {
+  background-color: rgb(243, 243, 243) !important;
+}
+
+
