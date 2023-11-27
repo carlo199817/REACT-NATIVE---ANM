@@ -303,12 +303,18 @@ document.body.style = 'background:'+localStorage.getItem('themecolor1');
   localStorage.setItem('APIthemecolor', "https://core01.ameliteaviation.com:19987/theme_color/");
 
   localStorage.setItem('APIthemetype', "https://core01.ameliteaviation.com:19987/theme_type/");
-  localStorage.setItem('APIthemefontsize', "https://core01.ameliteaviation.com:19987/themes_font/");
-  localStorage.setItem('APIthemefontweight', "https://core01.ameliteaviation.com:19987/themes_font_size/");
+  localStorage.setItem('APIthemefontfamily', "https://core01.ameliteaviation.com:19987/themes_font/");
+  localStorage.setItem('APIthemefontsize', "https://core01.ameliteaviation.com:19987/themes_font_size/");
+  localStorage.setItem('APIthemefontweight', "https://core01.ameliteaviation.com:19987/themes_font_weight/");
   localStorage.setItem('APIthemelogo', "https://core01.ameliteaviation.com:19987/themes_logo/");
   localStorage.setItem('APIchecklist', "https://core01.ameliteaviation.com:19987/checklist/");
-  localStorage.setItem('APIoverall', "https://core01.ameliteaviation.com:19987/overall/");
+  localStorage.setItem('APIoverall', "https://core01.ameliteaviation.com:19987/overall/"); 
   localStorage.setItem('APIallmyquestion', "https://core01.ameliteaviation.com:19987/all_my_question/");
   localStorage.setItem('APIallchoices', "https://core01.ameliteaviation.com:19987/allchoices/");
-
-  localStorage.setItem('APIthemeviews', "https://core01.ameliteaviation.com:19987/web_themes_view/"); 
+ 
+  localStorage.setItem('APIwebthemeviews', "https://core01.ameliteaviation.com:19987/web_themes_view/"); 
+  localStorage.setItem('APImobilethemeviews', "https://core01.ameliteaviation.com:19987/mobile_themes_view/"); 
+  localStorage.setItem('APImobile_themes', "https://core01.ameliteaviation.com:19987/mobile_themes/"); 
+  localStorage.setItem('APImobile_themes_activator', "https://core01.ameliteaviation.com:19987/mobile_themes_activate/"); 
+  localStorage.setItem('APIweb_themes', "https://core01.ameliteaviation.com:19987/web_themes/"); 
+  localStorage.setItem('APIweb_themes_activator', "https://core01.ameliteaviation.com:19987/web_themes_activate/"); 

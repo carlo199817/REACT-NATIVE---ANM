@@ -1062,7 +1062,7 @@ style={{
                   borderWidth:2, 
                   paddingLeft: 12,
           paddingRight: 8, 
-          fontSize:localStorage.getItem('themefontsize'),   
+          fontSize:parseInt(localStorage.getItem("themefontsizetext"), 0) + 0,   
           color:localStorage.getItem('themecolor5'),
                 }
               }
@@ -1089,7 +1089,7 @@ style={{
                   borderWidth:2, 
                   paddingLeft: 12,
           paddingRight: 8, 
-          fontSize:localStorage.getItem('themefontsize'),   
+          fontSize:parseInt(localStorage.getItem("themefontsizetext"), 0) + 0,   
           color:localStorage.getItem('themecolor5'),
                 }
               }

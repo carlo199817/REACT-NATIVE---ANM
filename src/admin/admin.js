@@ -18,6 +18,10 @@ import dateFormat from 'dateformat';
 import moment from 'moment';
 import Select from 'react-select'
 import { FaCheck } from "react-icons/fa6";
+import { IoColorPaletteSharp } from "react-icons/io5";
+import { BiSelection } from "react-icons/bi";
+import { MdWebAsset } from "react-icons/md";
+import { CiMobile1 } from "react-icons/ci";
 import {
     View,   
     Text,
@@ -42,11 +46,16 @@ export const Admin = props => {
     setImages2(files.base64)
 
   }; 
+  let  [getThemeColors, setThemeColors] = useState(""); 
+  let  [getThemeType, setThemeType] = useState(""); 
+  let  [getThemeFont, setThemeFont] = useState(""); 
+  let  [getThemeSize, setThemeSize] = useState(""); 
+  let  [getThemeWeight, setThemeWeight] = useState(""); 
 
-
+  let  [insertuse, insertUse] = useState(false);  
   let  [myroles1, setRoles1] = useState([]);  
   let  [myrolesid1, setRolesID1] = useState([]);  
-
+ 
   let  [inputemail, inputEmail] = useState("");  
   let  [inputpassword, inputPassword] = useState("");  
   let  [inputusername, inputUsername] = useState("");  
@@ -86,7 +95,53 @@ export const Admin = props => {
 
   let  [inputdestination, inputDestination] = useState("");  
   let  [inputplane, inputPlane] = useState("");  
-  let  [getusersdata, setUsersData] = useState("[]");   
+  let  [getusersdata, setUsersData] = useState("[]"); 
+  
+  let  [mythemes, setThemes] = useState("1");  
+
+  let  [getthemecolor, setThemeColor] = useState("[]"); 
+  let  [getfontfamily, setThemeFontFamily] = useState("[]"); 
+  let  [getfontweight, setThemeFontWeight] = useState("[]"); 
+  let  [getfontsize, setThemeFontSize] = useState("[]"); 
+
+  let  [insertthemecolor, insertThemeColor] = useState(""); 
+  let  [insertthemefamily, insertThemeFontFamily] = useState(""); 
+  let  [insertthemeweight, insertThemeFontWeight] = useState(""); 
+  let  [insertthemesize, insertThemeSize] = useState(""); 
+
+  let  [getwebtheme, setWebTheme] = useState("[]"); 
+  let  [getwebthemeviews, setWebThemeViews] = useState("[]"); 
+  let  [getmobiletheme, setMobileTheme] = useState("[]"); 
+  let  [getmobilethemeviews, setMobileThemeViews] = useState("[]"); 
+
+
+  let  [insertwebthemecolor1, insertWebThemeColor1] = useState(""); 
+  let  [insertwebthemecolor2, insertWebThemeColor2] = useState(""); 
+  let  [insertwebthemecolor3, insertWebThemeColor3] = useState(""); 
+  let  [insertwebthemecolor4, insertWebThemeColor4] = useState(""); 
+  let  [insertwebthemecolor5, insertWebThemeColor5] = useState(""); 
+  let  [insertwebthemecolor6, insertWebThemeColor6] = useState(""); 
+  let  [insertwebthemecolor7, insertWebThemeColor7] = useState(""); 
+  let  [insertwebthemetype, insertWebThemeType] = useState(""); 
+  let  [insertwebthemefont, insertWebThemeFont] = useState(""); 
+  let  [insertwebthemeweight, insertWebThemeWeight] = useState(""); 
+  let  [insertwebthemesizebigtitle, insertWebThemeSizeBigTitle] = useState(""); 
+  let  [insertwebthemesizetitle, insertWebThemeSizeTitle] = useState(""); 
+  let  [insertwebthemesizetext, insertWebThemeSizeText] = useState(""); 
+  let  [insertwebthemesizeheader, insertWebThemeSizeHeader] = useState(""); 
+  let  [insertwebthemeiconsize, insertWebThemeIconSize] = useState(""); 
+  
+
+  let  [insertmobilethemecolor1, insertMobileThemeColor1] = useState(""); 
+  let  [insertmobilethemecolor2, insertMobileThemeColor2] = useState(""); 
+  let  [insertmobilethemecolor3, insertMobileThemeColor3] = useState(""); 
+  let  [insertmobilethemecolor4, insertMobileThemeColor4] = useState(""); 
+  let  [insertmobilethemecolor5, insertMobileThemeColor5] = useState(""); 
+  let  [insertmobilethemecolor6, insertMobileThemeColor6] = useState(""); 
+  let  [insertmobilethemetype, insertMobileThemeType] = useState(""); 
+  let  [insertmobilethemefont, insertMobileThemeFont] = useState(""); 
+  let  [insertmobilethemesize, insertMobileThemeSize] = useState(""); 
+  let  [insertmobilethemeweight, insertMobileThemeWeight] = useState(""); 
 
   async function getUsersAPI(){
     try { 
@@ -172,9 +227,855 @@ export const Admin = props => {
     } catch (error) { 
     }
   }
+  async function getMobileThemesViewAPI(){
+    try { 
+      const response = await fetch(localStorage.getItem("APImobilethemeviews"), {
+          method: 'GET', 
+          headers: {
+            Accept: 'application/json', 
+            'Content-Type': 'application/json',
+          }, 
+        }  
+      );  
+   
+      const json = await response.json();
+      if(JSON.stringify(json)!="[]"){  
+        setMobileThemeViews(JSON.stringify(json))
+        insertMobileThemeColor1({ value: json[0]['theme_color_1_id'], label:<tr
+        
+        >
+          <td> 
+          <View
+        style={{
+          height:20,
+          width:20,
+          borderColor:'grey',
+          borderWidth:0.01, 
+          backgroundColor:json[0]['theme_color_1_id']
+        }}  
+        ></View>
+          </td>
+          <td>
+            <View
+            style={{
+              width:5
+            }}
+            >  
+
+            </View>
+          </td>
+          <td>
+          <Text 
+          style={{
+            color:localStorage.getItem('themecolor5')
+          }}
+          >{json[0]['theme_color_1_id']}</Text>
+          </td>
+        </tr>})
+   insertMobileThemeColor2({ value: json[0]['theme_color_2_id'], label:<tr
+    
+   >
+     <td>
+     <View
+   style={{
+     height:20,
+     width:20,
+     borderColor:'grey',
+     borderWidth:0.01, 
+     backgroundColor:json[0]['theme_color_2_id']
+   }}  
+   ></View>
+     </td>
+     <td>
+       <View
+       style={{
+         width:5
+       }}
+       >  
+
+       </View>
+     </td>
+     <td>
+     <Text 
+     style={{
+       color:localStorage.getItem('themecolor5')
+     }}
+     >{json[0]['theme_color_2_id']}</Text>
+     </td>
+   </tr>})
+      insertMobileThemeColor3({ value: json[0]['theme_color_3_id'], label:<tr
+    
+      >
+        <td>
+        <View
+      style={{
+        height:20,
+        width:20,
+        borderColor:'grey',
+        borderWidth:0.01, 
+        backgroundColor:json[0]['theme_color_3_id']
+      }}  
+      ></View>
+        </td>
+        <td>
+          <View
+          style={{
+            width:5
+          }}
+          >  
+
+          </View>
+        </td>
+        <td>
+        <Text 
+        style={{
+          color:localStorage.getItem('themecolor5')
+        }}
+        >{json[0]['theme_color_3_id']}</Text>
+        </td>
+      </tr>})
+         insertMobileThemeColor4({ value: json[0]['theme_color_4_id'], label:<tr
+    
+         >
+           <td>
+           <View
+         style={{
+           height:20,
+           width:20,
+           borderColor:'grey',
+           borderWidth:0.01, 
+           backgroundColor:json[0]['theme_color_4_id']
+         }}  
+         ></View>
+           </td>
+           <td>
+             <View
+             style={{
+               width:5
+             }}
+             >  
+ 
+             </View>
+           </td>
+           <td>
+           <Text 
+           style={{
+             color:localStorage.getItem('themecolor5')
+           }}
+           >{json[0]['theme_color_4_id']}</Text>
+           </td>
+         </tr>})
+            insertMobileThemeColor5({ value: json[0]['theme_color_5_id'], label:<tr
+    
+            >
+              <td>
+              <View
+            style={{
+              height:20,
+              width:20,
+              borderColor:'grey',
+              borderWidth:0.01, 
+              backgroundColor:json[0]['theme_color_5_id']
+            }}  
+            ></View>
+              </td>
+              <td>
+                <View
+                style={{
+                  width:5
+                }}
+                >  
+    
+                </View>
+              </td>
+              <td>
+              <Text 
+              style={{
+                color:localStorage.getItem('themecolor5')
+              }}
+              >{json[0]['theme_color_5_id']}</Text>
+              </td>
+            </tr>})
+               insertMobileThemeColor6({ value: json[0]['theme_color_6_id'], label:<tr
+    
+               >
+                 <td>
+                 <View
+               style={{
+                 height:20,
+                 width:20,
+                 borderColor:'grey',
+                 borderWidth:0.01, 
+                 backgroundColor:json[0]['theme_color_6_id']
+               }}  
+               ></View>
+                 </td>
+                 <td>
+                   <View
+                   style={{
+                     width:5
+                   }}
+                   >  
+       
+                   </View>
+                 </td>
+                 <td> 
+                 <Text 
+                 style={{
+                   color:localStorage.getItem('themecolor5')
+                 }}
+                 >{json[0]['theme_color_6_id']}</Text>
+                 </td>
+               </tr>})
+               
 
 
+insertMobileThemeType({ value: json[0]['theme_type_id'], label:<tr
+        
+>
 
+  <td>
+  <Text 
+  style={{
+    color:localStorage.getItem('themecolor5')
+  }}
+  >{json[0]['theme_type_id']}</Text>
+  </td>
+</tr>})
+insertMobileThemeFont({ value: json[0]['theme_font_id'], label:<tr
+        
+>
+
+  <td>
+  <Text 
+  style={{
+    fontWeight:json[0]['theme_font_id'],  
+    color:localStorage.getItem('themecolor5')
+  }}
+  >{json[0]['theme_font_id']}</Text>
+  </td> 
+</tr>})
+
+insertMobileThemeSize({ value: json[0]['theme_font_size_id'], label:<tr
+        
+> 
+ 
+  <td>
+  <Text 
+  style={{
+    fontSize:parseInt(json[0]['theme_font_size_id'], 0) + 0, 
+    color:localStorage.getItem('themecolor5')
+  }} 
+  >{json[0]['theme_font_size_id']}</Text>
+  </td>
+</tr>}) 
+
+
+insertMobileThemeWeight({ value: json[0]['theme_font_weight_id'], label:<tr
+        
+>
+  
+  <td>
+  <Text 
+  style={{
+    fontWeight:json[0]['theme_font_weight_id'],
+    color:localStorage.getItem('themecolor5')
+  }}
+  >{json[0]['theme_font_weight_id']}</Text>
+  </td>
+</tr>})
+
+
+        
+
+      }
+      return json.movies; 
+    } catch (error) {
+    } 
+  }
+  async function getWebThemesViewAPI(){
+    try {
+      const response = await fetch(localStorage.getItem("APIwebthemeviews"), {
+          method: 'GET',
+          headers: {
+            Accept: 'application/json', 
+            'Content-Type': 'application/json',
+          },
+        } 
+      );  
+  
+      const json = await response.json();
+      if(JSON.stringify(json)!="[]"){  
+        setWebThemeViews(JSON.stringify(json))
+        insertWebThemeColor1({ value: json[0]['web_theme_color_1_id'], label:<tr
+        
+        >
+          <td> 
+          <View
+        style={{
+          height:20,
+          width:20,
+          borderColor:'grey',
+          borderWidth:0.01, 
+          backgroundColor:json[0]['web_theme_color_1_id']
+        }}  
+        ></View>
+          </td>
+          <td>
+            <View
+            style={{
+              width:5
+            }}
+            >  
+
+            </View>
+          </td>
+          <td>
+          <Text 
+          style={{
+            color:localStorage.getItem('themecolor5')
+          }}
+          >{json[0]['web_theme_color_1_id']}</Text>
+          </td>
+        </tr>})
+   insertWebThemeColor2({ value: json[0]['web_theme_color_2_id'], label:<tr
+    
+   >
+     <td>
+     <View
+   style={{
+     height:20,
+     width:20,
+     borderColor:'grey',
+     borderWidth:0.01, 
+     backgroundColor:json[0]['web_theme_color_2_id']
+   }}  
+   ></View>
+     </td>
+     <td>
+       <View
+       style={{
+         width:5
+       }}
+       >  
+
+       </View>
+     </td>
+     <td>
+     <Text 
+     style={{
+       color:localStorage.getItem('themecolor5')
+     }}
+     >{json[0]['web_theme_color_2_id']}</Text>
+     </td>
+   </tr>})
+      insertWebThemeColor3({ value: json[0]['web_theme_color_3_id'], label:<tr
+    
+      >
+        <td>
+        <View
+      style={{
+        height:20,
+        width:20,
+        borderColor:'grey',
+        borderWidth:0.01, 
+        backgroundColor:json[0]['web_theme_color_3_id']
+      }}  
+      ></View>
+        </td>
+        <td>
+          <View
+          style={{
+            width:5
+          }}
+          >  
+
+          </View>
+        </td>
+        <td>
+        <Text 
+        style={{
+          color:localStorage.getItem('themecolor5')
+        }}
+        >{json[0]['web_theme_color_3_id']}</Text>
+        </td>
+      </tr>})
+         insertWebThemeColor4({ value: json[0]['web_theme_color_4_id'], label:<tr
+    
+         >
+           <td>
+           <View
+         style={{
+           height:20,
+           width:20,
+           borderColor:'grey',
+           borderWidth:0.01, 
+           backgroundColor:json[0]['web_theme_color_4_id']
+         }}  
+         ></View>
+           </td>
+           <td>
+             <View
+             style={{
+               width:5
+             }}
+             >  
+ 
+             </View>
+           </td>
+           <td>
+           <Text 
+           style={{
+             color:localStorage.getItem('themecolor5')
+           }}
+           >{json[0]['web_theme_color_4_id']}</Text>
+           </td>
+         </tr>})
+            insertWebThemeColor5({ value: json[0]['web_theme_color_5_id'], label:<tr
+    
+            >
+              <td>
+              <View
+            style={{
+              height:20,
+              width:20,
+              borderColor:'grey',
+              borderWidth:0.01, 
+              backgroundColor:json[0]['web_theme_color_5_id']
+            }}  
+            ></View>
+              </td>
+              <td>
+                <View
+                style={{
+                  width:5
+                }}
+                >  
+    
+                </View>
+              </td>
+              <td>
+              <Text 
+              style={{
+                color:localStorage.getItem('themecolor5')
+              }}
+              >{json[0]['web_theme_color_5_id']}</Text>
+              </td>
+            </tr>})
+               insertWebThemeColor6({ value: json[0]['web_theme_color_6_id'], label:<tr
+    
+               >
+                 <td>
+                 <View
+               style={{
+                 height:20,
+                 width:20,
+                 borderColor:'grey',
+                 borderWidth:0.01, 
+                 backgroundColor:json[0]['web_theme_color_6_id']
+               }}  
+               ></View>
+                 </td>
+                 <td>
+                   <View
+                   style={{
+                     width:5
+                   }}
+                   >  
+       
+                   </View>
+                 </td>
+                 <td>
+                 <Text 
+                 style={{
+                   color:localStorage.getItem('themecolor5')
+                 }}
+                 >{json[0]['web_theme_color_6_id']}</Text>
+                 </td>
+               </tr>})
+                  insertWebThemeColor7({ value: json[0]['web_theme_color_7_id'], label:<tr
+    
+                  >
+                    <td>
+                    <View
+                  style={{
+                    height:20,
+                    width:20,
+                    borderColor:'grey',
+                    borderWidth:0.01, 
+                    backgroundColor:json[0]['web_theme_color_7_id']
+                  }}  
+                  ></View>
+                    </td>
+                    <td>
+                      <View
+                      style={{
+                        width:5
+                      }}
+                      >  
+          
+                      </View>
+                    </td>
+                    <td>
+                    <Text 
+                    style={{
+                      color:localStorage.getItem('themecolor5')
+                    }}
+                    >{json[0]['web_theme_color_7_id']}</Text>
+                    </td>
+                  </tr>})
+
+
+insertWebThemeType({ value: json[0]['web_theme_type_id'], label:<tr
+        
+>
+
+  <td>
+  <Text 
+  style={{
+    color:localStorage.getItem('themecolor5')
+  }}
+  >{json[0]['web_theme_type_id']}</Text>
+  </td>
+</tr>})
+insertWebThemeFont({ value: json[0]['web_theme_font_id'], label:<tr
+        
+>
+
+  <td>
+  <Text 
+  style={{
+    fontWeight:json[0]['web_theme_font_id'],  
+    color:localStorage.getItem('themecolor5')
+  }}
+  >{json[0]['web_theme_font_id']}</Text>
+  </td>
+</tr>})
+
+insertWebThemeSizeText({ value: json[0]['web_theme_font_size_text_id'], label:<tr
+        
+>
+ 
+  <td>
+  <Text 
+  style={{
+    fontSize:parseInt(json[0]['web_theme_font_size_text_id'], 0) + 0, 
+    color:localStorage.getItem('themecolor5')
+  }}
+  >{json[0]['web_theme_font_size_text_id']}</Text>
+  </td>
+</tr>}) 
+
+insertWebThemeSizeTitle({ value: json[0]['web_theme_font_size_title_id'], label:<tr
+        
+>
+
+  <td>
+  <Text 
+  style={{
+    fontSize:parseInt(json[0]['web_theme_font_size_title_id'], 0) + 0, 
+    color:localStorage.getItem('themecolor5')
+  }}
+  >{json[0]['web_theme_font_size_title_id']}</Text>
+  </td>
+</tr>})
+
+insertWebThemeSizeBigTitle({ value: json[0]['web_theme_font_size_bigtitle_id'], label:<tr
+        
+>
+
+  <td>
+  <Text 
+  style={{
+    fontSize:parseInt(json[0]['web_theme_font_size_bigtitle_id'], 0) + 0, 
+    color:localStorage.getItem('themecolor5')
+  }}
+  >{json[0]['web_theme_font_size_bigtitle_id']}</Text>
+  </td>
+</tr>})
+
+insertWebThemeSizeHeader({ value: json[0]['web_theme_font_size_header_id'], label:<tr
+        
+>
+
+  <td>
+  <Text 
+  style={{
+        fontSize:parseInt(json[0]['web_theme_font_size_header_id'], 0) + 0, 
+    color:localStorage.getItem('themecolor5')
+  }}
+  >{json[0]['web_theme_font_size_header_id']}</Text>
+  </td>
+</tr>})
+
+insertWebThemeWeight({ value: json[0]['web_theme_font_weight_id'], label:<tr
+        
+>
+  
+  <td>
+  <Text 
+  style={{
+    fontWeight:json[0]['web_theme_font_weight_id'],
+    color:localStorage.getItem('themecolor5')
+  }}
+  >{json[0]['web_theme_font_weight_id']}</Text>
+  </td>
+</tr>})
+
+insertWebThemeIconSize({ value: json[0]['web_theme_icons_size_id'], label:<tr
+        
+>
+  
+  <td>
+  <Text 
+  style={{
+    fontSize:parseInt(json[0]['web_theme_icons_size_id'], 0) + 0, 
+    color:localStorage.getItem('themecolor5')
+  }}
+  >{json[0]['web_theme_icons_size_id']}</Text>
+  </td>
+</tr>})
+        
+
+      }
+      return json.movies; 
+    } catch (error) {
+    } 
+  }
+  async function getMobileThemesAPI(){
+    try {
+      const response = await fetch(
+        localStorage.getItem("APImobile_themes"), {
+          method: 'GET',
+          headers: {
+            'Content-type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem("tokens")}`,
+        }, 
+        } 
+      );  
+      const json = await response.json();
+      
+  
+      setMobileTheme(JSON.stringify(json))
+    
+      return json.movies;   
+    } catch (error) { 
+    }
+  }
+  async function getWebThemesAPI(){
+    try {
+      const response = await fetch(
+        localStorage.getItem("APIweb_themes"), {
+          method: 'GET',
+          headers: {
+            'Content-type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem("tokens")}`,
+        }, 
+        } 
+      );  
+      const json = await response.json();
+      
+  
+      setWebTheme(JSON.stringify(json))
+    
+      return json.movies;   
+    } catch (error) { 
+    }
+  }
+  
+  async function getColorAPI(){
+    try {
+      const response = await fetch(
+        localStorage.getItem("APIthemecolor"), {
+          method: 'GET',
+          headers: {
+            'Content-type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem("tokens")}`,
+        }, 
+        } 
+      );  
+      const json = await response.json();
+      setThemeColor(JSON.stringify(json))
+      var ghs = json
+      var ni = []
+      for(var i=0;i<ghs.length;i++){ 
+        ni.push({ value: ghs[i]['description'], label:<tr
+        
+        >
+          <td>
+          <View
+        style={{
+          height:20,
+          width:20,
+          borderColor:'grey',
+          borderWidth:0.01, 
+          backgroundColor:ghs[i]['description']
+        }}  
+        ></View>
+          </td>
+          <td>
+            <View
+            style={{
+              width:5
+            }}
+            >  
+
+            </View>
+          </td>
+          <td>
+          <Text 
+          style={{
+            color:localStorage.getItem('themecolor5')
+          }}
+          >{ghs[i]['description']}</Text>
+          </td>
+        </tr>})
+      }  
+      setThemeColors(ni)
+      
+    
+      return json.movies;   
+    } catch (error) { 
+    }
+  }
+  async function getThemeTypeAPI(){
+    try {
+      const response = await fetch(
+        localStorage.getItem("APIthemetype"), {
+          method: 'GET',
+          headers: {
+            'Content-type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem("tokens")}`,
+        }, 
+        } 
+      );  
+      const json = await response.json();
+     // setThemeType(JSON.stringify(json))
+      var ghs = json
+      var ni = []
+      for(var i=0;i<ghs.length;i++){ 
+        ni.push({ value: ghs[i]['description'], label:<tr
+        
+        >
+          <td>
+          <Text 
+          style={{
+            color:localStorage.getItem('themecolor5')
+          }}
+          >{ghs[i]['description']}</Text>
+          </td>
+        </tr>})
+      }  
+      setThemeType(ni)
+      return json.movies;   
+    } catch (error) { 
+    }
+  }
+
+  async function getFontFamilyAPI(){
+    try {
+      const response = await fetch(
+        localStorage.getItem("APIthemefontfamily"), {
+          method: 'GET',
+          headers: {
+            'Content-type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem("tokens")}`,
+        }, 
+        } 
+      );  
+      const json = await response.json();
+      setThemeFontFamily(JSON.stringify(json))
+      var ghs = json
+      var ni = []
+      for(var i=0;i<ghs.length;i++){ 
+        ni.push({ value: ghs[i]['description'], label:<tr
+        
+        >
+          <td>
+          <Text 
+          style={{
+            fontFamily:ghs[i]['description'],
+            color:localStorage.getItem('themecolor5')
+          }}
+          >{ghs[i]['description']}</Text>
+          </td>
+        </tr>})
+      }  
+      setThemeFont(ni)
+      return json.movies;   
+    } catch (error) { 
+    }
+  }
+  async function getFontSizeAPI(){
+    try {
+      const response = await fetch(
+        localStorage.getItem("APIthemefontsize"), {
+          method: 'GET',
+          headers: {
+            'Content-type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem("tokens")}`,
+        }, 
+        } 
+      );  
+      const json = await response.json();
+      setThemeFontSize(JSON.stringify(json))
+      var ghs = json
+      var ni = []
+      for(var i=0;i<ghs.length;i++){ 
+        ni.push({ value: ghs[i]['description'], label:<tr
+        
+        >
+          <td>
+          <Text 
+          style={{ 
+            fontSize:parseInt(ghs[i]['description'], 0) + 0, 
+            color:localStorage.getItem('themecolor5')
+          }}
+          >{ghs[i]['description']}</Text>
+          </td>
+        </tr>})
+      }  
+      setThemeSize(ni)
+      return json.movies;   
+    } catch (error) { 
+    }
+  }
+
+
+  async function getFontWeightAPI(){
+    try {
+      const response = await fetch(
+        localStorage.getItem("APIthemefontweight"), {
+          method: 'GET',
+          headers: {
+            'Content-type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem("tokens")}`,
+        }, 
+        } 
+      );  
+      const json = await response.json();
+      setThemeFontWeight(JSON.stringify(json))
+      var ghs = json
+      var ni = []
+      for(var i=0;i<ghs.length;i++){ 
+        ni.push({ value: ghs[i]['description'], label:<tr
+        
+        >
+          <td>
+          <Text 
+          style={{ 
+            fontWeight:ghs[i]['description'],
+            color:localStorage.getItem('themecolor5')
+          }}
+          >{ghs[i]['description']}</Text>
+          </td>
+        </tr>})
+      }  
+      setThemeWeight(ni)
+      return json.movies;   
+    } catch (error) { 
+    }
+  }
   async function getChecklist(){
 
     try {
@@ -500,8 +1401,220 @@ async function UpdatePlane(){
   }
 }
 
+async function UpdateFontWeight(){
 
+  try {
+    const response = await fetch(
+      localStorage.getItem("APIthemefontweight")+RolesID+"/", {
+        method: 'PATCH',
+        headers: {
+          'Content-type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem("tokens")}`,
+      },  
+      body: JSON.stringify({ 
+        description: insertthemeweight
+      })
+      } 
+    );   
 
+    if(response.status==200){ 
+      toast(
+        'Update Fontweight',
+        toastConfig({
+       theme:'success'
+        })
+      )
+      getFontWeightAPI()  
+      insertThemeFontWeight("")
+    }else if(response.status==400){
+      toast(
+        'FONTWEIGHT ALREADY EXIST',
+        toastConfig({
+       theme:'failure'
+        })
+      )
+    }
+ 
+  } catch (error) { 
+  }
+}
+
+async function UpdateFontFamily(){
+
+  try {
+    const response = await fetch(
+      localStorage.getItem("APIthemefontfamily")+RolesID+"/", {
+        method: 'PATCH',
+        headers: {
+          'Content-type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem("tokens")}`,
+      }, 
+      body: JSON.stringify({ 
+        description: insertthemefamily
+      })
+      } 
+    );   
+
+    if(response.status==200){ 
+      toast(
+        'Update Font Family',
+        toastConfig({
+       theme:'success'
+        })
+      )
+      getFontFamilyAPI()  
+      insertThemeFontFamily("")
+    }else if(response.status==400){
+      toast(
+        'FONT FAMILY ALREADY EXIST',
+        toastConfig({
+       theme:'failure'
+        })
+      )
+    }
+ 
+  } catch (error) { 
+  }
+}
+async function UpdateFontSize(){
+
+  try {
+    const response = await fetch(
+      localStorage.getItem("APIthemefontsize")+RolesID+"/", {
+        method: 'PATCH',
+        headers: {
+          'Content-type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem("tokens")}`,
+      }, 
+      body: JSON.stringify({ 
+        description: insertthemesize
+      })
+      } 
+    );  
+ 
+    if(response.status==200){ 
+      toast(
+        'Update Font Size',
+        toastConfig({
+       theme:'success'
+        })
+      )
+      getFontSizeAPI()
+      insertThemeSize("")
+    }else if(response.status==400){
+      toast(
+        'FONT SIZE ALREADY EXIST',
+        toastConfig({
+       theme:'failure'
+        })
+      )
+    }
+ 
+  } catch (error) { 
+  }
+}
+async function ActivateMobileThemes(){
+  if(insertuse===true){
+    try {
+      const response = await fetch(
+        localStorage.getItem("APImobile_themes_activator")+RolesID+"/", {
+          method: 'PATCH',
+          headers: {
+            'Content-type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem("tokens")}`,
+        }, 
+        } 
+      );  
+   
+      if(response.status==200){ 
+        toast(
+          'THEMES ACTIVATE',
+          toastConfig({
+         theme:'success'
+          })
+        )
+        getMobileThemesAPI()
+        getMobileThemesViewAPI()
+      }
+   
+    } catch (error) { 
+    }
+  } 
+  }
+async function ActivateWebThemes(){
+if(insertuse===true){
+  try {
+    const response = await fetch(
+      localStorage.getItem("APIweb_themes_activator")+RolesID+"/", {
+        method: 'PATCH',
+        headers: {
+          'Content-type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem("tokens")}`,
+      }, 
+      } 
+    );  
+ 
+    if(response.status==200){ 
+      toast(
+        'THEMES ACTIVATE',
+        toastConfig({
+       theme:'success'
+        })
+      )
+      getWebThemesAPI()
+      getWebThemesViewAPI()
+      toast(
+        'RESTART IN SECOND',
+        toastConfig({
+       theme:'success'
+        })
+      )
+      setTimeout(() => { 
+        window.location.reload();
+       }, 3000);
+    }
+ 
+  } catch (error) { 
+  }
+}
+}
+async function UpdateColor(){
+
+  try {
+    const response = await fetch(
+      localStorage.getItem("APIthemecolor")+RolesID+"/", {
+        method: 'PATCH',
+        headers: {
+          'Content-type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem("tokens")}`,
+      }, 
+      body: JSON.stringify({ 
+        description: insertthemecolor
+      })
+      } 
+    );  
+ 
+    if(response.status==200){ 
+      toast(
+        'Update Color',
+        toastConfig({
+       theme:'success'
+        })
+      )
+      getColorAPI()
+      insertThemeColor("")
+    }else if(response.status==400){
+      toast(
+        'COLOR ALREADY EXIST',
+        toastConfig({
+       theme:'failure'
+        })
+      )
+    }
+ 
+  } catch (error) { 
+  }
+}
 async function UpdateDestination(){
 
   try {
@@ -671,6 +1784,162 @@ async function addPlane(){
   }
 }
 
+async function addFontFamily(){
+
+  try {
+    const response = await fetch(
+      localStorage.getItem("APIthemefontfamily"), {
+        method: 'POST',
+        headers: {
+          'Content-type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem("tokens")}`,
+      }, 
+      body: JSON.stringify({ 
+        description: insertthemefamily,
+      })
+      } 
+    );   
+ 
+   
+    if(response.status==201){ 
+      toast(
+        'Font Family Added',
+        toastConfig({
+       theme:'success'
+        })
+      )
+      getFontFamilyAPI()
+      insertThemeFontFamily("")
+     
+    }else if(response.status==400){
+      toast(
+        'FONT FAMILY ALREADY EXIST',
+        toastConfig({
+       theme:'failure'
+        })
+      )
+    }
+    
+  } catch (error) { 
+  }
+}
+async function addFontWeight(){
+
+  try {
+    const response = await fetch(
+      localStorage.getItem("APIthemefontweight"), {
+        method: 'POST',
+        headers: {
+          'Content-type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem("tokens")}`,
+      }, 
+      body: JSON.stringify({ 
+        description: insertthemeweight
+      })
+      } 
+    );   
+ 
+   
+    if(response.status==201){ 
+      toast(
+        'Fontweight Added',
+        toastConfig({
+       theme:'success'
+        })
+      )
+      getFontWeightAPI()
+      insertThemeFontWeight("")
+     
+    }else if(response.status==400){
+      toast(
+        'FONTWEIGHT ALREADY EXIST',
+        toastConfig({
+       theme:'failure'
+        })
+      )
+    }
+    
+  } catch (error) { 
+  }
+}
+async function addFontSize(){
+
+  try {
+    const response = await fetch(
+      localStorage.getItem("APIthemefontsize"), {
+        method: 'POST',
+        headers: {
+          'Content-type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem("tokens")}`,
+      }, 
+      body: JSON.stringify({ 
+        description: insertthemesize
+      })
+      } 
+    );   
+ 
+   
+    if(response.status==201){ 
+      toast(
+        'Font Size Added',
+        toastConfig({
+       theme:'success'
+        })
+      )
+      getFontSizeAPI()
+      insertThemeSize("")
+     
+    }else if(response.status==400){
+      toast(
+        'FONT SIZE ALREADY EXIST',
+        toastConfig({
+       theme:'failure'
+        })
+      )
+    }
+    
+  } catch (error) { 
+  }
+}
+async function addColor(){
+
+  try {
+    const response = await fetch(
+      localStorage.getItem("APIthemecolor"), {
+        method: 'POST',
+        headers: {
+          'Content-type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem("tokens")}`,
+      }, 
+      body: JSON.stringify({ 
+        description: insertthemecolor,
+      })
+      } 
+    );   
+ 
+   
+    if(response.status==201){ 
+      toast(
+        'Color Added',
+        toastConfig({
+       theme:'success'
+        })
+      )
+      getColorAPI()
+      insertThemeColor("")
+     
+    }else if(response.status==400){
+      toast(
+        'COLOR ALREADY EXIST',
+        toastConfig({
+       theme:'failure'
+        })
+      )
+    }
+    
+  } catch (error) { 
+  }
+}
 async function addDestination(){
 
   try {
@@ -770,7 +2039,6 @@ async function DeleteUserRoles(){
 
   for(var i=0;i<gs1.length;i++){
 
-  console.log(gs1[i])
  try {
     const response = await fetch(
       localStorage.getItem("APImultiroles")+gs1[i]+"/", {
@@ -892,6 +2160,241 @@ async function addUsers(){
   } catch (error) { 
   }
 }
+async function DeleteMobileThemes(){
+
+ try { 
+   const response = await fetch(
+     localStorage.getItem("APImobile_themes")+RolesID+"/", {
+       method: 'DELETE',  
+       headers: {
+         'Content-type': 'application/json',
+         'Authorization': `Bearer ${localStorage.getItem("tokens")}`,
+     } 
+     } 
+   );  
+
+   if(response.status==204){ 
+
+     toast(     
+       'DELETED',
+       toastConfig({
+      theme:'failure'
+       })  
+     )
+     getMobileThemesAPI() 
+   }
+
+ } catch (error) { 
+ }
+}
+async function DeleteWebThemes(){
+
+  try { 
+    const response = await fetch(
+      localStorage.getItem("APIweb_themes")+RolesID+"/", {
+        method: 'DELETE',  
+        headers: {
+          'Content-type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem("tokens")}`,
+      } 
+      } 
+    );  
+
+    if(response.status==204){ 
+ 
+      toast(     
+        'DELETED',
+        toastConfig({
+       theme:'failure'
+        })  
+      )
+      getWebThemesAPI() 
+    }
+
+  } catch (error) { 
+  }
+}
+async function UpdateMobileThemes(){
+  
+  try { 
+    const response = await fetch(
+      localStorage.getItem("APImobile_themes")+RolesID+"/", {
+        method: 'PATCH', 
+        headers: {
+          'Content-type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem("tokens")}`,
+      }, 
+      body: JSON.stringify({ 
+        use_id: insertuse,
+        theme_color_1_id: insertmobilethemecolor1.value,
+        theme_color_2_id: insertmobilethemecolor2.value,
+        theme_color_3_id: insertmobilethemecolor3.value,
+        theme_color_4_id: insertmobilethemecolor4.value,
+        theme_color_5_id: insertmobilethemecolor5.value,
+        theme_color_6_id: insertmobilethemecolor6.value,
+        theme_type_id: insertmobilethemetype.value,
+        theme_font_id: insertmobilethemefont.value,
+        theme_font_size_id: insertmobilethemesize.value,
+        theme_font_weight_id: insertmobilethemeweight.value,  
+      })  
+      } 
+    );  
+    const json = await response.json();
+
+    RolesID=json['id']
+    if(response.status==200){ 
+ 
+      toast(     
+        'THEMES UPDATED',
+        toastConfig({
+       theme:'success'
+        })  
+      )
+      getMobileThemesAPI()
+      ActivateMobileThemes() 
+    }
+    return json.movies;   
+  } catch (error) { 
+  }
+}
+async function UpdateWebThemes(){
+  
+  try { 
+    const response = await fetch(
+      localStorage.getItem("APIweb_themes")+RolesID+"/", {
+        method: 'PATCH', 
+        headers: {
+          'Content-type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem("tokens")}`,
+      }, 
+      body: JSON.stringify({ 
+        use_id: insertuse,
+        web_theme_color_1_id: insertwebthemecolor1.value,
+        web_theme_color_2_id: insertwebthemecolor2.value,
+        web_theme_color_3_id: insertwebthemecolor3.value,
+        web_theme_color_4_id: insertwebthemecolor4.value,
+        web_theme_color_5_id: insertwebthemecolor5.value,
+        web_theme_color_6_id: insertwebthemecolor6.value,
+        web_theme_color_7_id: insertwebthemecolor7.value,
+        web_theme_type_id: insertwebthemetype.value,
+        web_theme_font_id: insertwebthemefont.value,
+        web_theme_font_size_text_id: insertwebthemesizetext.value,
+        web_theme_font_size_title_id: insertwebthemesizetitle.value,
+        web_theme_font_size_bigtitle_id: insertwebthemesizebigtitle.value,
+        web_theme_font_size_header_id: insertwebthemesizeheader.value,
+        web_theme_font_weight_id: insertwebthemeweight.value,  
+        web_theme_icons_size_id: insertwebthemeiconsize.value, 
+      })  
+      } 
+    );  
+    const json = await response.json();
+
+    RolesID=json['id']
+    if(response.status==200){ 
+ 
+      toast(     
+        'THEMES UPDATED',
+        toastConfig({
+       theme:'success'
+        })  
+      )
+      getWebThemesAPI()
+      ActivateWebThemes() 
+    }
+    return json.movies;   
+  } catch (error) { 
+  }
+}
+async function addMobileThemes(){
+
+  try { 
+    const response = await fetch(
+      localStorage.getItem("APImobile_themes"), {
+        method: 'POST',
+        headers: {
+          'Content-type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem("tokens")}`,
+      }, 
+      body: JSON.stringify({ 
+        use_id: insertuse,
+        theme_color_1_id: insertmobilethemecolor1.value,
+        theme_color_2_id: insertmobilethemecolor2.value,
+        theme_color_3_id: insertmobilethemecolor3.value,
+        theme_color_4_id: insertmobilethemecolor4.value,
+        theme_color_5_id: insertmobilethemecolor5.value,
+        theme_color_6_id: insertmobilethemecolor6.value,
+        theme_type_id: insertmobilethemetype.value,
+        theme_font_id: insertmobilethemefont.value,
+        theme_font_size_id: insertmobilethemesize.value,
+        theme_font_weight_id: insertmobilethemeweight.value,  
+      })  
+      } 
+    );  
+    const json = await response.json();
+
+    RolesID=json['id']
+    if(response.status==201){ 
+ 
+      toast(     
+        'THEMES CREATED',
+        toastConfig({
+       theme:'success'
+        }) 
+      )
+      getMobileThemesAPI()
+      ActivateMobileThemes()
+    }
+    return json.movies;   
+  } catch (error) { 
+  }
+}
+async function addWebThemes(){
+  try { 
+    const response = await fetch(
+      localStorage.getItem("APIweb_themes"), {
+        method: 'POST',
+        headers: {
+          'Content-type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem("tokens")}`,
+      }, 
+      body: JSON.stringify({ 
+        use_id: insertuse,
+        web_theme_color_1_id: insertwebthemecolor1.value,
+        web_theme_color_2_id: insertwebthemecolor2.value,
+        web_theme_color_3_id: insertwebthemecolor3.value,
+        web_theme_color_4_id: insertwebthemecolor4.value,
+        web_theme_color_5_id: insertwebthemecolor5.value,
+        web_theme_color_6_id: insertwebthemecolor6.value,
+        web_theme_color_7_id: insertwebthemecolor7.value,
+        web_theme_type_id: insertwebthemetype.value,
+        web_theme_font_id: insertwebthemefont.value,
+        web_theme_font_size_text_id: insertwebthemesizetext.value,
+        web_theme_font_size_title_id: insertwebthemesizetitle.value,
+        web_theme_font_size_bigtitle_id: insertwebthemesizebigtitle.value,
+        web_theme_font_size_header_id: insertwebthemesizeheader.value,
+        web_theme_font_weight_id: insertwebthemeweight.value,  
+        web_theme_icons_size_id: insertwebthemeiconsize.value, 
+      })  
+      } 
+    );  
+    const json = await response.json();
+
+    RolesID=json['id']
+    if(response.status==201){ 
+ 
+      toast(     
+        'THEMES CREATED',
+        toastConfig({
+       theme:'success'
+        }) 
+      )
+      getWebThemesAPI()
+      ActivateWebThemes()
+    }
+    return json.movies;   
+  } catch (error) { 
+  }
+}
   async function addRoles(){
 
     try {
@@ -970,6 +2473,122 @@ async function addUsers(){
         )
         getPlaneAPI()
         inputPlane("")
+      }
+ 
+    } catch (error) { 
+    }
+  }
+  async function DeleteFontWeight(){
+
+    try {
+      const response = await fetch(
+        localStorage.getItem("APIthemefontweight")+RolesID+"/", {
+          method: 'DELETE',
+          headers: {
+            'Content-type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem("tokens")}`,
+        }, 
+
+        } 
+      );  
+
+   
+      if(response.status==204){ 
+        toast(
+          'DELETED',
+          toastConfig({
+         theme:'failure' 
+          })
+        )
+        getFontWeightAPI()
+        insertThemeFontWeight("")
+      }
+ 
+    } catch (error) { 
+    }
+  }
+  async function DeleteFontFamily(){
+
+    try {
+      const response = await fetch(
+        localStorage.getItem("APIthemefontfamily")+RolesID+"/", {
+          method: 'DELETE',
+          headers: {
+            'Content-type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem("tokens")}`,
+        }, 
+
+        } 
+      );  
+
+   
+      if(response.status==204){ 
+        toast(
+          'DELETED',
+          toastConfig({
+         theme:'failure' 
+          })
+        )
+        getFontFamilyAPI()
+        insertThemeFontFamily("")
+      }
+ 
+    } catch (error) { 
+    }
+  }
+  async function DeleteFontSize(){
+
+    try {
+      const response = await fetch(
+        localStorage.getItem("APIthemefontsize")+RolesID+"/", {
+          method: 'DELETE',
+          headers: {
+            'Content-type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem("tokens")}`,
+        }, 
+
+        } 
+      );  
+
+
+      if(response.status==204){ 
+        toast(
+          'DELETED',
+          toastConfig({
+         theme:'failure' 
+          })
+        )
+        getFontSizeAPI()
+        insertThemeSize("")
+      }
+ 
+    } catch (error) { 
+    }
+  }
+  async function DeleteColor(){
+
+    try {
+      const response = await fetch(
+        localStorage.getItem("APIthemecolor")+RolesID+"/", {
+          method: 'DELETE',
+          headers: {
+            'Content-type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem("tokens")}`,
+        }, 
+
+        } 
+      );  
+
+
+      if(response.status==204){ 
+        toast(
+          'DELETED',
+          toastConfig({
+         theme:'failure' 
+          })
+        )
+        getColorAPI()
+        insertThemeColor("")
       }
  
     } catch (error) { 
@@ -2317,7 +3936,7 @@ style={{
             borderWidth:2, 
             paddingLeft: 12,
     paddingRight: 8,  
-    fontSize:localStorage.getItem('themefontsize'),   
+    fontSize:parseInt(localStorage.getItem("themefontsizetext"), 0) + 0,    
     color:localStorage.getItem('themecolor5'),
           }
         }
@@ -2342,7 +3961,7 @@ style={{
             borderWidth:2, 
             paddingLeft: 12,
     paddingRight: 8, 
-    fontSize:localStorage.getItem('themefontsize'),   
+    fontSize:parseInt(localStorage.getItem("themefontsizetext"), 0) + 0,    
     color:localStorage.getItem('themecolor5'),
           }
         }
@@ -2367,7 +3986,7 @@ style={{
             borderWidth:2, 
             paddingLeft: 12,
     paddingRight: 8, 
-    fontSize:localStorage.getItem('themefontsize'),   
+    fontSize:parseInt(localStorage.getItem("themefontsizetext"), 0) + 0,   
     color:localStorage.getItem('themecolor5'),
           }
         }
@@ -2392,7 +4011,7 @@ style={{
             borderWidth:2, 
             paddingLeft: 12,
     paddingRight: 8, 
-    fontSize:localStorage.getItem('themefontsize'),   
+    fontSize:parseInt(localStorage.getItem("themefontsizetext"), 0) + 0,   
     color:localStorage.getItem('themecolor5'),
           }
         }
@@ -2417,7 +4036,7 @@ style={{
             borderWidth:2, 
             paddingLeft: 12,
     paddingRight: 8, 
-    fontSize:localStorage.getItem('themefontsize'),   
+    fontSize:parseInt(localStorage.getItem("themefontsizetext"), 0) + 0,   
     color:localStorage.getItem('themecolor5'),
           }
         }
@@ -2442,7 +4061,7 @@ style={{
             borderWidth:2, 
             paddingLeft: 12,
     paddingRight: 8, 
-    fontSize:localStorage.getItem('themefontsize'),   
+    fontSize:parseInt(localStorage.getItem("themefontsizetext"), 0) + 0,   
     color:localStorage.getItem('themecolor5'),
           }
         }
@@ -2467,7 +4086,7 @@ style={{
             borderWidth:2, 
             paddingLeft: 12,
     paddingRight: 8, 
-    fontSize:localStorage.getItem('themefontsize'),   
+    fontSize:parseInt(localStorage.getItem("themefontsizetext"), 0) + 0,     
     color:localStorage.getItem('themecolor5'),
           }
         }
@@ -2492,7 +4111,7 @@ style={{
             borderWidth:2, 
             paddingLeft: 12,
     paddingRight: 8, 
-    fontSize:localStorage.getItem('themefontsize'),   
+    fontSize:parseInt(localStorage.getItem("themefontsizetext"), 0) + 0,   
     color:localStorage.getItem('themecolor5'),
           }
         }
@@ -2517,7 +4136,7 @@ style={{
             borderWidth:2, 
             paddingLeft: 12,
     paddingRight: 8, 
-    fontSize:localStorage.getItem('themefontsize'),   
+    fontSize:parseInt(localStorage.getItem("themefontsizetext"), 0) + 0,   
     color:localStorage.getItem('themecolor5'),
           }
         }
@@ -2542,7 +4161,7 @@ style={{
             borderWidth:2, 
             paddingLeft: 12,
     paddingRight: 8, 
-    fontSize:localStorage.getItem('themefontsize'),   
+    fontSize:parseInt(localStorage.getItem("themefontsizetext"), 0) + 0,    
     color:localStorage.getItem('themecolor5'),
           }
         }
@@ -2567,7 +4186,7 @@ style={{
             borderWidth:2, 
             paddingLeft: 12,
     paddingRight: 8, 
-    fontSize:localStorage.getItem('themefontsize'),   
+    fontSize:parseInt(localStorage.getItem("themefontsizetext"), 0) + 0,     
     color:localStorage.getItem('themecolor5'),
           }
         }
@@ -2836,7 +4455,7 @@ style={{
             borderWidth:2, 
             paddingLeft: 12,
     paddingRight: 8, 
-    fontSize:localStorage.getItem('themefontsize'),   
+    fontSize:parseInt(localStorage.getItem("themefontsizetext"), 0) + 0,   
     color:localStorage.getItem('themecolor5'),
           }
         }
@@ -2878,7 +4497,6 @@ if(getdestinationdata!=""){
       ></View>
    <table>
 <tr>
-
 <td>
 <View
       style={{
@@ -3078,7 +4696,7 @@ height:15
           borderWidth:2, 
           paddingLeft: 12,
   paddingRight: 8, 
-  fontSize:localStorage.getItem('themefontsize'),   
+  fontSize:parseInt(localStorage.getItem("themefontsizetext"), 0) + 0,   
   color:localStorage.getItem('themecolor5'),
         }
       }
@@ -3155,9 +4773,7 @@ style={{
 }}
 />
         
-<table
-
-      >
+<table>
 <tr>
 <td
   style={{
@@ -3462,7 +5078,7 @@ style={{
                   borderWidth:2, 
                   paddingLeft: 12,
           paddingRight: 8, 
-          fontSize:localStorage.getItem('themefontsize'),   
+          fontSize:parseInt(localStorage.getItem("themefontsizetext"), 0) + 0,   
           color:localStorage.getItem('themecolor5'),
                 }
               }
@@ -3497,6 +5113,5273 @@ style={{
     
 </Typography>
    }
+  }else if(mychooser==="THEMES"){ 
+
+    var MyUI3 
+
+    if(mythemes==="3"){
+      MyUI3 = <View>
+      <table
+      >
+      <tr>
+
+ <td
+  style={{
+    width:340,
+
+  }}
+  >
+
+   <Text
+  style={{
+    fontWeight:'100', 
+    fontSize:parseInt(localStorage.getItem("themefontsizeheader"), 0) + 0, 
+    color:localStorage.getItem('themecolor5'),  
+  }}
+  >MOBILE THEMES</Text>
+
+   
+  </td>
+
+
+
+</tr>
+
+      </table>
+       <table
+
+       >
+      <tr>
+      <td>
+      <View
+            style={{
+              height: window.innerHeight-180,  
+              alignItems:'center', 
+              //WEB THEMES
+            }}
+
+            >  
+
+ {
+              JSON.parse(getmobilethemeviews).map((str) => {
+    
+ 
+               return (                   
+                 <td
+                 style={{
+                   paddingBottom:10
+                 }}
+                 >
+             
+             <Button
+             disabled={true}
+             style={{ 
+               width:160,
+               height:160,
+             }}
+             >
+               <View>
+               <table>
+                 <tr>
+                   <td
+                   >
+                   <View style={{
+                           borderColor:'white',
+                           borderWidth:3, 
+         backgroundColor:str['theme_color_1_id'],
+         width:160,
+         height:160,
+         alignItems:'center',
+         justifyContent:'center'
+               }}> 
+                     
+                    <View
+                   style={{ 
+                     height:150,
+                     width:150,
+                     backgroundColor:str['theme_color_2_id'],
+                     borderRadius: 30,
+                     shadowColor: '#000',
+                     shadowOffset: { width: 0, height: 2 },
+                     shadowOpacity: 0.4,
+                     shadowRadius: 100,
+                     alignItems: "center",
+                   }} >
+                          <View
+                   style={{
+                     height: 10,
+       
+                   }}
+                 /> 
+                  <img src={localStorage.getItem('logo')} alt=""
+             style={{
+               height:40, width:40}}
+             /> 
+       
+              
+                 <Text style={{ 
+                       fontSize:7,
+                       fontFamily: 'Cochin',
+                       color:str['theme_color_5_id'],
+                       fontWeight: localStorage.getItem('themefontweight'), 
+                 }}>
+              A & M ELITE AVIATION   
+                 </Text>
+         
+           
+               <View
+                   style={{
+                     height: 10,
+       
+                   }}
+                 />
+                 <View style={{
+                   height:20
+                 }}>
+       
+       
+       
+                   <TextInput
+       
+       editable={false}
+                     style={
+                       { 
+                          
+                         caretColor:str['theme_color_5_id'],
+                         outlineStyle: 'none',
+                         borderColor:str['theme_color_2_id'], 
+                         backgroundColor:str['theme_color_3_id'],
+                         height:20,
+                         width:70,
+                         borderWidth:2,
+                         paddingLeft: 5,
+                         
+                 paddingRight: 8, 
+                 color:str['theme_color_5_id'],
+                 fontSize:5
+                       }
+                     }
+                     value="email@gmail.com"
+                     placeholder="USERNAME"
+                     placeholderTextColor={str['theme_color_6_id']}
+                     
+       
+                   /> 
+       
+                   
+                 </View> 
+       
+       <View style={{
+                   height:20
+                 }}>
+       
+       
+       
+                   <TextInput
+                secureTextEntry={true}
+         editable={false}
+                     style={
+                       { 
+                        caretColor:str['theme_color_5_id'],
+                        outlineStyle: 'none',
+                        borderColor:str['theme_color_2_id'], 
+                        backgroundColor:str['theme_color_3_id'],
+                        height:20,
+                        width:70,
+                        borderWidth:2,
+                        paddingLeft: 5,
+                         
+                        paddingRight: 8, 
+                        color:str['theme_color_5_id'],
+                        fontSize:5
+                       }
+                     }
+       
+                     placeholder="PASSWORD"
+                     placeholderTextColor={str['theme_color_6_id']}
+                     
+       
+                   /> 
+       
+                   
+                 </View> 
+                 <View style={{
+                   height:10
+                 }}>
+                   
+               
+                 </View> 
+                 <TouchableHighlight 
+                 activeOpacity={0.6}
+                 underlayColor="#9c9c9c"
+                 style={{
+                   width:70,
+                   borderRadius: 25,
+                   height: 15,
+                     alignItems: 'center', 
+                     backgroundColor: str['theme_color_6_id'], 
+                     fontWeight:localStorage.getItem("themefontweight"),
+                     justifyContent: "center",
+                 }}
+                 disabled={true}
+                 >
+                 <Text
+                 style={{
+                   color:str['theme_color_5_id'],
+                   fontWeight:localStorage.getItem("themefontweight"),
+                   fontSize:5
+                 }}
+                 >LOGIN</Text>
+             </TouchableHighlight>
+                   </View>
+                 </View>
+                   </td>
+                 </tr>
+               </table>
+             </View>
+             </Button>
+       
+             </td>
+                       );
+                     })}
+
+<View
+            style={{
+              overflowY:"scroll",  
+              height: window.innerHeight-460,
+              width:161,
+       
+            }}
+
+            >  
+ 
+            {   
+       JSON.parse(getmobiletheme).map((str) => {
+      
+   
+        return (                   
+          <td
+          style={{
+            paddingBottom:10
+          }}
+          >
+      
+      <Button
+          onClick={()=>{
+            insertMobileThemeColor1({ value: str['theme_color_1_id'], label:<tr
+        
+            >
+              <td>
+              <View
+            style={{
+              height:20,
+              width:20,
+              borderColor:'grey',
+              borderWidth:0.01, 
+              backgroundColor:str['theme_color_1_id']
+            }}  
+            ></View>
+              </td>
+              <td>
+                <View
+                style={{
+                  width:5
+                }}
+                >  
+    
+                </View>
+              </td>
+              <td>
+              <Text 
+              style={{
+                color:localStorage.getItem('themecolor5')
+              }}
+              >{str['theme_color_1_id']}</Text>
+              </td>
+            </tr>}) 
+       insertMobileThemeColor2({ value: str['theme_color_2_id'], label:<tr
+        
+       >
+         <td>
+         <View
+       style={{
+         height:20,
+         width:20,
+         borderColor:'grey',
+         borderWidth:0.01, 
+         backgroundColor:str['theme_color_2_id']
+       }}  
+       ></View>
+         </td>
+         <td>
+           <View
+           style={{
+             width:5
+           }}
+           >  
+
+           </View>
+         </td>
+         <td>
+         <Text 
+         style={{
+           color:localStorage.getItem('themecolor5')
+         }}
+         >{str['theme_color_2_id']}</Text>
+         </td>
+       </tr>})
+          insertMobileThemeColor3({ value: str['theme_color_3_id'], label:<tr
+        
+          >
+            <td>
+            <View
+          style={{
+            height:20,
+            width:20,
+            borderColor:'grey',
+            borderWidth:0.01, 
+            backgroundColor:str['theme_color_3_id']
+          }}  
+          ></View>
+            </td>
+            <td>
+              <View
+              style={{
+                width:5
+              }}
+              >  
+  
+              </View>
+            </td>
+            <td>
+            <Text 
+            style={{
+              color:localStorage.getItem('themecolor5')
+            }}
+            >{str['theme_color_3_id']}</Text>
+            </td>
+          </tr>})
+             insertMobileThemeColor4({ value: str['theme_color_4_id'], label:<tr
+        
+             >
+               <td>
+               <View
+             style={{
+               height:20,
+               width:20,
+               borderColor:'grey',
+               borderWidth:0.01, 
+               backgroundColor:str['theme_color_4_id']
+             }}  
+             ></View>
+               </td>
+               <td>
+                 <View
+                 style={{
+                   width:5
+                 }}
+                 >  
+     
+                 </View>
+               </td>
+               <td>
+               <Text 
+               style={{
+                 color:localStorage.getItem('themecolor5')
+               }}
+               >{str['theme_color_4_id']}</Text>
+               </td>
+             </tr>})
+                insertMobileThemeColor5({ value: str['theme_color_5_id'], label:<tr
+        
+                >
+                  <td>
+                  <View
+                style={{
+                  height:20,
+                  width:20,
+                  borderColor:'grey',
+                  borderWidth:0.01, 
+                  backgroundColor:str['theme_color_5_id']
+                }}  
+                ></View>
+                  </td>
+                  <td>
+                    <View
+                    style={{
+                      width:5
+                    }}
+                    >  
+        
+                    </View>
+                  </td>
+                  <td>
+                  <Text 
+                  style={{
+                    color:localStorage.getItem('themecolor5')
+                  }}
+                  >{str['theme_color_5_id']}</Text>
+                  </td>
+                </tr>})
+                   insertMobileThemeColor6({ value: str['theme_color_6_id'], label:<tr
+        
+                   >
+                     <td>
+                     <View
+                   style={{
+                     height:20,
+                     width:20,
+                     borderColor:'grey',
+                     borderWidth:0.01, 
+                     backgroundColor:str['theme_color_6_id']
+                   }}  
+                   ></View>
+                     </td>
+                     <td>
+                       <View
+                       style={{
+                         width:5
+                       }}
+                       >  
+           
+                       </View>
+                     </td>
+                     <td>
+                     <Text 
+                     style={{
+                       color:localStorage.getItem('themecolor5')
+                     }}
+                     >{str['theme_color_6_id']}</Text>
+                     </td>
+                   </tr>})
+                    
+
+insertMobileThemeType({ value: str['theme_type_id'], label:<tr
+        
+>
+
+  <td>
+  <Text 
+  style={{
+    color:localStorage.getItem('themecolor5')
+  }}
+  >{str['theme_type_id']}</Text>
+  </td>
+</tr>})
+
+insertMobileThemeFont({ value: str['theme_font_id'], label:<tr
+        
+>
+ 
+
+  <td>
+  <Text 
+  style={{ 
+    fontFamily:str['theme_font_id'],
+    color:localStorage.getItem('themecolor5')
+  }}
+  >{str['theme_font_id']}</Text>
+  </td>
+</tr>})
+
+insertMobileThemeSize({ value: str['theme_font_size_id'], label:<tr
+        
+>
+ 
+  <td>
+  <Text 
+  style={{
+    fontSize:parseInt(str['theme_font_size_id'], 0) + 0, 
+    color:localStorage.getItem('themecolor5')
+  }}
+  >{str['theme_font_size_id']}</Text>
+  </td>
+</tr>})  
+
+
+
+
+
+
+insertMobileThemeWeight({ value: str['theme_font_weight_id'], label:<tr
+        
+>
+  
+  <td> 
+  <Text 
+  style={{
+    fontWeight:str['theme_font_weight_id'],
+    color:localStorage.getItem('themecolor5')
+  }}
+  >{str['theme_font_weight_id']}</Text>
+  </td>
+</tr>})
+
+
+
+
+            RolesID=str['id']
+            insertUse(str['use_id'])
+          }}
+             style={{ 
+               width:160,
+               height:160,
+             }}
+             >
+               <View>
+               <table>
+                 <tr>
+                   <td
+                   >
+                   <View style={{
+                           borderColor:'white',
+                           borderWidth:0.01, 
+         backgroundColor:str['theme_color_1_id'],
+         width:160,
+         height:160,
+         alignItems:'center',
+         justifyContent:'center'
+               }}> 
+                     
+                    <View
+                   style={{ 
+                     height:150,
+                     width:150,
+                     backgroundColor:str['theme_color_2_id'],
+                     borderRadius: 30,
+                     shadowColor: '#000',
+                     shadowOffset: { width: 0, height: 2 },
+                     shadowOpacity: 0.4,
+                     shadowRadius: 100,
+                     alignItems: "center",
+                   }} >
+                          <View
+                   style={{
+                     height: 10,
+       
+                   }}
+                 /> 
+                  <img src={localStorage.getItem('logo')} alt=""
+             style={{
+               height:40, width:40}}
+             /> 
+       
+              
+                 <Text style={{ 
+                       fontSize:7,
+                       fontFamily: 'Cochin',
+                       color:str['theme_color_5_id'],
+                       fontWeight: localStorage.getItem('themefontweight'), 
+                 }}>
+              A & M ELITE AVIATION   
+                 </Text>
+         
+           
+               <View
+                   style={{
+                     height: 10,
+       
+                   }}
+                 />
+                 <View style={{
+                   height:20
+                 }}>
+       
+       
+       
+                   <TextInput
+       
+       editable={false}
+                     style={
+                       { 
+                          
+                         caretColor:str['theme_color_5_id'],
+                         outlineStyle: 'none',
+                         borderColor:str['theme_color_2_id'], 
+                         backgroundColor:str['theme_color_3_id'],
+                         height:20,
+                         width:70,
+                         borderWidth:2,
+                         paddingLeft: 5,
+                         
+                 paddingRight: 8, 
+                 color:str['theme_color_5_id'],
+                 fontSize:5
+                       }
+                     }
+                     value="email@gmail.com"
+                     placeholder="USERNAME"
+                     placeholderTextColor={str['theme_color_6_id']}
+                     
+       
+                   /> 
+       
+                   
+                 </View> 
+       
+       <View style={{
+                   height:20
+                 }}>
+       
+       
+       
+                   <TextInput
+                secureTextEntry={true}
+         editable={false}
+                     style={
+                       { 
+                        caretColor:str['theme_color_5_id'],
+                        outlineStyle: 'none',
+                        borderColor:str['theme_color_2_id'], 
+                        backgroundColor:str['theme_color_3_id'],
+                        height:20,
+                        width:70,
+                        borderWidth:2,
+                        paddingLeft: 5,
+                         
+                        paddingRight: 8, 
+                        color:str['theme_color_5_id'],
+                        fontSize:5
+                       }
+                     }
+       
+                     placeholder="PASSWORD"
+                     placeholderTextColor={str['theme_color_6_id']}
+                     
+       
+                   /> 
+       
+                   
+                 </View> 
+                 <View style={{
+                   height:10
+                 }}>
+                   
+               
+                 </View> 
+                 <TouchableHighlight 
+                 activeOpacity={0.6}
+                 underlayColor="#9c9c9c"
+                 style={{
+                   width:70,
+                   borderRadius: 25,
+                   height: 15,
+                     alignItems: 'center', 
+                     backgroundColor: str['theme_color_6_id'], 
+                     fontWeight:localStorage.getItem("themefontweight"),
+                     justifyContent: "center",
+                 }}
+                 disabled={true}
+                 >
+                 <Text
+                 style={{
+                   color:str['theme_color_5_id'],
+                   fontWeight:localStorage.getItem("themefontweight"),
+                   fontSize:5
+                 }}
+                 >LOGIN</Text>
+             </TouchableHighlight>
+                   </View>
+                 </View>
+                   </td>
+                 </tr>
+               </table>
+             </View>
+             </Button>
+
+      </td>
+                );
+              })}
+            </View>
+            </View> 
+      </td>
+      <td>
+
+      </td>
+      <View style={{
+           flex: 1,
+           alignItems: "center",
+           height: window.innerHeight-180,  
+      }}> 
+              
+  <View
+  style={{
+    height:530,
+    width:530,
+    alignItems: "center",
+    justifyContent: "center", 
+    backgroundColor:insertmobilethemecolor1.value 
+}}
+  >
+  <View
+            style={{ 
+
+
+            }} 
+          />
+             <View
+            style={{ 
+              height:500,
+              width:500,
+              backgroundColor:insertmobilethemecolor2.value,
+              borderRadius: 30,
+              shadowColor: '#000',
+              shadowOffset: { width: 0, height: 2 },
+              shadowOpacity: 0.4,
+              shadowRadius: 100,
+              alignItems: "center",
+            }} >
+                   <View
+            style={{
+              height: 10,
+
+            }}
+          /> 
+           <img src={localStorage.getItem('logo')} alt=""
+      style={{
+        height:200, width:200}}
+      /> 
+
+          <Text style={{
+               fontFamily: 'Cochin',
+          }}>
+          <Text style={{ 
+                fontSize:parseInt(insertmobilethemesize.value, 0) + 0, 
+                color:insertmobilethemecolor5.value,
+                fontWeight: localStorage.getItem('themefontweight'), 
+          }}>
+       A & M ELITE AVIATION   
+          </Text>
+        </Text>
+    
+        <View
+            style={{
+              height: 30,
+
+            }}
+          />
+          <View style={{
+            height:50
+          }}>
+
+
+
+            <TextInput
+            editable={false}
+  
+              style={
+                { 
+                   
+                  caretColor:insertmobilethemecolor5.value,
+                  outlineStyle: 'none',
+                  borderColor:insertmobilethemecolor2.value, 
+                  backgroundColor:insertmobilethemecolor3.value,
+                  height:50,
+                  width:350,
+                  borderWidth:2,
+                  paddingLeft: 12, 
+                  
+          paddingRight: 8,
+          color:insertmobilethemecolor5.value,
+          fontSize:parseInt(insertmobilethemesize.value, 0) + 0,   
+                }
+              }
+              value="email@gmail.com"
+              placeholder="USERNAME"
+              placeholderTextColor={insertmobilethemecolor6.value}
+              
+            /> 
+
+            
+          </View> 
+          <View 
+            style={{ 
+              height: 10,  
+            }}
+          />
+
+
+          <View style={{
+            height:50
+          }}>
+            
+            <TextInput
+   secureTextEntry={true}
+   editable={false}
+              style={
+                {
+                  caretColor:insertmobilethemecolor5.value,
+                  outlineStyle: 'none',
+                  borderColor:insertmobilethemecolor2.value, 
+                  backgroundColor:insertmobilethemecolor3.value,
+                  height:50,
+                  width:350,
+                  borderWidth:2,
+                  paddingLeft: 12,
+                  
+          paddingRight: 8,
+          color:insertmobilethemecolor5.value,
+          fontSize:parseInt(insertmobilethemesize.value, 0) + 0,   
+                }
+              }
+              placeholder="PASSWORD"
+              placeholderTextColor={insertmobilethemecolor6.value}
+     
+            /> 
+          </View> 
+          <View
+            style={{
+              height: 30,
+
+            }}
+          />
+          <TouchableHighlight 
+          activeOpacity={0.6}
+          underlayColor="#9c9c9c"
+          style={{
+            width: 180,
+            borderRadius: 25,
+            
+            height: 45,
+              alignItems: 'center',  
+              backgroundColor: insertmobilethemecolor6.value, 
+              fontWeight:localStorage.getItem("themefontweight"),
+              justifyContent: "center",
+          }}>
+          <Text
+          style={{ 
+            color:insertmobilethemecolor5.value,
+            fontWeight:localStorage.getItem("themefontweight"),
+            fontSize:parseInt(insertmobilethemesize.value, 0) + 0,    
+          }} 
+          >LOGIN</Text>
+      </TouchableHighlight>
+            </View>
+  </View>
+          </View>
+          <td >
+      <View
+      style={{
+      height: window.innerHeight-180,
+
+
+      }}
+      >
+      
+      
+      <table
+      style={{
+
+      borderCollapse: 'separate',
+      borderSpacing: '0px 4px'
+      }}
+      >
+        <tr>
+        <input type="checkbox" 
+      onClick={()=>{
+      if(insertuse===false){
+        insertUse(true) 
+      }else{
+        insertUse(false)   
+      }
+       }}
+          checked={insertuse}
+        style={{
+          width:18,
+          height:18
+        }}
+        />
+                <Text
+                style={{
+                  fontSize:parseInt(localStorage.getItem("themefontsizetext"), 0) + 0, 
+                  color:localStorage.getItem('themecolor5')
+                }}
+                > Use this</Text>
+        </tr>
+        <tr>
+      <Button
+      style={{
+        width:220,
+        backgroundColor:localStorage.getItem('themecolor2'),
+      }}
+      onClick={()=>{
+        insertMobileThemeColor1({ value:"#1D3D4C", label:<tr
+        
+        >
+          <td>
+          <View
+        style={{
+          height:20,
+          width:20,
+          borderColor:'grey',
+          borderWidth:0.01, 
+          backgroundColor:"#1D3D4C"
+        }}  
+        ></View>
+          </td>
+          <td>
+            <View
+            style={{
+              width:5
+            }}
+            >  
+
+            </View>
+          </td>
+          <td>
+          <Text 
+          style={{
+            color:localStorage.getItem('themecolor5')
+          }}
+          >#1D3D4C</Text>
+          </td>
+        </tr>})
+   insertMobileThemeColor2({ value: "#1F1F1F", label:<tr
+    
+   >
+     <td>
+     <View
+   style={{
+     height:20,
+     width:20,
+     borderColor:'grey',
+     borderWidth:0.01, 
+     backgroundColor:"#1F1F1F"
+   }}  
+   ></View>
+     </td>
+     <td>
+       <View
+       style={{
+         width:5
+       }}
+       >  
+
+       </View>
+     </td>
+     <td>
+     <Text 
+     style={{
+       color:localStorage.getItem('themecolor5')
+     }}
+     >#1F1F1F</Text>
+     </td>
+   </tr>})
+      insertMobileThemeColor3({ value: "#303030", label:<tr
+    
+      >
+        <td>
+        <View
+      style={{
+        height:20,
+        width:20,
+        borderColor:'grey',
+        borderWidth:0.01, 
+        backgroundColor:"#303030"
+      }}  
+      ></View>
+        </td>
+        <td>
+          <View
+          style={{
+            width:5
+          }}
+          >  
+
+          </View>
+        </td>
+        <td>
+        <Text 
+        style={{
+          color:localStorage.getItem('themecolor5')
+        }}
+        >#303030</Text>
+        </td>
+      </tr>})
+         insertMobileThemeColor4({ value:"#3D3D3D", label:<tr
+    
+         >
+           <td>
+           <View
+         style={{
+           height:20,
+           width:20,
+           borderColor:'grey',
+           borderWidth:0.01, 
+           backgroundColor:"#3D3D3D"
+         }}  
+         ></View>
+           </td>
+           <td>
+             <View
+             style={{
+               width:5
+             }}
+             >  
+ 
+             </View>
+           </td>
+           <td>
+           <Text 
+           style={{
+             color:localStorage.getItem('themecolor5')
+           }}
+           >#3D3D3D</Text>
+           </td>
+         </tr>})
+            insertMobileThemeColor5({ value: "#FFFFFF", label:<tr
+    
+            >
+              <td>
+              <View
+            style={{
+              height:20,
+              width:20,
+              borderColor:'grey',
+              borderWidth:0.01, 
+              backgroundColor:"#FFFFFF"
+            }}  
+            ></View>
+              </td>
+              <td>
+                <View
+                style={{
+                  width:5
+                }}
+                >  
+    
+                </View>
+              </td>
+              <td>
+              <Text 
+              style={{
+                color:localStorage.getItem('themecolor5')
+              }}
+              >#FFFFFF</Text>
+              </td>
+            </tr>})
+               insertMobileThemeColor6({ value: "#878787", label:<tr
+    
+               >
+                 <td>
+                 <View
+               style={{
+                 height:20,
+                 width:20,
+                 borderColor:'grey',
+                 borderWidth:0.01, 
+                 backgroundColor:"#878787"
+               }}  
+               ></View>
+                 </td>
+                 <td>
+                   <View
+                   style={{
+                     width:5
+                   }}
+                   >  
+       
+                   </View>
+                 </td>
+                 <td>
+                 <Text 
+                 style={{
+                   color:localStorage.getItem('themecolor5')
+                 }}
+                 >#878787</Text>
+                 </td>
+               </tr>})
+               
+                        insertMobileThemeType({ value: "Simple", label:<tr
+    
+                        >
+                        
+                          <td>
+                          <Text 
+                          style={{
+                            color:localStorage.getItem('themecolor5')
+                          }}
+                          >Simple</Text>
+                          </td>
+                        </tr>}) 
+                         insertMobileThemeFont({ value: "Inter", label:<tr
+    
+                         >
+                         
+                           <td>
+                           <Text 
+                           style={{
+                             color:localStorage.getItem('themecolor5')
+                           }}
+                           >Inter</Text>
+                           </td>
+                         </tr>}) 
+                           insertMobileThemeSize({ value: "13", label:<tr
+     
+                           >
+                           
+                             <td>
+                             <Text 
+                             style={{
+                              fontSize:parseInt("13", 0) + 0, 
+                               color:localStorage.getItem('themecolor5')
+                             }}
+                             >13</Text>
+                             </td>
+                           </tr>}) 
+                         
+                                       insertMobileThemeWeight({ value: "normal", label:<tr
+    
+                                       >
+                                       
+                                         <td>
+                                         <Text 
+                                         style={{
+                                          fontWeight:'normal',
+                                           color:localStorage.getItem('themecolor5')
+                                         }}
+                                         >normal</Text>
+                                         </td>
+                                       </tr>}) 
+                                      
+                              
+      
+      }}
+      ><Text
+      style={{
+        fontWeight:'bold',
+        fontSize:parseInt(localStorage.getItem("themefontsizetext"), 0) + 0,
+        color:localStorage.getItem('themecolor5'),
+      }}
+      >DEFAULT</Text></Button>
+      </tr>
+      <tr>
+      <Button
+      style={{
+        width:220,
+        backgroundColor:localStorage.getItem('themecolor2'),
+      }}
+      onClick={()=>{
+        getMobileThemesViewAPI()
+      }}
+      ><Text
+      style={{
+        fontWeight:'bold',
+        fontSize:parseInt(localStorage.getItem("themefontsizetext"), 0) + 0,
+        color:localStorage.getItem('themecolor5'),
+      }}
+      >CLEAR</Text></Button>
+      </tr>
+      <tr>
+      <Button
+      style={{
+        backgroundColor:localStorage.getItem('themecolor2'),
+        width:220,
+      }}
+      onClick={()=>{
+        addMobileThemes() 
+      }}
+      ><Text
+      style={{
+        fontWeight:'bold',
+        fontSize:parseInt(localStorage.getItem("themefontsizetext"), 0) + 0,
+        color:localStorage.getItem('themecolor5'),
+      }}
+      >ADD</Text></Button>
+      </tr>
+      <tr>
+      <Button
+      style={{
+        backgroundColor:localStorage.getItem('themecolor2'),
+        width:220,
+      }}
+      onClick={()=>{
+       if(RolesID===""){
+        toast(
+          'Select One',
+          toastConfig({
+          theme:'dark'
+          }) 
+          )
+       }else{
+        UpdateMobileThemes()
+       }
+      }}
+      ><Text
+      style={{
+        fontWeight:'bold',
+        fontSize:parseInt(localStorage.getItem("themefontsizetext"), 0) + 0,
+        color:localStorage.getItem('themecolor5'),
+      }}
+      >UPDATE</Text></Button>
+      </tr>
+      <tr>
+
+      <Button
+      style={{
+        backgroundColor:localStorage.getItem('themecolor2'),
+        width:220,
+      }}
+      onClick={()=>{
+
+      if(RolesID==="")
+      {
+      if(localStorage.getItem("allow")==="on"){
+      localStorage.setItem('allow', "off");
+      toast(
+      'Select One',
+      toastConfig({
+      theme:'dark'
+      }) 
+      )
+       
+      setTimeout(() => {
+      localStorage.setItem('allow', "on");
+      }, 3000);
+      }
+      }else{
+        DeleteMobileThemes()
+      }
+      }}
+      ><Text
+      style={{
+        fontWeight:'bold',
+        fontSize:parseInt(localStorage.getItem("themefontsizetext"), 0) + 0,
+        color:localStorage.getItem('themecolor5'),
+      }}
+      >DELETE</Text></Button>
+      </tr>
+      <View
+            style={{
+              height: window.innerHeight-473,
+            }}
+            
+            >  
+      <tr
+      style={{
+        paddingBottom:5
+      }}
+      >
+      <Select
+      options={getThemeColors} 
+      value={insertmobilethemecolor1} 
+        onChange={(v)=>{
+          insertMobileThemeColor1(v)
+        }}  
+
+    theme={(theme) => ({
+    ...theme,
+    borderradius: 0,
+    colors: {
+    ...theme.colors,
+    text: 'green',
+    font:'green',
+    primary25: '#6bbfff',  
+    
+    neutral0: localStorage.getItem("themecolor2"),
+    primary: localStorage.getItem("themecolor6"), 
+    neutral80: localStorage.getItem("themecolor5"),
+    neutral50: localStorage.getItem("themecolor6"), 
+    color: 'green', 
+
+    },
+    })}
+    
+    placeholder="Color 1"  
+    placeholderTextColor={localStorage.getItem('themecolor6')}
+       styles={{
+         control: (base, state) => ({
+           ...base,
+           width:220,
+           fontWeight:localStorage.getItem("themefontweight"),
+           fontSize:parseInt(localStorage.getItem("themefontsizetext"), 0) + 0, 
+           outlineStyle: 'none',
+           border: 0,
+           boxShadow: 'none',
+           backgroundColor:localStorage.getItem('themecolor3'),
+
+     paddingRight: 8, 
+     
+         }),
+         menu: (base) => ({
+          ...base,
+          width: "max-content",
+
+   
+     }),
+       }}
+
+    >
+    
+     </Select>
+      </tr>
+      <tr
+      style={{
+        paddingBottom:5
+      }}
+      >
+      <Select
+      options={getThemeColors}
+      value={insertmobilethemecolor2} 
+        onChange={(v)=>{ 
+          insertMobileThemeColor2(v)
+        }}  
+
+    theme={(theme) => ({
+    ...theme,
+    borderradius: 0,
+    colors: {
+    ...theme.colors,
+    text: 'green',
+    font:'green',
+    primary25: '#6bbfff',  
+    
+    neutral0: localStorage.getItem("themecolor2"),
+    primary: localStorage.getItem("themecolor6"), 
+    neutral80: localStorage.getItem("themecolor5"),
+    neutral50: localStorage.getItem("themecolor6"), 
+    color: 'green', 
+
+    },
+    })}
+    
+    placeholder="Color 2"  
+    placeholderTextColor={localStorage.getItem('themecolor6')}
+       styles={{
+         control: (base, state) => ({
+           ...base,
+           width:220,
+           fontWeight:localStorage.getItem("themefontweight"),
+           fontSize:parseInt(localStorage.getItem("themefontsizetext"), 0) + 0, 
+           outlineStyle: 'none',
+           border: 0,
+           boxShadow: 'none',
+           backgroundColor:localStorage.getItem('themecolor3'),
+
+     paddingRight: 8, 
+     
+         }),
+         menu: (base) => ({
+          ...base,
+          width: "max-content", 
+
+   
+     }),
+       }}
+
+    >
+    
+     </Select>
+      </tr>
+
+
+      <tr
+      style={{
+        paddingBottom:5
+      }}
+      >
+      <Select
+      options={getThemeColors}
+      value={insertmobilethemecolor3} 
+      onChange={(v)=>{ 
+        insertMobileThemeColor3(v)
+      }}  
+   
+
+    theme={(theme) => ({
+    ...theme,
+    borderradius: 0,
+    colors: {
+    ...theme.colors,
+    text: 'green',
+    font:'green',
+    primary25: '#6bbfff',  
+    
+    neutral0: localStorage.getItem("themecolor2"),
+    primary: localStorage.getItem("themecolor6"), 
+    neutral80: localStorage.getItem("themecolor5"),
+    neutral50: localStorage.getItem("themecolor6"), 
+    color: 'green', 
+
+    },
+    })}
+    
+    placeholder="Color 3"  
+    placeholderTextColor={localStorage.getItem('themecolor6')}
+       styles={{
+         control: (base, state) => ({
+           ...base,
+           width:220,
+           fontWeight:localStorage.getItem("themefontweight"),
+           fontSize:parseInt(localStorage.getItem("themefontsizetext"), 0) + 0, 
+           outlineStyle: 'none',
+           border: 0,
+           boxShadow: 'none',
+           backgroundColor:localStorage.getItem('themecolor3'),
+
+     paddingRight: 8, 
+     
+         }),
+         menu: (base) => ({
+          ...base,
+          width: "max-content",
+
+   
+     }),
+       }}
+
+    >
+    
+     </Select>
+      </tr>
+      <tr
+      style={{
+        paddingBottom:5
+      }}
+      >
+      <Select
+      options={getThemeColors}
+      value={insertmobilethemecolor4} 
+      onChange={(v)=>{ 
+        insertMobileThemeColor4(v)
+      }}  
+     
+    theme={(theme) => ({
+    ...theme,
+    borderradius: 0,
+    colors: {
+    ...theme.colors,
+    text: 'green',
+    font:'green',
+    primary25: '#6bbfff',  
+    
+    neutral0: localStorage.getItem("themecolor2"),
+    primary: localStorage.getItem("themecolor6"), 
+    neutral80: localStorage.getItem("themecolor5"),
+    neutral50: localStorage.getItem("themecolor6"), 
+    color: 'green', 
+
+    },
+    })}
+    
+    placeholder="Color 4"  
+    placeholderTextColor={localStorage.getItem('themecolor6')}
+       styles={{
+         control: (base, state) => ({
+           ...base,
+           width:220,
+           fontWeight:localStorage.getItem("themefontweight"),
+           fontSize:parseInt(localStorage.getItem("themefontsizetext"), 0) + 0, 
+           outlineStyle: 'none',
+           border: 0,
+           boxShadow: 'none',
+           backgroundColor:localStorage.getItem('themecolor3'),
+
+     paddingRight: 8, 
+     
+         }),
+         menu: (base) => ({
+          ...base,
+          width: "max-content",
+
+   
+     }),
+       }}
+
+    >
+    
+     </Select>
+      </tr>
+      <tr
+      style={{
+        paddingBottom:5
+      }}
+      >
+      <Select
+      options={getThemeColors}
+      value={insertmobilethemecolor5} 
+      onChange={(v)=>{ 
+        insertMobileThemeColor5(v)
+      }}  
+
+
+    theme={(theme) => ({
+    ...theme,
+    borderradius: 0,
+    colors: {
+    ...theme.colors,
+    text: 'green',
+    font:'green',
+    primary25: '#6bbfff',  
+    
+    neutral0: localStorage.getItem("themecolor2"),
+    primary: localStorage.getItem("themecolor6"), 
+    neutral80: localStorage.getItem("themecolor5"),
+    neutral50: localStorage.getItem("themecolor6"), 
+    color: 'green', 
+
+    },
+    })}
+    
+    placeholder="Color 5"  
+    placeholderTextColor={localStorage.getItem('themecolor6')}
+       styles={{
+         control: (base, state) => ({
+           ...base,
+           width:220,
+           fontWeight:localStorage.getItem("themefontweight"),
+           fontSize:parseInt(localStorage.getItem("themefontsizetext"), 0) + 0, 
+           outlineStyle: 'none',
+           border: 0,
+           boxShadow: 'none',
+           backgroundColor:localStorage.getItem('themecolor3'),
+
+     paddingRight: 8, 
+     
+         }),
+         menu: (base) => ({
+          ...base,
+          width: "max-content",
+
+   
+     }),
+       }}
+
+    >
+    
+     </Select>
+      </tr>
+      <tr
+      style={{
+        paddingBottom:5
+      }}
+      >
+      <Select
+      options={getThemeColors}
+      value={insertmobilethemecolor6} 
+      onChange={(v)=>{ 
+        insertMobileThemeColor6(v)
+      }}  
+
+    theme={(theme) => ({
+    ...theme,
+    borderradius: 0,
+    colors: {
+    ...theme.colors,
+    text: 'green',
+    font:'green',
+    primary25: '#6bbfff',  
+    
+    neutral0: localStorage.getItem("themecolor2"),
+    primary: localStorage.getItem("themecolor6"), 
+    neutral80: localStorage.getItem("themecolor5"),
+    neutral50: localStorage.getItem("themecolor6"), 
+    color: 'green', 
+
+    },
+    })}
+    
+    placeholder="Color6"  
+    placeholderTextColor={localStorage.getItem('themecolor6')}
+       styles={{
+         control: (base, state) => ({
+           ...base,
+           width:220,
+           fontWeight:localStorage.getItem("themefontweight"),
+           fontSize:parseInt(localStorage.getItem("themefontsizetext"), 0) + 0, 
+           outlineStyle: 'none',
+           border: 0,
+           boxShadow: 'none',
+           backgroundColor:localStorage.getItem('themecolor3'),
+
+     paddingRight: 8, 
+     
+         }),
+         menu: (base) => ({
+          ...base,
+          width: "max-content",
+
+   
+     }),
+       }}
+
+    >
+    
+     </Select>
+      </tr>
+      </View>
+      </table>
+      </View> 
+      </td>
+      <td >
+      <View
+      style={{
+      height: window.innerHeight-180,
+   
+      }}
+      >
+      
+      
+      <table
+      style={{
+
+      borderCollapse: 'separate',
+      borderSpacing: '0px 4px'
+      }}
+      >
+  
+      <View
+            style={{
+              height: window.innerHeight-473,
+            }}
+            
+            >  
+      <tr
+      style={{
+        paddingBottom:5
+      }}
+      >
+      <Select
+      options={getThemeType} 
+      value={insertmobilethemetype} 
+      onChange={(v)=>{   
+        insertMobileThemeType(v)
+      }}  
+
+    theme={(theme) => ({
+    ...theme,
+    borderradius: 0,
+    colors: {
+    ...theme.colors,
+    text: 'green',
+    font:'green',
+    primary25: '#6bbfff',  
+    
+    neutral0: localStorage.getItem("themecolor2"),
+    primary: localStorage.getItem("themecolor6"), 
+    neutral80: localStorage.getItem("themecolor5"),
+    neutral50: localStorage.getItem("themecolor6"), 
+    color: 'green', 
+
+    },
+    })}
+    
+    placeholder="Theme Type"  
+    placeholderTextColor={localStorage.getItem('themecolor6')}
+       styles={{
+         control: (base, state) => ({
+           ...base,
+           width:220,
+           fontWeight:localStorage.getItem("themefontweight"),
+           fontSize:parseInt(localStorage.getItem("themefontsizetext"), 0) + 0, 
+           outlineStyle: 'none',
+           border: 0,
+           boxShadow: 'none',
+           backgroundColor:localStorage.getItem('themecolor3'),
+
+     paddingRight: 8, 
+     
+         }), 
+         menu: (base) => ({
+          ...base,
+          width: "max-content",
+
+   
+     }),
+       }}
+
+    >
+    
+     </Select>
+      </tr>
+      <tr
+      style={{
+        paddingBottom:5
+      }}
+      >
+      <Select
+      options={getThemeFont} 
+      value={insertmobilethemefont} 
+      onChange={(v)=>{   
+        insertMobileThemeFont(v)
+      }}  
+ 
+    theme={(theme) => ({
+    ...theme,
+    borderradius: 0,
+    colors: {
+    ...theme.colors,
+    text: 'green',
+    font:'green',
+    primary25: '#6bbfff',  
+    
+    neutral0: localStorage.getItem("themecolor2"),
+    primary: localStorage.getItem("themecolor6"), 
+    neutral80: localStorage.getItem("themecolor5"),
+    neutral50: localStorage.getItem("themecolor6"), 
+    color: 'green', 
+
+    },
+    })}
+    
+    placeholder="Theme Font Family"  
+    placeholderTextColor={localStorage.getItem('themecolor6')}
+       styles={{
+         control: (base, state) => ({
+           ...base,
+           width:220, 
+           fontSize:parseInt(localStorage.getItem("themefontsizetext"), 0) + 0, 
+           outlineStyle: 'none',
+           border: 0,
+           boxShadow: 'none',
+           backgroundColor:localStorage.getItem('themecolor3'),
+
+     paddingRight: 8, 
+     
+         }),
+         menu: (base) => ({
+          ...base,
+          width: "max-content", 
+
+   
+     }),
+       }}
+
+    >
+    
+     </Select>
+      </tr>
+
+
+      <tr
+      style={{
+        paddingBottom:5
+      }}
+      >
+      <Select
+      options={getThemeSize}
+      value={insertmobilethemesize} 
+      onChange={(v)=>{   
+        insertMobileThemeSize(v)
+      }}  
+
+    theme={(theme) => ({
+    ...theme,
+    borderradius: 0,
+    colors: {
+    ...theme.colors,
+    text: 'green',
+    font:'green',
+    primary25: '#6bbfff',  
+    
+    neutral0: localStorage.getItem("themecolor2"),
+    primary: localStorage.getItem("themecolor6"), 
+    neutral80: localStorage.getItem("themecolor5"),
+    neutral50: localStorage.getItem("themecolor6"), 
+    color: 'green', 
+
+    },
+    })}
+    
+    placeholder="Theme Size Text"  
+    placeholderTextColor={localStorage.getItem('themecolor6')}
+       styles={{
+         control: (base, state) => ({
+           ...base,
+           width:220,
+           fontWeight:localStorage.getItem("themefontweight"),
+           fontSize:parseInt(localStorage.getItem("themefontsizetext"), 0) + 0, 
+           outlineStyle: 'none',
+           border: 0,
+           boxShadow: 'none',
+           backgroundColor:localStorage.getItem('themecolor3'),
+
+     paddingRight: 8, 
+     
+         }),
+         menu: (base) => ({
+          ...base,
+          width: "max-content",
+
+   
+     }),
+       }}
+
+    >
+    
+     </Select>
+      </tr>
+    
+      <tr
+      style={{
+        paddingBottom:5
+      }}
+      >
+      <Select
+      options={getThemeWeight}  
+      value={insertmobilethemeweight} 
+      onChange={(v)=>{   
+        insertMobileThemeWeight(v)
+      }}  
+
+    theme={(theme) => ({
+    ...theme,
+    borderradius: 0,
+    colors: { 
+    ...theme.colors,
+    text: 'green',
+    font:'green',
+    primary25: '#6bbfff',  
+    
+    neutral0: localStorage.getItem("themecolor2"),
+    primary: localStorage.getItem("themecolor6"), 
+    neutral80: localStorage.getItem("themecolor5"),
+    neutral50: localStorage.getItem("themecolor6"), 
+    color: 'green', 
+
+    },
+    })}
+    
+    placeholder="Theme Font Weight"  
+    placeholderTextColor={localStorage.getItem('themecolor6')}
+       styles={{
+         control: (base, state) => ({
+           ...base,
+           width:220,
+           fontWeight:localStorage.getItem("themefontweight"),
+           fontSize:parseInt(localStorage.getItem("themefontsizetext"), 0) + 0, 
+           outlineStyle: 'none',
+           border: 0,
+           boxShadow: 'none',
+           backgroundColor:localStorage.getItem('themecolor3'),
+
+     paddingRight: 8, 
+     
+         }),
+         menu: (base) => ({
+          ...base,
+          width: "max-content",
+
+   
+     }),
+       }}
+
+    >
+    
+     </Select>
+      </tr>
+   
+      </View>
+      </table>
+      </View> 
+      </td>
+
+      </tr>
+      </table>
+    </View>
+    }else if(mythemes==="1"){
+      MyUI3 = <View>
+      <table
+      >
+      <tr>
+
+ <td
+  style={{
+    width:340,
+
+  }}
+  >
+
+   <Text
+  style={{
+    fontWeight:'100', 
+    fontSize:parseInt(localStorage.getItem("themefontsizeheader"), 0) + 0, 
+    color:localStorage.getItem('themecolor5'),  
+  }}
+  >WEB THEMES</Text>
+
+   
+  </td>
+
+
+
+</tr>
+
+      </table>
+       <table
+
+       >
+      <tr>
+      <td>
+      <View
+            style={{
+              height: window.innerHeight-180,  
+              alignItems:'center', 
+              //WEB THEMES
+            }}
+
+            >  
+
+ {
+              JSON.parse(getwebthemeviews).map((str) => {
+    
+
+               return (                   
+                 <td
+                 style={{
+                   paddingBottom:10
+                 }}
+                 >
+             
+             <Button
+             disabled={true}
+             style={{ 
+               width:160,
+               height:160,
+             }}
+             >
+               <View>
+               <table>
+                 <tr>
+                   <td
+                   >
+                   <View style={{
+                           borderColor:'white',
+                           borderWidth:3, 
+         backgroundColor:str['web_theme_color_1_id'],
+         width:160,
+         height:160,
+         alignItems:'center',
+         justifyContent:'center'
+               }}> 
+                     
+                    <View
+                   style={{ 
+                     height:150,
+                     width:150,
+                     backgroundColor:str['web_theme_color_2_id'],
+                     borderRadius: 30,
+                     shadowColor: '#000',
+                     shadowOffset: { width: 0, height: 2 },
+                     shadowOpacity: 0.4,
+                     shadowRadius: 100,
+                     alignItems: "center",
+                   }} >
+                          <View
+                   style={{
+                     height: 10,
+       
+                   }}
+                 /> 
+                  <img src={localStorage.getItem('logo')} alt=""
+             style={{
+               height:40, width:40}}
+             /> 
+       
+              
+                 <Text style={{ 
+                       fontSize:7,
+                       fontFamily: 'Cochin',
+                       color:str['web_theme_color_5_id'],
+                       fontWeight: localStorage.getItem('themefontweight'), 
+                 }}>
+              A & M ELITE AVIATION   
+                 </Text>
+         
+           
+               <View
+                   style={{
+                     height: 10,
+       
+                   }}
+                 />
+                 <View style={{
+                   height:20
+                 }}>
+       
+       
+       
+                   <TextInput
+       
+       editable={false}
+                     style={
+                       { 
+                          
+                         caretColor:str['web_theme_color_5_id'],
+                         outlineStyle: 'none',
+                         borderColor:str['web_theme_color_2_id'], 
+                         backgroundColor:str['web_theme_color_3_id'],
+                         height:20,
+                         width:70,
+                         borderWidth:2,
+                         paddingLeft: 5,
+                         
+                 paddingRight: 8, 
+                 color:str['web_theme_color_5_id'],
+                 fontSize:5
+                       }
+                     }
+                     value="email@gmail.com"
+                     placeholder="USERNAME"
+                     placeholderTextColor={str['web_theme_color_6_id']}
+                     
+       
+                   /> 
+       
+                   
+                 </View> 
+       
+       <View style={{
+                   height:20
+                 }}>
+       
+       
+       
+                   <TextInput
+                secureTextEntry={true}
+         editable={false}
+                     style={
+                       { 
+                        caretColor:str['web_theme_color_5_id'],
+                        outlineStyle: 'none',
+                        borderColor:str['web_theme_color_2_id'], 
+                        backgroundColor:str['web_theme_color_3_id'],
+                        height:20,
+                        width:70,
+                        borderWidth:2,
+                        paddingLeft: 5,
+                         
+                        paddingRight: 8, 
+                        color:str['web_theme_color_5_id'],
+                        fontSize:5
+                       }
+                     }
+       
+                     placeholder="PASSWORD"
+                     placeholderTextColor={str['web_theme_color_6_id']}
+                     
+       
+                   /> 
+       
+                   
+                 </View> 
+                 <View style={{
+                   height:10
+                 }}>
+                   
+               
+                 </View> 
+                 <TouchableHighlight 
+                 activeOpacity={0.6}
+                 underlayColor="#9c9c9c"
+                 style={{
+                   width:70,
+                   borderRadius: 25,
+                   height: 15,
+                     alignItems: 'center', 
+                     backgroundColor: str['web_theme_color_6_id'], 
+                     fontWeight:localStorage.getItem("themefontweight"),
+                     justifyContent: "center",
+                 }}
+                 disabled={true}
+                 >
+                 <Text
+                 style={{
+                   color:str['web_theme_color_5_id'],
+                   fontWeight:localStorage.getItem("themefontweight"),
+                   fontSize:5
+                 }}
+                 >LOGIN</Text>
+             </TouchableHighlight>
+                   </View>
+                 </View>
+                   </td>
+                 </tr>
+               </table>
+             </View>
+             </Button>
+       
+             </td>
+                       );
+                     })}
+
+<View
+            style={{
+              overflowY:"scroll",  
+              height: window.innerHeight-460,
+              width:161,
+       
+            }}
+
+            >  
+
+            {   
+       JSON.parse(getwebtheme).map((str) => {
+      
+   
+        return (                   
+          <td
+          style={{
+            paddingBottom:10
+          }}
+          >
+      
+      <Button
+          onClick={()=>{
+            insertWebThemeColor1({ value: str['web_theme_color_1_id'], label:<tr
+        
+            >
+              <td>
+              <View
+            style={{
+              height:20,
+              width:20,
+              borderColor:'grey',
+              borderWidth:0.01, 
+              backgroundColor:str['web_theme_color_1_id']
+            }}  
+            ></View>
+              </td>
+              <td>
+                <View
+                style={{
+                  width:5
+                }}
+                >  
+    
+                </View>
+              </td>
+              <td>
+              <Text 
+              style={{
+                color:localStorage.getItem('themecolor5')
+              }}
+              >{str['web_theme_color_1_id']}</Text>
+              </td>
+            </tr>})
+       insertWebThemeColor2({ value: str['web_theme_color_2_id'], label:<tr
+        
+       >
+         <td>
+         <View
+       style={{
+         height:20,
+         width:20,
+         borderColor:'grey',
+         borderWidth:0.01, 
+         backgroundColor:str['web_theme_color_2_id']
+       }}  
+       ></View>
+         </td>
+         <td>
+           <View
+           style={{
+             width:5
+           }}
+           >  
+
+           </View>
+         </td>
+         <td>
+         <Text 
+         style={{
+           color:localStorage.getItem('themecolor5')
+         }}
+         >{str['web_theme_color_2_id']}</Text>
+         </td>
+       </tr>})
+          insertWebThemeColor3({ value: str['web_theme_color_3_id'], label:<tr
+        
+          >
+            <td>
+            <View
+          style={{
+            height:20,
+            width:20,
+            borderColor:'grey',
+            borderWidth:0.01, 
+            backgroundColor:str['web_theme_color_3_id']
+          }}  
+          ></View>
+            </td>
+            <td>
+              <View
+              style={{
+                width:5
+              }}
+              >  
+  
+              </View>
+            </td>
+            <td>
+            <Text 
+            style={{
+              color:localStorage.getItem('themecolor5')
+            }}
+            >{str['web_theme_color_3_id']}</Text>
+            </td>
+          </tr>})
+             insertWebThemeColor4({ value: str['web_theme_color_4_id'], label:<tr
+        
+             >
+               <td>
+               <View
+             style={{
+               height:20,
+               width:20,
+               borderColor:'grey',
+               borderWidth:0.01, 
+               backgroundColor:str['web_theme_color_4_id']
+             }}  
+             ></View>
+               </td>
+               <td>
+                 <View
+                 style={{
+                   width:5
+                 }}
+                 >  
+     
+                 </View>
+               </td>
+               <td>
+               <Text 
+               style={{
+                 color:localStorage.getItem('themecolor5')
+               }}
+               >{str['web_theme_color_4_id']}</Text>
+               </td>
+             </tr>})
+                insertWebThemeColor5({ value: str['web_theme_color_5_id'], label:<tr
+        
+                >
+                  <td>
+                  <View
+                style={{
+                  height:20,
+                  width:20,
+                  borderColor:'grey',
+                  borderWidth:0.01, 
+                  backgroundColor:str['web_theme_color_5_id']
+                }}  
+                ></View>
+                  </td>
+                  <td>
+                    <View
+                    style={{
+                      width:5
+                    }}
+                    >  
+        
+                    </View>
+                  </td>
+                  <td>
+                  <Text 
+                  style={{
+                    color:localStorage.getItem('themecolor5')
+                  }}
+                  >{str['web_theme_color_5_id']}</Text>
+                  </td>
+                </tr>})
+                   insertWebThemeColor6({ value: str['web_theme_color_6_id'], label:<tr
+        
+                   >
+                     <td>
+                     <View
+                   style={{
+                     height:20,
+                     width:20,
+                     borderColor:'grey',
+                     borderWidth:0.01, 
+                     backgroundColor:str['web_theme_color_6_id']
+                   }}  
+                   ></View>
+                     </td>
+                     <td>
+                       <View
+                       style={{
+                         width:5
+                       }}
+                       >  
+           
+                       </View>
+                     </td>
+                     <td>
+                     <Text 
+                     style={{
+                       color:localStorage.getItem('themecolor5')
+                     }}
+                     >{str['web_theme_color_6_id']}</Text>
+                     </td>
+                   </tr>})
+                      insertWebThemeColor7({ value: str['web_theme_color_7_id'], label:<tr
+        
+                      >
+                        <td>
+                        <View
+                      style={{
+                        height:20,
+                        width:20,
+                        borderColor:'grey',
+                        borderWidth:0.01, 
+                        backgroundColor:str['web_theme_color_7_id']
+                      }}  
+                      ></View>
+                        </td>
+                        <td>
+                          <View
+                          style={{
+                            width:5
+                          }}
+                          >  
+              
+                          </View>
+                        </td>
+                        <td>
+                        <Text 
+                        style={{
+                          color:localStorage.getItem('themecolor5')
+                        }}
+                        >{str['web_theme_color_7_id']}</Text>
+                        </td>
+                      </tr>})
+
+insertWebThemeType({ value: str['web_theme_type_id'], label:<tr
+        
+>
+
+  <td>
+  <Text 
+  style={{
+    color:localStorage.getItem('themecolor5')
+  }}
+  >{str['web_theme_type_id']}</Text>
+  </td>
+</tr>})
+
+insertWebThemeFont({ value: str['web_theme_font_id'], label:<tr
+        
+>
+ 
+
+  <td>
+  <Text 
+  style={{ 
+    fontFamily:str['web_theme_font_id'],
+    color:localStorage.getItem('themecolor5')
+  }}
+  >{str['web_theme_font_id']}</Text>
+  </td>
+</tr>})
+
+insertWebThemeSizeText({ value: str['web_theme_font_size_text_id'], label:<tr
+        
+>
+ 
+  <td>
+  <Text 
+  style={{
+    fontSize:parseInt(str['web_theme_font_size_text_id'], 0) + 0, 
+    color:localStorage.getItem('themecolor5')
+  }}
+  >{str['web_theme_font_size_text_id']}</Text>
+  </td>
+</tr>})  
+
+insertWebThemeSizeTitle({ value: str['web_theme_font_size_title_id'], label:<tr
+        
+>
+ 
+
+  <td>
+  <Text 
+  style={{
+    fontSize:parseInt(str['web_theme_font_size_title_id'], 0) + 0, 
+    color:localStorage.getItem('themecolor5')
+  }}
+  >{str['web_theme_font_size_title_id']}</Text>
+  </td>
+</tr>})
+
+insertWebThemeSizeBigTitle({ value: str['web_theme_font_size_bigtitle_id'], label:<tr
+        
+>
+
+
+  <td>
+  <Text 
+  style={{
+    fontSize:parseInt(str['web_theme_font_size_bigtitle_id'], 0) + 0, 
+    color:localStorage.getItem('themecolor5')
+  }}
+  >{str['web_theme_font_size_bigtitle_id']}</Text>
+  </td>
+</tr>})
+
+insertWebThemeSizeHeader({ value: str['web_theme_font_size_header_id'], label:<tr
+        
+>
+
+  <td>
+  <Text 
+  style={{
+    fontSize:parseInt(str['web_theme_font_size_header_id'], 0) + 0, 
+    color:localStorage.getItem('themecolor5')
+  }}
+  >{str['web_theme_font_size_header_id']}</Text>
+  </td>
+</tr>})
+
+insertWebThemeWeight({ value: str['web_theme_font_weight_id'], label:<tr
+        
+>
+  
+  <td> 
+  <Text 
+  style={{
+    fontWeight:str['web_theme_font_weight_id'],
+    color:localStorage.getItem('themecolor5')
+  }}
+  >{str['web_theme_font_weight_id']}</Text>
+  </td>
+</tr>})
+
+
+
+insertWebThemeIconSize({ value: str['web_theme_icons_size_id'], label:<tr
+        
+> 
+  
+  <td>
+  <Text 
+  style={{
+    fontSize:parseInt(str['web_theme_icons_size_id'], 0) + 0, 
+    color:localStorage.getItem('themecolor5')
+  }}
+  >{str['web_theme_icons_size_id']}</Text>
+  </td>
+</tr>})
+
+            RolesID=str['id']
+            insertUse(str['use_id'])
+          }}
+             style={{ 
+               width:160,
+               height:160,
+             }}
+             >
+               <View>
+               <table>
+                 <tr>
+                   <td
+                   >
+                   <View style={{
+                           borderColor:'white',
+                           borderWidth:0.01, 
+         backgroundColor:str['web_theme_color_1_id'],
+         width:160,
+         height:160,
+         alignItems:'center',
+         justifyContent:'center'
+               }}> 
+                     
+                    <View
+                   style={{ 
+                     height:150,
+                     width:150,
+                     backgroundColor:str['web_theme_color_2_id'],
+                     borderRadius: 30,
+                     shadowColor: '#000',
+                     shadowOffset: { width: 0, height: 2 },
+                     shadowOpacity: 0.4,
+                     shadowRadius: 100,
+                     alignItems: "center",
+                   }} >
+                          <View
+                   style={{
+                     height: 10,
+       
+                   }}
+                 /> 
+                  <img src={localStorage.getItem('logo')} alt=""
+             style={{
+               height:40, width:40}}
+             /> 
+       
+              
+                 <Text style={{ 
+                       fontSize:7,
+                       fontFamily: 'Cochin',
+                       color:str['web_theme_color_5_id'],
+                       fontWeight: localStorage.getItem('themefontweight'), 
+                 }}>
+              A & M ELITE AVIATION   
+                 </Text>
+         
+           
+               <View
+                   style={{
+                     height: 10,
+       
+                   }}
+                 />
+                 <View style={{
+                   height:20
+                 }}>
+       
+       
+       
+                   <TextInput
+       
+       editable={false}
+                     style={
+                       { 
+                          
+                         caretColor:str['web_theme_color_5_id'],
+                         outlineStyle: 'none',
+                         borderColor:str['web_theme_color_2_id'], 
+                         backgroundColor:str['web_theme_color_3_id'],
+                         height:20,
+                         width:70,
+                         borderWidth:2,
+                         paddingLeft: 5,
+                         
+                 paddingRight: 8, 
+                 color:str['web_theme_color_5_id'],
+                 fontSize:5
+                       }
+                     }
+                     value="email@gmail.com"
+                     placeholder="USERNAME"
+                     placeholderTextColor={str['web_theme_color_6_id']}
+                     
+       
+                   /> 
+       
+                   
+                 </View> 
+       
+       <View style={{
+                   height:20
+                 }}>
+       
+       
+       
+                   <TextInput
+                secureTextEntry={true}
+         editable={false}
+                     style={
+                       { 
+                        caretColor:str['web_theme_color_5_id'],
+                        outlineStyle: 'none',
+                        borderColor:str['web_theme_color_2_id'], 
+                        backgroundColor:str['web_theme_color_3_id'],
+                        height:20,
+                        width:70,
+                        borderWidth:2,
+                        paddingLeft: 5,
+                         
+                        paddingRight: 8, 
+                        color:str['web_theme_color_5_id'],
+                        fontSize:5
+                       }
+                     }
+       
+                     placeholder="PASSWORD"
+                     placeholderTextColor={str['web_theme_color_6_id']}
+                     
+       
+                   /> 
+       
+                   
+                 </View> 
+                 <View style={{
+                   height:10
+                 }}>
+                   
+               
+                 </View> 
+                 <TouchableHighlight 
+                 activeOpacity={0.6}
+                 underlayColor="#9c9c9c"
+                 style={{
+                   width:70,
+                   borderRadius: 25,
+                   height: 15,
+                     alignItems: 'center', 
+                     backgroundColor: str['web_theme_color_6_id'], 
+                     fontWeight:localStorage.getItem("themefontweight"),
+                     justifyContent: "center",
+                 }}
+                 disabled={true}
+                 >
+                 <Text
+                 style={{
+                   color:str['web_theme_color_5_id'],
+                   fontWeight:localStorage.getItem("themefontweight"),
+                   fontSize:5
+                 }}
+                 >LOGIN</Text>
+             </TouchableHighlight>
+                   </View>
+                 </View>
+                   </td>
+                 </tr>
+               </table>
+             </View>
+             </Button>
+
+      </td>
+                );
+              })}
+            </View>
+            </View>
+      </td>
+      <td>
+
+      </td>
+      <View style={{
+           flex: 1,
+           alignItems: "center",
+           height: window.innerHeight-180,  
+      }}> 
+              
+  <View
+  style={{
+    height:530,
+    width:530,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor:insertwebthemecolor1.value 
+}}
+  >
+  <View
+            style={{ 
+
+
+            }} 
+          />
+             <View
+            style={{ 
+              height:500,
+              width:500,
+              backgroundColor:insertwebthemecolor2.value,
+              borderRadius: 30,
+              shadowColor: '#000',
+              shadowOffset: { width: 0, height: 2 },
+              shadowOpacity: 0.4,
+              shadowRadius: 100,
+              alignItems: "center",
+            }} >
+                   <View
+            style={{
+              height: 10,
+
+            }}
+          /> 
+           <img src={localStorage.getItem('logo')} alt=""
+      style={{
+        height:200, width:200}}
+      /> 
+
+          <Text style={{
+               fontFamily: 'Cochin',
+          }}>
+          <Text style={{ 
+                fontSize:parseInt(insertwebthemesizeheader.value, 0) + 0, 
+                color:insertwebthemecolor5.value,
+                fontWeight: localStorage.getItem('themefontweight'), 
+          }}>
+       A & M ELITE AVIATION   
+          </Text>
+        </Text>
+    
+        <View
+            style={{
+              height: 30,
+
+            }}
+          />
+          <View style={{
+            height:50
+          }}>
+
+
+
+            <TextInput
+            editable={false}
+  
+              style={
+                { 
+                   
+                  caretColor:insertwebthemecolor5.value,
+                  outlineStyle: 'none',
+                  borderColor:insertwebthemecolor2.value, 
+                  backgroundColor:insertwebthemecolor3.value,
+                  height:50,
+                  width:350,
+                  borderWidth:2,
+                  paddingLeft: 12,
+                  
+          paddingRight: 8,
+          color:insertwebthemecolor5.value,
+          fontSize:parseInt(insertwebthemesizetext.value, 0) + 0,   
+                }
+              }
+              value="email@gmail.com"
+              placeholder="USERNAME"
+              placeholderTextColor={parseInt(insertwebthemesizetext.value, 0) + 0}
+              
+            /> 
+
+            
+          </View> 
+          <View 
+            style={{ 
+              height: 10,  
+            }}
+          />
+
+
+          <View style={{
+            height:50
+          }}>
+            
+            <TextInput
+   secureTextEntry={true}
+   editable={false}
+              style={
+                {
+                  caretColor:insertwebthemecolor5.value,
+                  outlineStyle: 'none',
+                  borderColor:insertwebthemecolor2.value, 
+                  backgroundColor:insertwebthemecolor3.value,
+                  height:50,
+                  width:350,
+                  borderWidth:2,
+                  paddingLeft: 12,
+                  
+          paddingRight: 8,
+          color:insertwebthemecolor5.value,
+          fontSize:parseInt(insertwebthemesizetext.value, 0) + 0,   
+                }
+              }
+              placeholder="PASSWORD"
+              placeholderTextColor={parseInt(insertwebthemesizetext.value, 0) + 0}
+     
+            /> 
+          </View> 
+          <View
+            style={{
+              height: 30,
+
+            }}
+          />
+          <TouchableHighlight 
+          activeOpacity={0.6}
+          underlayColor="#9c9c9c"
+          style={{
+            width: 180,
+            borderRadius: 25,
+            
+            height: 45,
+              alignItems: 'center',  
+              backgroundColor: insertwebthemecolor6.value, 
+              fontWeight:localStorage.getItem("themefontweight"),
+              justifyContent: "center",
+          }}>
+          <Text
+          style={{ 
+            color:insertwebthemecolor5.value,
+            fontWeight:localStorage.getItem("themefontweight"),
+            fontSize:parseInt(insertwebthemesizetext.value, 0) + 0,    
+          }}
+          >LOGIN</Text>
+      </TouchableHighlight>
+            </View>
+  </View>
+          </View>
+          <td >
+      <View
+      style={{
+      height: window.innerHeight-180,
+
+
+      }}
+      >
+      
+      
+      <table
+      style={{
+
+      borderCollapse: 'separate',
+      borderSpacing: '0px 4px'
+      }}
+      >
+        <tr>
+        <input type="checkbox" 
+      onClick={()=>{
+      if(insertuse===false){
+        insertUse(true) 
+      }else{
+        insertUse(false)   
+      }
+       }}
+          checked={insertuse}
+        style={{
+          width:18,
+          height:18
+        }}
+        />
+                <Text
+                style={{
+                  fontSize:parseInt(localStorage.getItem("themefontsizetext"), 0) + 0, 
+                  color:localStorage.getItem('themecolor5')
+                }}
+                > Use this</Text>
+        </tr>
+        <tr>
+      <Button
+      style={{
+        width:220,
+        backgroundColor:localStorage.getItem('themecolor2'),
+      }}
+      onClick={()=>{
+        insertWebThemeColor1({ value:"#1D3D4C", label:<tr
+        
+        >
+          <td>
+          <View
+        style={{
+          height:20,
+          width:20,
+          borderColor:'grey',
+          borderWidth:0.01, 
+          backgroundColor:"#1D3D4C"
+        }}  
+        ></View>
+          </td>
+          <td>
+            <View
+            style={{
+              width:5
+            }}
+            >  
+
+            </View>
+          </td>
+          <td>
+          <Text 
+          style={{
+            color:localStorage.getItem('themecolor5')
+          }}
+          >#1D3D4C</Text>
+          </td>
+        </tr>})
+   insertWebThemeColor2({ value: "#1F1F1F", label:<tr
+    
+   >
+     <td>
+     <View
+   style={{
+     height:20,
+     width:20,
+     borderColor:'grey',
+     borderWidth:0.01, 
+     backgroundColor:"#1F1F1F"
+   }}  
+   ></View>
+     </td>
+     <td>
+       <View
+       style={{
+         width:5
+       }}
+       >  
+
+       </View>
+     </td>
+     <td>
+     <Text 
+     style={{
+       color:localStorage.getItem('themecolor5')
+     }}
+     >#1F1F1F</Text>
+     </td>
+   </tr>})
+      insertWebThemeColor3({ value: "#303030", label:<tr
+    
+      >
+        <td>
+        <View
+      style={{
+        height:20,
+        width:20,
+        borderColor:'grey',
+        borderWidth:0.01, 
+        backgroundColor:"#303030"
+      }}  
+      ></View>
+        </td>
+        <td>
+          <View
+          style={{
+            width:5
+          }}
+          >  
+
+          </View>
+        </td>
+        <td>
+        <Text 
+        style={{
+          color:localStorage.getItem('themecolor5')
+        }}
+        >#303030</Text>
+        </td>
+      </tr>})
+         insertWebThemeColor4({ value:"#3D3D3D", label:<tr
+    
+         >
+           <td>
+           <View
+         style={{
+           height:20,
+           width:20,
+           borderColor:'grey',
+           borderWidth:0.01, 
+           backgroundColor:"#3D3D3D"
+         }}  
+         ></View>
+           </td>
+           <td>
+             <View
+             style={{
+               width:5
+             }}
+             >  
+ 
+             </View>
+           </td>
+           <td>
+           <Text 
+           style={{
+             color:localStorage.getItem('themecolor5')
+           }}
+           >#3D3D3D</Text>
+           </td>
+         </tr>})
+            insertWebThemeColor5({ value: "#FFFFFF", label:<tr
+    
+            >
+              <td>
+              <View
+            style={{
+              height:20,
+              width:20,
+              borderColor:'grey',
+              borderWidth:0.01, 
+              backgroundColor:"#FFFFFF"
+            }}  
+            ></View>
+              </td>
+              <td>
+                <View
+                style={{
+                  width:5
+                }}
+                >  
+    
+                </View>
+              </td>
+              <td>
+              <Text 
+              style={{
+                color:localStorage.getItem('themecolor5')
+              }}
+              >#FFFFFF</Text>
+              </td>
+            </tr>})
+               insertWebThemeColor6({ value: "#878787", label:<tr
+    
+               >
+                 <td>
+                 <View
+               style={{
+                 height:20,
+                 width:20,
+                 borderColor:'grey',
+                 borderWidth:0.01, 
+                 backgroundColor:"#878787"
+               }}  
+               ></View>
+                 </td>
+                 <td>
+                   <View
+                   style={{
+                     width:5
+                   }}
+                   >  
+       
+                   </View>
+                 </td>
+                 <td>
+                 <Text 
+                 style={{
+                   color:localStorage.getItem('themecolor5')
+                 }}
+                 >#878787</Text>
+                 </td>
+               </tr>})
+                  insertWebThemeColor7({ value: "#ff1100", label:<tr
+    
+                  >
+                    <td>
+                    <View
+                  style={{
+                    height:20,
+                    width:20,
+                    borderColor:'grey',
+                    borderWidth:0.01, 
+                    backgroundColor:"#ff1100"
+                  }}  
+                  ></View>
+                    </td>
+                    <td>
+                      <View
+                      style={{
+                        width:5
+                      }}
+                      >  
+          
+                      </View>
+                    </td>
+                    <td>
+                    <Text 
+                    style={{
+                      color:localStorage.getItem('themecolor5')
+                    }}
+                    >#ff1100</Text>
+                    </td>
+                  </tr>}) 
+                        insertWebThemeType({ value: "Simple", label:<tr
+    
+                        >
+                        
+                          <td>
+                          <Text 
+                          style={{
+                            color:localStorage.getItem('themecolor5')
+                          }}
+                          >Simple</Text>
+                          </td>
+                        </tr>}) 
+                         insertWebThemeFont({ value: "Inter", label:<tr
+    
+                         >
+                         
+                           <td>
+                           <Text 
+                           style={{
+                             color:localStorage.getItem('themecolor5')
+                           }}
+                           >Inter</Text>
+                           </td>
+                         </tr>}) 
+                           insertWebThemeSizeText({ value: "15", label:<tr
+     
+                           >
+                           
+                             <td>
+                             <Text 
+                             style={{
+                              fontSize:parseInt("15", 0) + 0, 
+                               color:localStorage.getItem('themecolor5')
+                             }}
+                             >15</Text>
+                             </td>
+                           </tr>}) 
+                             insertWebThemeSizeTitle({ value: "20", label:<tr
+    
+                             >
+                             
+                               <td>
+                               <Text 
+                               style={{
+                                fontSize:parseInt("20", 0) + 0, 
+                                 color:localStorage.getItem('themecolor5')
+                               }}
+                               >20</Text>
+                               </td>
+                             </tr>}) 
+                                 insertWebThemeSizeBigTitle({ value: "50", label:<tr
+    
+                                 >
+                                 
+                                   <td>
+                                   <Text 
+                                   style={{
+                                    fontSize:parseInt("50", 0) + 0, 
+                                     color:localStorage.getItem('themecolor5')
+                                   }}
+                                   >50</Text>
+                                   </td>
+                                 </tr>}) 
+                                    insertWebThemeSizeHeader({ value: "30", label:<tr
+    
+                                    >
+                                    
+                                      <td>
+                                      <Text 
+                                      style={{
+                                        fontSize:parseInt("30", 0) + 0, 
+                                        color:localStorage.getItem('themecolor5')
+                                      }}
+                                      >30</Text>
+                                      </td>
+                                    </tr>}) 
+                                       insertWebThemeWeight({ value: "normal", label:<tr
+    
+                                       >
+                                       
+                                         <td>
+                                         <Text 
+                                         style={{
+                                          fontWeight:'normal',
+                                           color:localStorage.getItem('themecolor5')
+                                         }}
+                                         >normal</Text>
+                                         </td>
+                                       </tr>}) 
+                                            insertWebThemeIconSize({ value: "50", label:<tr
+    
+                                            >
+                                            
+                                              <td>
+                                              <Text 
+                                              style={{
+                                                fontSize:parseInt("50", 0) + 0, 
+                                                color:localStorage.getItem('themecolor5')
+                                              }}
+                                              >50</Text>
+                                              </td>
+                                            </tr>}) 
+                              
+      
+      }}
+      ><Text
+      style={{
+        fontWeight:'bold',
+        fontSize:parseInt(localStorage.getItem("themefontsizetext"), 0) + 0,
+        color:localStorage.getItem('themecolor5'),
+      }}
+      >DEFAULT</Text></Button>
+      </tr>
+      <tr>
+      <Button
+      style={{
+        width:220,
+        backgroundColor:localStorage.getItem('themecolor2'),
+      }}
+      onClick={()=>{
+    
+        getWebThemesViewAPI()
+      }}
+      ><Text
+      style={{
+        fontWeight:'bold',
+        fontSize:parseInt(localStorage.getItem("themefontsizetext"), 0) + 0,
+        color:localStorage.getItem('themecolor5'),
+      }}
+      >CLEAR</Text></Button>
+      </tr>
+      <tr>
+      <Button
+      style={{
+        backgroundColor:localStorage.getItem('themecolor2'),
+        width:220,
+      }}
+      onClick={()=>{
+        addWebThemes()
+      }}
+      ><Text
+      style={{
+        fontWeight:'bold',
+        fontSize:parseInt(localStorage.getItem("themefontsizetext"), 0) + 0,
+        color:localStorage.getItem('themecolor5'),
+      }}
+      >ADD</Text></Button>
+      </tr>
+      <tr>
+      <Button
+      style={{
+        backgroundColor:localStorage.getItem('themecolor2'),
+        width:220,
+      }}
+      onClick={()=>{
+       if(RolesID===""){
+        toast(
+          'Select One',
+          toastConfig({
+          theme:'dark'
+          }) 
+          )
+       }else{
+        UpdateWebThemes()
+       }
+      }}
+      ><Text
+      style={{
+        fontWeight:'bold',
+        fontSize:parseInt(localStorage.getItem("themefontsizetext"), 0) + 0,
+        color:localStorage.getItem('themecolor5'),
+      }}
+      >UPDATE</Text></Button>
+      </tr>
+      <tr>
+
+      <Button
+      style={{
+        backgroundColor:localStorage.getItem('themecolor2'),
+        width:220,
+      }}
+      onClick={()=>{
+
+      if(RolesID==="")
+      {
+      if(localStorage.getItem("allow")==="on"){
+      localStorage.setItem('allow', "off");
+      toast(
+      'Select One',
+      toastConfig({
+      theme:'dark'
+      }) 
+      )
+       
+      setTimeout(() => {
+      localStorage.setItem('allow', "on");
+      }, 3000);
+      }
+      }else{
+        DeleteWebThemes()
+      }
+      }}
+      ><Text
+      style={{
+        fontWeight:'bold',
+        fontSize:parseInt(localStorage.getItem("themefontsizetext"), 0) + 0,
+        color:localStorage.getItem('themecolor5'),
+      }}
+      >DELETE</Text></Button>
+      </tr>
+      <View
+            style={{
+              height: window.innerHeight-473,
+            }}
+            
+            >  
+      <tr
+      style={{
+        paddingBottom:5
+      }}
+      >
+      <Select
+      options={getThemeColors} 
+      value={insertwebthemecolor1} 
+        onChange={(v)=>{
+          insertWebThemeColor1(v)
+        }}  
+
+    theme={(theme) => ({
+    ...theme,
+    borderradius: 0,
+    colors: {
+    ...theme.colors,
+    text: 'green',
+    font:'green',
+    primary25: '#6bbfff',  
+    
+    neutral0: localStorage.getItem("themecolor2"),
+    primary: localStorage.getItem("themecolor6"), 
+    neutral80: localStorage.getItem("themecolor5"),
+    neutral50: localStorage.getItem("themecolor6"), 
+    color: 'green', 
+
+    },
+    })}
+    
+    placeholder="Color 1"  
+    placeholderTextColor={localStorage.getItem('themecolor6')}
+       styles={{
+         control: (base, state) => ({
+           ...base,
+           width:220,
+           fontWeight:localStorage.getItem("themefontweight"),
+           fontSize:parseInt(localStorage.getItem("themefontsizetext"), 0) + 0, 
+           outlineStyle: 'none',
+           border: 0,
+           boxShadow: 'none',
+           backgroundColor:localStorage.getItem('themecolor3'),
+
+     paddingRight: 8, 
+     
+         }),
+         menu: (base) => ({
+          ...base,
+          width: "max-content",
+
+   
+     }),
+       }}
+
+    >
+    
+     </Select>
+      </tr>
+      <tr
+      style={{
+        paddingBottom:5
+      }}
+      >
+      <Select
+      options={getThemeColors}
+      value={insertwebthemecolor2} 
+        onChange={(v)=>{ 
+          insertWebThemeColor2(v)
+        }}  
+
+    theme={(theme) => ({
+    ...theme,
+    borderradius: 0,
+    colors: {
+    ...theme.colors,
+    text: 'green',
+    font:'green',
+    primary25: '#6bbfff',  
+    
+    neutral0: localStorage.getItem("themecolor2"),
+    primary: localStorage.getItem("themecolor6"), 
+    neutral80: localStorage.getItem("themecolor5"),
+    neutral50: localStorage.getItem("themecolor6"), 
+    color: 'green', 
+
+    },
+    })}
+    
+    placeholder="Color 2"  
+    placeholderTextColor={localStorage.getItem('themecolor6')}
+       styles={{
+         control: (base, state) => ({
+           ...base,
+           width:220,
+           fontWeight:localStorage.getItem("themefontweight"),
+           fontSize:parseInt(localStorage.getItem("themefontsizetext"), 0) + 0, 
+           outlineStyle: 'none',
+           border: 0,
+           boxShadow: 'none',
+           backgroundColor:localStorage.getItem('themecolor3'),
+
+     paddingRight: 8, 
+     
+         }),
+         menu: (base) => ({
+          ...base,
+          width: "max-content", 
+
+   
+     }),
+       }}
+
+    >
+    
+     </Select>
+      </tr>
+
+
+      <tr
+      style={{
+        paddingBottom:5
+      }}
+      >
+      <Select
+      options={getThemeColors}
+      value={insertwebthemecolor3} 
+      onChange={(v)=>{ 
+        insertWebThemeColor3(v)
+      }}  
+   
+
+    theme={(theme) => ({
+    ...theme,
+    borderradius: 0,
+    colors: {
+    ...theme.colors,
+    text: 'green',
+    font:'green',
+    primary25: '#6bbfff',  
+    
+    neutral0: localStorage.getItem("themecolor2"),
+    primary: localStorage.getItem("themecolor6"), 
+    neutral80: localStorage.getItem("themecolor5"),
+    neutral50: localStorage.getItem("themecolor6"), 
+    color: 'green', 
+
+    },
+    })}
+    
+    placeholder="Color 3"  
+    placeholderTextColor={localStorage.getItem('themecolor6')}
+       styles={{
+         control: (base, state) => ({
+           ...base,
+           width:220,
+           fontWeight:localStorage.getItem("themefontweight"),
+           fontSize:parseInt(localStorage.getItem("themefontsizetext"), 0) + 0, 
+           outlineStyle: 'none',
+           border: 0,
+           boxShadow: 'none',
+           backgroundColor:localStorage.getItem('themecolor3'),
+
+     paddingRight: 8, 
+     
+         }),
+         menu: (base) => ({
+          ...base,
+          width: "max-content",
+
+   
+     }),
+       }}
+
+    >
+    
+     </Select>
+      </tr>
+      <tr
+      style={{
+        paddingBottom:5
+      }}
+      >
+      <Select
+      options={getThemeColors}
+      value={insertwebthemecolor4} 
+      onChange={(v)=>{ 
+        insertWebThemeColor4(v)
+      }}  
+     
+    theme={(theme) => ({
+    ...theme,
+    borderradius: 0,
+    colors: {
+    ...theme.colors,
+    text: 'green',
+    font:'green',
+    primary25: '#6bbfff',  
+    
+    neutral0: localStorage.getItem("themecolor2"),
+    primary: localStorage.getItem("themecolor6"), 
+    neutral80: localStorage.getItem("themecolor5"),
+    neutral50: localStorage.getItem("themecolor6"), 
+    color: 'green', 
+
+    },
+    })}
+    
+    placeholder="Color 4"  
+    placeholderTextColor={localStorage.getItem('themecolor6')}
+       styles={{
+         control: (base, state) => ({
+           ...base,
+           width:220,
+           fontWeight:localStorage.getItem("themefontweight"),
+           fontSize:parseInt(localStorage.getItem("themefontsizetext"), 0) + 0, 
+           outlineStyle: 'none',
+           border: 0,
+           boxShadow: 'none',
+           backgroundColor:localStorage.getItem('themecolor3'),
+
+     paddingRight: 8, 
+     
+         }),
+         menu: (base) => ({
+          ...base,
+          width: "max-content",
+
+   
+     }),
+       }}
+
+    >
+    
+     </Select>
+      </tr>
+      <tr
+      style={{
+        paddingBottom:5
+      }}
+      >
+      <Select
+      options={getThemeColors}
+      value={insertwebthemecolor5} 
+      onChange={(v)=>{ 
+        insertWebThemeColor5(v)
+      }}  
+
+
+    theme={(theme) => ({
+    ...theme,
+    borderradius: 0,
+    colors: {
+    ...theme.colors,
+    text: 'green',
+    font:'green',
+    primary25: '#6bbfff',  
+    
+    neutral0: localStorage.getItem("themecolor2"),
+    primary: localStorage.getItem("themecolor6"), 
+    neutral80: localStorage.getItem("themecolor5"),
+    neutral50: localStorage.getItem("themecolor6"), 
+    color: 'green', 
+
+    },
+    })}
+    
+    placeholder="Color 5"  
+    placeholderTextColor={localStorage.getItem('themecolor6')}
+       styles={{
+         control: (base, state) => ({
+           ...base,
+           width:220,
+           fontWeight:localStorage.getItem("themefontweight"),
+           fontSize:parseInt(localStorage.getItem("themefontsizetext"), 0) + 0, 
+           outlineStyle: 'none',
+           border: 0,
+           boxShadow: 'none',
+           backgroundColor:localStorage.getItem('themecolor3'),
+
+     paddingRight: 8, 
+     
+         }),
+         menu: (base) => ({
+          ...base,
+          width: "max-content",
+
+   
+     }),
+       }}
+
+    >
+    
+     </Select>
+      </tr>
+      <tr
+      style={{
+        paddingBottom:5
+      }}
+      >
+      <Select
+      options={getThemeColors}
+      value={insertwebthemecolor6} 
+      onChange={(v)=>{ 
+        insertWebThemeColor6(v)
+      }}  
+
+    theme={(theme) => ({
+    ...theme,
+    borderradius: 0,
+    colors: {
+    ...theme.colors,
+    text: 'green',
+    font:'green',
+    primary25: '#6bbfff',  
+    
+    neutral0: localStorage.getItem("themecolor2"),
+    primary: localStorage.getItem("themecolor6"), 
+    neutral80: localStorage.getItem("themecolor5"),
+    neutral50: localStorage.getItem("themecolor6"), 
+    color: 'green', 
+
+    },
+    })}
+    
+    placeholder="Color6"  
+    placeholderTextColor={localStorage.getItem('themecolor6')}
+       styles={{
+         control: (base, state) => ({
+           ...base,
+           width:220,
+           fontWeight:localStorage.getItem("themefontweight"),
+           fontSize:parseInt(localStorage.getItem("themefontsizetext"), 0) + 0, 
+           outlineStyle: 'none',
+           border: 0,
+           boxShadow: 'none',
+           backgroundColor:localStorage.getItem('themecolor3'),
+
+     paddingRight: 8, 
+     
+         }),
+         menu: (base) => ({
+          ...base,
+          width: "max-content",
+
+   
+     }),
+       }}
+
+    >
+    
+     </Select>
+      </tr>
+      <tr
+      style={{
+        paddingBottom:5
+      }}
+      >
+      <Select
+      options={getThemeColors}
+      value={insertwebthemecolor7} 
+      onChange={(v)=>{  
+        insertWebThemeColor7(v)
+      }}  
+
+    theme={(theme) => ({
+    ...theme,
+    borderradius: 0,
+    colors: {
+    ...theme.colors,
+    text: 'green',
+    font:'green',
+    primary25: '#6bbfff',  
+    
+    neutral0: localStorage.getItem("themecolor2"),
+    primary: localStorage.getItem("themecolor6"), 
+    neutral80: localStorage.getItem("themecolor5"),
+    neutral50: localStorage.getItem("themecolor6"), 
+    color: 'green', 
+
+    },
+    })}
+    
+    placeholder="Color 7"  
+    placeholderTextColor={localStorage.getItem('themecolor6')}
+       styles={{
+         control: (base, state) => ({
+           ...base,
+           width:220,
+           fontWeight:localStorage.getItem("themefontweight"),
+           fontSize:parseInt(localStorage.getItem("themefontsizetext"), 0) + 0, 
+           outlineStyle: 'none',
+           border: 0,
+           boxShadow: 'none',
+           backgroundColor:localStorage.getItem('themecolor3'),
+
+     paddingRight: 8, 
+     
+         }),
+         menu: (base) => ({
+          ...base,
+          width: "max-content",
+
+   
+     }),
+       }}
+
+    >
+    
+     </Select>
+      </tr>
+      </View>
+      </table>
+      </View> 
+      </td>
+      <td >
+      <View
+      style={{
+      height: window.innerHeight-180,
+   
+      }}
+      >
+      
+      
+      <table
+      style={{
+
+      borderCollapse: 'separate',
+      borderSpacing: '0px 4px'
+      }}
+      >
+  
+      <View
+            style={{
+              height: window.innerHeight-473,
+            }}
+            
+            >  
+      <tr
+      style={{
+        paddingBottom:5
+      }}
+      >
+      <Select
+      options={getThemeType} 
+      value={insertwebthemetype} 
+      onChange={(v)=>{   
+        insertWebThemeType(v)
+      }}  
+
+    theme={(theme) => ({
+    ...theme,
+    borderradius: 0,
+    colors: {
+    ...theme.colors,
+    text: 'green',
+    font:'green',
+    primary25: '#6bbfff',  
+    
+    neutral0: localStorage.getItem("themecolor2"),
+    primary: localStorage.getItem("themecolor6"), 
+    neutral80: localStorage.getItem("themecolor5"),
+    neutral50: localStorage.getItem("themecolor6"), 
+    color: 'green', 
+
+    },
+    })}
+    
+    placeholder="Theme Type"  
+    placeholderTextColor={localStorage.getItem('themecolor6')}
+       styles={{
+         control: (base, state) => ({
+           ...base,
+           width:220,
+           fontWeight:localStorage.getItem("themefontweight"),
+           fontSize:parseInt(localStorage.getItem("themefontsizetext"), 0) + 0, 
+           outlineStyle: 'none',
+           border: 0,
+           boxShadow: 'none',
+           backgroundColor:localStorage.getItem('themecolor3'),
+
+     paddingRight: 8, 
+     
+         }),
+         menu: (base) => ({
+          ...base,
+          width: "max-content",
+
+   
+     }),
+       }}
+
+    >
+    
+     </Select>
+      </tr>
+      <tr
+      style={{
+        paddingBottom:5
+      }}
+      >
+      <Select
+      options={getThemeFont} 
+      value={insertwebthemefont} 
+      onChange={(v)=>{   
+        insertWebThemeFont(v)
+      }}  
+ 
+    theme={(theme) => ({
+    ...theme,
+    borderradius: 0,
+    colors: {
+    ...theme.colors,
+    text: 'green',
+    font:'green',
+    primary25: '#6bbfff',  
+    
+    neutral0: localStorage.getItem("themecolor2"),
+    primary: localStorage.getItem("themecolor6"), 
+    neutral80: localStorage.getItem("themecolor5"),
+    neutral50: localStorage.getItem("themecolor6"), 
+    color: 'green', 
+
+    },
+    })}
+    
+    placeholder="Theme Font Family"  
+    placeholderTextColor={localStorage.getItem('themecolor6')}
+       styles={{
+         control: (base, state) => ({
+           ...base,
+           width:220, 
+           fontSize:parseInt(localStorage.getItem("themefontsizetext"), 0) + 0, 
+           outlineStyle: 'none',
+           border: 0,
+           boxShadow: 'none',
+           backgroundColor:localStorage.getItem('themecolor3'),
+
+     paddingRight: 8, 
+     
+         }),
+         menu: (base) => ({
+          ...base,
+          width: "max-content", 
+
+   
+     }),
+       }}
+
+    >
+    
+     </Select>
+      </tr>
+
+
+      <tr
+      style={{
+        paddingBottom:5
+      }}
+      >
+      <Select
+      options={getThemeSize}
+      value={insertwebthemesizetext} 
+      onChange={(v)=>{   
+        insertWebThemeSizeText(v)
+      }}  
+
+    theme={(theme) => ({
+    ...theme,
+    borderradius: 0,
+    colors: {
+    ...theme.colors,
+    text: 'green',
+    font:'green',
+    primary25: '#6bbfff',  
+    
+    neutral0: localStorage.getItem("themecolor2"),
+    primary: localStorage.getItem("themecolor6"), 
+    neutral80: localStorage.getItem("themecolor5"),
+    neutral50: localStorage.getItem("themecolor6"), 
+    color: 'green', 
+
+    },
+    })}
+    
+    placeholder="Theme Size Text"  
+    placeholderTextColor={localStorage.getItem('themecolor6')}
+       styles={{
+         control: (base, state) => ({
+           ...base,
+           width:220,
+           fontWeight:localStorage.getItem("themefontweight"),
+           fontSize:parseInt(localStorage.getItem("themefontsizetext"), 0) + 0, 
+           outlineStyle: 'none',
+           border: 0,
+           boxShadow: 'none',
+           backgroundColor:localStorage.getItem('themecolor3'),
+
+     paddingRight: 8, 
+     
+         }),
+         menu: (base) => ({
+          ...base,
+          width: "max-content",
+
+   
+     }),
+       }}
+
+    >
+    
+     </Select>
+      </tr>
+      <tr
+      style={{
+        paddingBottom:5
+      }}
+      >
+      <Select
+      options={getThemeSize}
+      value={insertwebthemesizebigtitle} 
+      onChange={(v)=>{   
+        insertWebThemeSizeBigTitle(v)
+      }}  
+
+    theme={(theme) => ({
+    ...theme,
+    borderradius: 0,
+    colors: {
+    ...theme.colors,
+    text: 'green',
+    font:'green',
+    primary25: '#6bbfff',  
+    
+    neutral0: localStorage.getItem("themecolor2"),
+    primary: localStorage.getItem("themecolor6"), 
+    neutral80: localStorage.getItem("themecolor5"),
+    neutral50: localStorage.getItem("themecolor6"), 
+    color: 'green', 
+
+    },
+    })}
+    
+    placeholder="Theme Size Big Title"  
+    placeholderTextColor={localStorage.getItem('themecolor6')}
+       styles={{
+         control: (base, state) => ({
+           ...base,
+           width:220,
+           fontWeight:localStorage.getItem("themefontweight"),
+           fontSize:parseInt(localStorage.getItem("themefontsizetext"), 0) + 0, 
+           outlineStyle: 'none',
+           border: 0,
+           boxShadow: 'none',
+           backgroundColor:localStorage.getItem('themecolor3'),
+
+     paddingRight: 8, 
+     
+         }),
+         menu: (base) => ({
+          ...base,
+          width: "max-content",
+
+   
+     }),
+       }}
+
+    >
+    
+     </Select>
+      </tr>
+      <tr
+      style={{
+        paddingBottom:5
+      }}
+      >
+      <Select
+      options={getThemeSize}
+      value={insertwebthemesizeheader} 
+      onChange={(v)=>{   
+        insertWebThemeSizeHeader(v)
+      }}   
+
+    theme={(theme) => ({
+    ...theme,
+    borderradius: 0,
+    colors: {
+    ...theme.colors,
+    text: 'green',
+    font:'green',
+    primary25: '#6bbfff',  
+    
+    neutral0: localStorage.getItem("themecolor2"),
+    primary: localStorage.getItem("themecolor6"), 
+    neutral80: localStorage.getItem("themecolor5"),
+    neutral50: localStorage.getItem("themecolor6"), 
+    color: 'green', 
+
+    },
+    })}
+    
+    placeholder="Theme Size Header"  
+    placeholderTextColor={localStorage.getItem('themecolor6')}
+       styles={{
+         control: (base, state) => ({
+           ...base,
+           width:220,
+           fontWeight:localStorage.getItem("themefontweight"),
+           fontSize:parseInt(localStorage.getItem("themefontsizetext"), 0) + 0, 
+           outlineStyle: 'none',
+           border: 0,
+           boxShadow: 'none',
+           backgroundColor:localStorage.getItem('themecolor3'),
+
+     paddingRight: 8, 
+     
+         }),
+         menu: (base) => ({
+          ...base,
+          width: "max-content",
+
+   
+     }),
+       }}
+
+    >
+    
+     </Select>
+      </tr>
+      <tr
+      style={{
+        paddingBottom:5
+      }}
+      >
+      <Select
+      options={getThemeWeight}  
+      value={insertwebthemeweight} 
+      onChange={(v)=>{   
+        insertWebThemeWeight(v)
+      }}  
+
+    theme={(theme) => ({
+    ...theme,
+    borderradius: 0,
+    colors: { 
+    ...theme.colors,
+    text: 'green',
+    font:'green',
+    primary25: '#6bbfff',  
+    
+    neutral0: localStorage.getItem("themecolor2"),
+    primary: localStorage.getItem("themecolor6"), 
+    neutral80: localStorage.getItem("themecolor5"),
+    neutral50: localStorage.getItem("themecolor6"), 
+    color: 'green', 
+
+    },
+    })}
+    
+    placeholder="Theme Font Weight"  
+    placeholderTextColor={localStorage.getItem('themecolor6')}
+       styles={{
+         control: (base, state) => ({
+           ...base,
+           width:220,
+           fontWeight:localStorage.getItem("themefontweight"),
+           fontSize:parseInt(localStorage.getItem("themefontsizetext"), 0) + 0, 
+           outlineStyle: 'none',
+           border: 0,
+           boxShadow: 'none',
+           backgroundColor:localStorage.getItem('themecolor3'),
+
+     paddingRight: 8, 
+     
+         }),
+         menu: (base) => ({
+          ...base,
+          width: "max-content",
+
+   
+     }),
+       }}
+
+    >
+    
+     </Select>
+      </tr>
+      <tr
+      style={{
+        paddingBottom:5
+      }}
+      >
+      <Select
+          options={getThemeSize}
+      value={insertwebthemeiconsize} 
+      onChange={(v)=>{   
+        insertWebThemeIconSize(v)
+      }}  
+
+    theme={(theme) => ({ 
+    ...theme,
+    borderradius: 0,
+    colors: {
+    ...theme.colors,
+    text: 'green',
+    font:'green',
+    primary25: '#6bbfff',  
+    
+    neutral0: localStorage.getItem("themecolor2"),
+    primary: localStorage.getItem("themecolor6"), 
+    neutral80: localStorage.getItem("themecolor5"),
+    neutral50: localStorage.getItem("themecolor6"), 
+    color: 'green', 
+
+    },
+    })}
+    
+    placeholder="Theme Icons Size"  
+    placeholderTextColor={localStorage.getItem('themecolor6')}
+       styles={{
+         control: (base, state) => ({
+           ...base,
+           width:220,
+           fontWeight:localStorage.getItem("themefontweight"),
+           fontSize:parseInt(localStorage.getItem("themefontsizetext"), 0) + 0, 
+           outlineStyle: 'none',
+           border: 0,
+           boxShadow: 'none',
+           backgroundColor:localStorage.getItem('themecolor3'),
+
+     paddingRight: 8, 
+     
+         }),
+         menu: (base) => ({
+          ...base,
+          width: "max-content",
+
+   
+     }),
+       }}
+
+    > 
+    
+     </Select>
+      </tr>
+      </View>
+      </table>
+      </View> 
+      </td>
+
+      </tr>
+      </table>
+    </View>
+    }else if(mythemes==="2"){
+      MyUI3 = <View>
+        <table>
+        <tr>
+
+   <td
+    style={{
+      width:325,
+
+    }}
+    >
+
+     <Text
+    style={{
+      fontWeight:'100', 
+      fontSize:parseInt(localStorage.getItem("themefontsizeheader"), 0) + 0, 
+      color:localStorage.getItem('themecolor5'),  
+    }}
+    >COLOR</Text>
+
+     
+    </td>
+
+    
+    <td
+       style={{
+        width:330,
+      }}
+    >
+
+<Text
+style={{
+ fontWeight:'100',  
+ 
+ fontSize:parseInt(localStorage.getItem("themefontsizeheader"), 0) + 0, 
+ color:localStorage.getItem('themecolor5'),  
+}}
+>FONT FAMILY</Text>
+
+
+</td>
+<td
+       style={{
+        width:320,
+      }}
+    >
+
+<Text
+style={{
+ fontWeight:'100',  
+ fontSize:parseInt(localStorage.getItem("themefontsizeheader"), 0) + 0, 
+ color:localStorage.getItem('themecolor5'),  
+
+}}
+>FONT SIZE</Text>
+
+
+</td>
+<td
+       style={{
+        width:320,
+      }}
+    >
+
+<Text
+style={{
+ fontWeight:'100',  
+ fontSize:parseInt(localStorage.getItem("themefontsizeheader"), 0) + 0, 
+ color:localStorage.getItem('themecolor5'),  
+}}
+>FONT WEIGHT</Text>
+
+
+</td>
+  </tr>
+
+        </table>
+         <table>
+        <tr>
+        <td>
+        <View
+              style={{
+                overflowY:"scroll", 
+                height: window.innerHeight-180,
+                width:200,
+                //COLOR
+              }}
+              >
+              {
+         JSON.parse(getthemecolor).map((str) => {
+          return (                   
+            <td>
+        
+                              <Button
+        
+                          
+                                      onClick={()=>{ 
+                                     insertThemeColor(str['description'])
+                                        RolesID = str['id']
+                                      }}
+                                       
+                                      > 
+                                        
+      <View
+          style={{
+            backgroundColor:str['description'],
+            width:20,
+            height:20,
+            borderWidth:1,
+            borderColor:'grey',
+          }}
+      >
+      </View>
+      <View
+      style={{
+        width:10
+      }}
+      ></View>
+      <Text
+                                                      style={{
+                                                        fontSize:20,
+                                                        color:localStorage.getItem('themecolor5'),                                       
+                                                      }}
+                                                   >
+                                                    {str['description']}
+                                                   </Text>
+        </Button>
+        </td>
+                  );
+                })}
+              </View>
+        </td>
+        <td >
+        <View
+        style={{
+        height: window.innerHeight-180,
+        width:110,
+        paddingLeft:10,
+  
+        }}
+        >
+        
+        
+        <table
+        style={{
+  
+        borderCollapse: 'separate',
+        borderSpacing: '0px 4px'
+        }}
+        >
+        <tr>
+        <Button
+        style={{
+          width:120,
+          backgroundColor:localStorage.getItem('themecolor2'),
+        }}
+        onClick={()=>{
+          insertThemeColor("")
+        }}
+        ><Text
+        style={{
+          fontWeight:'bold',
+          fontSize:parseInt(localStorage.getItem("themefontsizetext"), 0) + 0,
+          color:localStorage.getItem('themecolor5'),
+        }}
+        >CLEAR</Text></Button>
+        </tr>
+        <tr>
+        <Button
+        style={{
+          backgroundColor:localStorage.getItem('themecolor2'),
+          width:120,
+        }}
+        onClick={()=>{
+        
+        if(insertthemecolor==="")
+        {
+        if(localStorage.getItem("allow")==="on"){
+        localStorage.setItem('allow', "off");
+        toast(
+        'Avoid blank space',
+        toastConfig({
+        theme:'dark'
+        })
+        )
+        
+        setTimeout(() => {
+        localStorage.setItem('allow', "on");
+        }, 3000);
+        }
+        }else{
+          addColor()
+        }
+        }}
+        ><Text
+        style={{
+          fontWeight:'bold',
+          fontSize:parseInt(localStorage.getItem("themefontsizetext"), 0) + 0,
+          color:localStorage.getItem('themecolor5'),
+        }}
+        >ADD</Text></Button>
+        </tr>
+        <tr>
+        <Button
+        style={{
+          backgroundColor:localStorage.getItem('themecolor2'),
+          width:120,
+        }}
+        onClick={()=>{
+        if(insertthemecolor==="")
+        {
+        if(localStorage.getItem("allow")==="on"){
+        localStorage.setItem('allow', "off");
+        toast(
+        'Avoid blank space',
+        toastConfig({
+        theme:'dark'
+        })
+        )
+        
+        setTimeout(() => {
+        localStorage.setItem('allow', "on");
+        }, 3000);
+        }
+        }else{
+        UpdateColor()
+        }
+        }}
+        ><Text
+        style={{
+          fontWeight:'bold',
+          fontSize:parseInt(localStorage.getItem("themefontsizetext"), 0) + 0,
+          color:localStorage.getItem('themecolor5'),
+        }}
+        >UPDATE</Text></Button>
+        </tr>
+        <tr>
+  
+        <Button
+        style={{
+          backgroundColor:localStorage.getItem('themecolor2'),
+          width:120,
+        }}
+        onClick={()=>{
+
+        if(RolesID==="")
+        {
+        if(localStorage.getItem("allow")==="on"){
+        localStorage.setItem('allow', "off");
+        toast(
+        'Select One',
+        toastConfig({
+        theme:'dark'
+        }) 
+        )
+         
+        setTimeout(() => {
+        localStorage.setItem('allow', "on");
+        }, 3000);
+        }
+        }else{
+          DeleteColor()
+        }
+        }}
+        ><Text
+        style={{
+          fontWeight:'bold',
+          fontSize:parseInt(localStorage.getItem("themefontsizetext"), 0) + 0,
+          color:localStorage.getItem('themecolor5'),
+        }}
+        >DELETE</Text></Button>
+  
+        </tr>
+        </table>
+        
+        <View
+        style={{
+        height:15
+        }}
+        ></View>
+
+     <tr>
+     <td>
+     <View
+      style={{
+        width:20,
+        height:20,
+        backgroundColor:insertthemecolor,
+        borderColor:'grey',
+        borderWidth:1
+      }}
+      >
+
+      </View>
+     </td>
+  <td>
+       <TextInput
+              style={
+                {
+                  outlineStyle: 'none',
+                  borderColor:localStorage.getItem('themecolor2'), 
+                  backgroundColor:localStorage.getItem('themecolor3'),
+                  height:50,
+                  width:90,
+                  borderWidth:2, 
+                  paddingLeft: 12,
+          paddingRight: 8, 
+          fontSize:parseInt(localStorage.getItem("themefontsizetext"), 0) + 0,   
+          color:localStorage.getItem('themecolor5'),
+                }
+              }
+              value={insertthemecolor}
+              placeholder="COLOR"
+              placeholderTextColor={localStorage.getItem('themecolor6')}
+              onChangeText={(v) => {insertThemeColor(v)}}
+            /> 
+  </td>
+     </tr>
+        
+        </View> 
+        </td>
+        <td>
+        <View
+              style={{
+                overflowY:"scroll",
+                height: window.innerHeight-180,
+                width:200,
+                //FONT FAMILY
+              }}
+              >
+              {
+         JSON.parse(getfontfamily).map((str) => {
+          return (                   
+            <td>
+        
+                              <Button
+        
+                          
+                                      onClick={()=>{ 
+                                        RolesID = str['id']
+                               
+                                     insertThemeFontFamily(str['description'])
+                                      }}
+                                       
+                                      > 
+                                        
+        <View style={{
+        
+        }}>
+        <Text
+                                                      style={{
+                                                        fontSize:20,
+                                                        color:localStorage.getItem('themecolor5'),
+                                                        fontFamily:str['description']
+                                                      }}
+                                                   >
+                                                    {str['description']}
+                                                   </Text>
+        </View>
+        </Button>
+        </td>
+                  );
+                })}
+              </View>
+        </td>
+        <td >
+        <View
+        style={{
+        height: window.innerHeight-180,
+        paddingLeft:10,
+        width:110,
+        }}
+        > 
+        
+        
+        <table
+        style={{
+  
+        borderCollapse: 'separate',
+        borderSpacing: '0px 4px'
+        }}
+        >
+        <tr>
+        <Button
+        style={{
+          width:100,
+          backgroundColor:localStorage.getItem('themecolor2'),
+        }}
+        onClick={()=>{
+        insertThemeFontFamily("")
+        }}
+        ><Text
+        style={{
+          fontWeight:'bold',
+          fontSize:parseInt(localStorage.getItem("themefontsizetext"), 0) + 0,
+          color:localStorage.getItem('themecolor5'),
+        }}
+        >CLEAR</Text></Button>
+        </tr>
+        <tr>
+        <Button
+        style={{
+          backgroundColor:localStorage.getItem('themecolor2'),
+          width:100,
+        }}
+        onClick={()=>{
+        
+        if(insertthemefamily==="")
+        {
+        if(localStorage.getItem("allow")==="on"){
+        localStorage.setItem('allow', "off");
+        toast(
+        'Avoid blank space',
+        toastConfig({
+        theme:'dark'
+        })
+        )
+        
+        setTimeout(() => {
+        localStorage.setItem('allow', "on");
+        }, 3000);
+        }
+        }else{
+        addFontFamily()
+        }
+        }}
+        ><Text
+        style={{
+          fontWeight:'bold',
+          fontSize:parseInt(localStorage.getItem("themefontsizetext"), 0) + 0,
+          color:localStorage.getItem('themecolor5'),
+        }}
+        >ADD</Text></Button>
+        </tr>
+        <tr>
+        <Button
+        style={{
+          backgroundColor:localStorage.getItem('themecolor2'),
+              width:100,
+        }}
+        onClick={()=>{
+        if(insertthemefamily==="")
+        {
+        if(localStorage.getItem("allow")==="on"){
+        localStorage.setItem('allow', "off");
+        toast(
+        'Avoid blank space',
+        toastConfig({
+        theme:'dark'
+        })
+        )
+        
+        setTimeout(() => {
+        localStorage.setItem('allow', "on");
+        }, 3000);
+        }
+        }else{
+          UpdateFontFamily()
+        }
+        }}
+        ><Text
+        style={{
+          fontWeight:'bold',
+          fontSize:parseInt(localStorage.getItem("themefontsizetext"), 0) + 0,
+          color:localStorage.getItem('themecolor5'),
+        }}
+        >UPDATE</Text></Button>
+        </tr>
+        <tr>
+  
+        <Button
+        style={{
+          backgroundColor:localStorage.getItem('themecolor2'),
+          width:100,
+        }}
+        onClick={()=>{
+        
+        if(RolesID==="")
+        {
+        if(localStorage.getItem("allow")==="on"){
+        localStorage.setItem('allow', "off");
+        toast(
+        'Select One',
+        toastConfig({
+        theme:'dark'
+        })
+        )
+        
+        setTimeout(() => {
+        localStorage.setItem('allow', "on");
+        }, 3000);
+        }
+        }else{
+        DeleteFontFamily()
+        }
+        }}
+        ><Text
+        style={{
+          fontWeight:'bold',
+          fontSize:parseInt(localStorage.getItem("themefontsizetext"), 0) + 0,
+          color:localStorage.getItem('themecolor5'),
+        }}
+        >DELETE</Text></Button>
+  
+        </tr>
+        </table>
+        
+        <View
+        style={{
+        height:15
+        }}
+        ></View>
+        <TextInput
+              style={
+                {
+                  outlineStyle: 'none',
+                  borderColor:localStorage.getItem('themecolor2'), 
+                  backgroundColor:localStorage.getItem('themecolor3'),
+                  height:50,
+                  width:120,
+                  borderWidth:2, 
+                  paddingLeft: 12,
+          paddingRight: 8, 
+          fontSize:parseInt(localStorage.getItem("themefontsizetext"), 0) + 0,   
+          color:localStorage.getItem('themecolor5'),
+          fontFamily:insertthemefamily
+                }
+              }
+              value={insertthemefamily}
+              placeholder="FONT FAMILY"
+              placeholderTextColor={localStorage.getItem('themecolor6')}
+              onChangeText={(v) => {insertThemeFontFamily(v)}}
+            /> 
+        
+        
+        
+        
+        
+        
+        </View> 
+        </td>
+        <td>
+        <View
+              style={{
+                overflowY:"scroll",
+                height: window.innerHeight-180,
+                width:200, 
+                //FONT SIZE
+              }}
+              >
+              { 
+         JSON.parse(getfontsize).sort((a, b) => a.description - b.description).map((str) => { 
+
+          return (                   
+            <td> 
+         
+                              <Button
+        
+                          
+                                      onClick={()=>{ 
+                                     insertThemeSize(str['description'])
+                                        RolesID = str['id']
+                                      }}
+                                       
+                                      > 
+                                        
+        <View style={{
+        
+        }}>
+        <Text
+                                                      style={{
+         
+                                                        color:localStorage.getItem('themecolor5'),
+                                                        fontSize:parseInt(str['description'], 0) + 0, 
+                                                      }}
+                                                   >
+                                                    {str['description']}
+                                                   </Text>
+        </View>
+        </Button>
+        </td>
+                  );
+                })}
+              </View>
+        </td>
+        <td >
+        <View
+        style={{
+        height: window.innerHeight-180,
+        paddingLeft:10,
+        width:110,
+        }}
+        >
+        
+        
+        <table
+        style={{
+  
+        borderCollapse: 'separate',
+        borderSpacing: '0px 4px'
+        }}
+        >
+        <tr>
+        <Button
+        style={{
+          width:100,
+          backgroundColor:localStorage.getItem('themecolor2'),
+        }}
+        onClick={()=>{
+        insertThemeSize("")
+        }}
+        ><Text
+        style={{
+          fontWeight:'bold',
+          fontSize:parseInt(localStorage.getItem("themefontsizetext"), 0) + 0,
+          color:localStorage.getItem('themecolor5'),
+        }}
+        >CLEAR</Text></Button>
+        </tr>
+        <tr>
+        <Button
+        style={{
+          backgroundColor:localStorage.getItem('themecolor2'),
+          width:100,
+        }}
+        onClick={()=>{
+        
+        if(insertthemesize==="")
+        {
+        if(localStorage.getItem("allow")==="on"){
+        localStorage.setItem('allow', "off");
+        toast(
+        'Avoid blank space',
+        toastConfig({
+        theme:'dark'
+        })
+        )
+        
+        setTimeout(() => {
+        localStorage.setItem('allow', "on");
+        }, 3000);
+        }
+        }else if(insertthemesize==="0")
+        {
+        if(localStorage.getItem("allow")==="on"){
+        localStorage.setItem('allow', "off");
+        toast(
+        "Zero not allowed",
+        toastConfig({
+        theme:'dark'
+        })
+        )
+        
+        setTimeout(() => {
+        localStorage.setItem('allow', "on");
+        }, 3000);
+        }
+        }else{
+          addFontSize()
+        }
+        }}
+        ><Text
+        style={{
+          fontWeight:'bold',
+          fontSize:parseInt(localStorage.getItem("themefontsizetext"), 0) + 0,
+          color:localStorage.getItem('themecolor5'),
+        }}
+        >ADD</Text></Button>
+        </tr>
+        <tr>
+        <Button
+        style={{
+          backgroundColor:localStorage.getItem('themecolor2'),
+              width:100,
+        }}
+        onClick={()=>{
+        if(insertthemesize==="")
+        {
+        if(localStorage.getItem("allow")==="on"){
+        localStorage.setItem('allow', "off");
+        toast(
+        'Avoid blank space',
+        toastConfig({
+        theme:'dark'
+        })
+        )
+        
+        setTimeout(() => {
+        localStorage.setItem('allow', "on");
+        }, 3000);
+        }
+        }else if(insertthemesize==="0")
+        {
+        if(localStorage.getItem("allow")==="on"){
+        localStorage.setItem('allow', "off");
+        toast(
+        "Zero not allowed",
+        toastConfig({
+        theme:'dark'
+        })
+        )
+        
+        setTimeout(() => {
+        localStorage.setItem('allow', "on");
+        }, 3000);
+        }
+        }else{
+          UpdateFontSize()
+        }
+        }}
+        ><Text
+        style={{
+          fontWeight:'bold',
+          fontSize:parseInt(localStorage.getItem("themefontsizetext"), 0) + 0,
+          color:localStorage.getItem('themecolor5'),
+        }}
+        >UPDATE</Text></Button>
+        </tr>
+        <tr>
+  
+        <Button
+        style={{
+          backgroundColor:localStorage.getItem('themecolor2'),
+          width:100,
+        }}
+        onClick={()=>{
+        
+        if(RolesID==="")
+        {
+        if(localStorage.getItem("allow")==="on"){
+        localStorage.setItem('allow', "off");
+        toast(
+        'Select One',
+        toastConfig({
+        theme:'dark'
+        })
+        )
+        
+        setTimeout(() => {
+        localStorage.setItem('allow', "on");
+        }, 3000);
+        }
+        }else{
+          DeleteFontSize()
+        }
+        }}
+        ><Text
+        style={{
+          fontWeight:'bold',
+          fontSize:parseInt(localStorage.getItem("themefontsizetext"), 0) + 0,
+          color:localStorage.getItem('themecolor5'),
+        }}
+        >DELETE</Text></Button>
+  
+        </tr>
+        </table>
+        
+        <View
+        style={{
+        height:15
+        }}
+        ></View>
+        <TextInput
+              style={
+                {
+                  outlineStyle: 'none',
+                  borderColor:localStorage.getItem('themecolor2'), 
+                  backgroundColor:localStorage.getItem('themecolor3'),
+                  height:50,
+                  width:120,
+                  borderWidth:2, 
+                  paddingLeft: 12,
+          paddingRight: 8, 
+          fontSize:parseInt(localStorage.getItem("themefontsizetext"), 0) + 0,    
+          color:localStorage.getItem('themecolor5'),
+                }
+              }
+              value={insertthemesize}
+              placeholder="FONT SIZE"
+              placeholderTextColor={localStorage.getItem('themecolor6')}
+              onChangeText={(v) => {insertThemeSize(v)}}
+            /> 
+        
+        
+        
+        
+        
+        
+        </View> 
+        </td>
+        <td>
+        <View
+              style={{
+                overflowY:"scroll",
+                height: window.innerHeight-180,
+                width:200,
+                //FONT WEIGHT
+              }}
+              >
+              {
+         JSON.parse(getfontweight).map((str) => {
+          return (                   
+            <td>
+        
+                              <Button
+        
+                          
+                                      onClick={()=>{  
+                                     insertThemeFontWeight(str['description'])
+                                        RolesID = str['id']
+                                      }}
+                                        
+                                      > 
+                                        
+        <View style={{
+        
+        }}>
+        <Text
+                                                      style={{
+                                                        fontSize:20,
+                                                        color:localStorage.getItem('themecolor5'),
+                                                        fontWeight:str['description']
+                                                      }}
+                                                   >
+                                                    {str['description']}
+                                                   </Text>
+        </View>
+        </Button>
+        </td>
+                  );
+                })}
+              </View>
+        </td>
+        <td >
+        <View
+        style={{
+        height: window.innerHeight-180,
+        paddingLeft:10,
+        width:110,
+        }}
+        >
+        
+        
+        <table
+        style={{
+  
+        borderCollapse: 'separate',
+        borderSpacing: '0px 4px'
+        }}
+        >
+        <tr>
+        <Button
+        style={{
+          width:100,
+          backgroundColor:localStorage.getItem('themecolor2'),
+        }}
+        onClick={()=>{
+        insertThemeFontWeight("")
+        }}
+        ><Text
+        style={{
+          fontWeight:'bold',
+          fontSize:parseInt(localStorage.getItem("themefontsizetext"), 0) + 0,
+          color:localStorage.getItem('themecolor5'),
+        }}
+        >CLEAR</Text></Button>
+        </tr>
+        <tr>
+        <Button
+        style={{
+          backgroundColor:localStorage.getItem('themecolor2'),
+          width:100,
+        }}
+        onClick={()=>{
+        
+        if(insertthemeweight==="")
+        {
+        if(localStorage.getItem("allow")==="on"){
+        localStorage.setItem('allow', "off");
+        toast(
+        'Avoid blank space',
+        toastConfig({
+        theme:'dark'
+        })
+        )
+        
+        setTimeout(() => {
+        localStorage.setItem('allow', "on");
+        }, 3000);
+        }
+        }else{
+          addFontWeight()
+        }
+        }}
+        ><Text
+        style={{
+          fontWeight:'bold',
+          fontSize:parseInt(localStorage.getItem("themefontsizetext"), 0) + 0,
+          color:localStorage.getItem('themecolor5'),
+        }}
+        >ADD</Text></Button>
+        </tr>
+        <tr>
+        <Button
+        style={{
+          backgroundColor:localStorage.getItem('themecolor2'),
+              width:100,
+        }}
+        onClick={()=>{
+
+        if(insertthemeweight==="")
+        {
+        if(localStorage.getItem("allow")==="on"){
+        localStorage.setItem('allow', "off");
+        toast(
+        'Avoid blank space',
+        toastConfig({
+        theme:'dark'
+        })
+        ) 
+        
+        setTimeout(() => {
+        localStorage.setItem('allow', "on");
+        }, 3000);
+        }
+        }else{
+
+        UpdateFontWeight()
+        }
+        }}
+        ><Text
+        style={{
+          fontWeight:'bold',
+          fontSize:parseInt(localStorage.getItem("themefontsizetext"), 0) + 0,
+          color:localStorage.getItem('themecolor5'),
+        }}
+        >UPDATE</Text></Button>
+        </tr>
+        <tr>
+  
+        <Button
+        style={{
+          backgroundColor:localStorage.getItem('themecolor2'),
+          width:100,
+        }}
+        onClick={()=>{
+        
+        if(RolesID==="")
+        {
+        if(localStorage.getItem("allow")==="on"){
+        localStorage.setItem('allow', "off");
+        toast(
+        'Select One',
+        toastConfig({
+        theme:'dark'
+        })
+        )
+        
+        setTimeout(() => {
+        localStorage.setItem('allow', "on");
+        }, 3000);
+        }
+        }else{
+  DeleteFontWeight()
+        }
+        }}
+        ><Text
+        style={{
+          fontWeight:'bold',
+          fontSize:parseInt(localStorage.getItem("themefontsizetext"), 0) + 0,
+          color:localStorage.getItem('themecolor5'),
+        }}
+        >DELETE</Text></Button>
+  
+        </tr>
+        </table>
+        
+        <View
+        style={{
+        height:15
+        }}
+        ></View>
+        <TextInput
+              style={
+                {
+                  outlineStyle: 'none',
+                  borderColor:localStorage.getItem('themecolor2'), 
+                  backgroundColor:localStorage.getItem('themecolor3'),
+                  height:50,
+                  width:120,
+                  borderWidth:2, 
+                  paddingLeft: 12,
+          paddingRight: 8, 
+          fontSize:parseInt(localStorage.getItem("themefontsizetext"), 0) + 0,   
+          color:localStorage.getItem('themecolor5'),
+                }
+              }
+              value={insertthemeweight}
+              placeholder="FONTWEIGHT"
+              placeholderTextColor={localStorage.getItem('themecolor6')}
+              onChangeText={(v) => {insertThemeFontWeight(v)}}
+            /> 
+        
+        
+        
+        
+        
+        
+        </View> 
+        </td>
+        
+        </tr>
+        </table>
+      </View>
+    }
+    MyUI = <Typography>
+    <View
+    style={{
+      height: window.innerHeight-180,
+      width: window.innerWidth-50,
+    }}
+    >
+    <Text
+        style={{
+          fontWeight:'bold',
+          fontSize:parseInt(localStorage.getItem("themefontsizeheader"), 0) + 0,
+          color:localStorage.getItem('themecolor5'),
+          
+        }}
+        >THEMES</Text>
+<View
+style={{
+  alignSelf: 'flex-end', 
+}}
+>
+<table
+   style={{
+    width:100,
+   }}
+   >
+      <td>
+    <TouchableHighlight 
+          activeOpacity={0.9}
+          underlayColor="#9c9c9c"
+          style={{
+            
+            
+          }}onPress={()=>{ 
+            setThemes("3") 
+            getMobileThemesAPI()
+            getMobileThemesViewAPI()
+          }}>
+          
+             <View
+                                      style={{
+                                      
+                          
+                                      }}
+                                      > 
+                                <CiMobile1
+                                color={localStorage.getItem('themecolor5')}
+                                size={parseInt(localStorage.getItem("themeiconssize"), 0) + 0}/> 
+                                      <View
+                                    style={{
+                               
+                                    }}
+                                    >
+                                    </View>
+                            
+                                      </View>
+      </TouchableHighlight>
+    </td>
+    <td>
+    <TouchableHighlight 
+          activeOpacity={0.9}
+          underlayColor="#9c9c9c"
+          style={{
+            
+            
+          }}onPress={()=>{ 
+            setThemes("1")
+            getWebThemesAPI()
+            getColorAPI()
+            getFontFamilyAPI()
+            getFontSizeAPI()
+            getFontWeightAPI()
+          }}>
+            
+             <View
+                                      style={{
+                                      
+                          
+                                      }}
+                                      > 
+                                <MdWebAsset 
+                                color={localStorage.getItem('themecolor5')}
+                                size={parseInt(localStorage.getItem("themeiconssize"), 0) + 0}/> 
+                                      <View
+                                    style={{
+                               
+                                    }}
+                                    >
+                                    </View>
+                            
+                                      </View>
+      </TouchableHighlight>
+    </td>
+     <td>
+    <TouchableHighlight 
+          activeOpacity={0.9}
+          underlayColor="#9c9c9c"
+          
+          style={{
+            
+            
+          }}onPress={()=>{ 
+            setThemes("2")
+            getColorAPI()
+            getFontFamilyAPI() 
+            getFontSizeAPI()
+            getFontWeightAPI()
+          }}>
+            
+             <View
+                                      style={{
+                                      
+                          
+                                      }}
+                                      > 
+                                <IoColorPaletteSharp
+                                color={localStorage.getItem('themecolor5')}
+                                size={parseInt(localStorage.getItem("themeiconssize"), 0) + 0}/> 
+                                      <View
+                                    style={{
+                               
+                                    }}
+                                    >
+                                    </View>
+                            
+                                      </View>
+      </TouchableHighlight>
+    </td>
+   </table>
+</View>
+<View>
+  {MyUI3}
+  </View>     
+
+    </View>
+</Typography>
   }else if(mychooser==="LOGO"){ 
     var MYIMAGES  
     if(images2.length===0){
@@ -3530,40 +10413,7 @@ style={{
           color:localStorage.getItem('themecolor5'),
         }}
         >LOGO</Text>
-  <View
-  style={{
 
-    height: window.innerHeight-180,
-    width: window.innerWidth-50,
-alignItems:'center' 
-  }} 
-  >
- 
-  <ReactFileReader fileTypes={[".png"]} base64={true} handleFiles={handleFiles2}>
-          {MYIMAGES}
-</ReactFileReader>
-<View
-style={{
-  height:30 
-}}
-></View>
-<Button
-onClick={()=>{
-UpdateLogo()
-}}
-style={{
-backgroundColor:localStorage.getItem('themecolor2')
-
-}}
-
-><Text
-style={{
-  fontWeight:'bold',
-  fontSize:parseInt(localStorage.getItem("themefontsizetext"), 0) + 0,
-  color:localStorage.getItem('themecolor5'),
-}}
->UPDATE</Text></Button>
-  </View>
     </View>
 </Typography>
   }
@@ -3621,6 +10471,15 @@ style={{
           getlogoAPI()
          }else if(str==="FLIGHT LIST"){
           getClient()
+         }else if(str==="THEMES"){
+          insertUse("")  
+          getWebThemesAPI()
+          getWebThemesViewAPI()
+          getColorAPI()
+          getFontFamilyAPI()
+          getFontSizeAPI()
+          getFontWeightAPI()
+          getThemeTypeAPI()
          }
             }}>
               
@@ -3686,3 +10545,4 @@ var EmailID = "";
   var Menu = ['FLIGHT LIST','USER MANAGEMENT','ADD PLANE','ADD DESTINATION','ADD ROLES','THEMES','LOGO','SWITCH USER']
 
   var niag = []
+  

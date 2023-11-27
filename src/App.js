@@ -35,7 +35,7 @@ async function logo(){
 async function themes(){
 
   try {
-    const response = await fetch(localStorage.getItem("APIthemeviews"), {
+    const response = await fetch(localStorage.getItem("APIwebthemeviews"), {
         method: 'GET',
         headers: {
           Accept: 'application/json', 
@@ -62,6 +62,7 @@ async function themes(){
       localStorage.setItem('themefontsizeheader', "30"); 
       localStorage.setItem('themeiconssize', "50"); 
     }else{
+
       localStorage.setItem('themecolor1', json[0]['web_theme_color_1_id']);
       localStorage.setItem('themecolor2', json[0]['web_theme_color_2_id']);
       localStorage.setItem('themecolor3', json[0]['web_theme_color_3_id']);
