@@ -10433,7 +10433,16 @@ style={{
   height:40
 }}
 onClick={()=>{
+  if(images2.length===0){
+    toast(
+      'Select Image',
+      toastConfig({
+     theme:'success'
+      })
+    )
+  }else{
 UpdateLogo() 
+  }
 }}
 ><Text
 style={{
