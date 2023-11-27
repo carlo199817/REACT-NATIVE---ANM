@@ -10385,16 +10385,14 @@ style={{
     if(images2.length===0){
       MYIMAGES =   <View
       style={{
-        height:500, width:500,
-      justifyContent:'center',
-
-      alignItems:'center'
+        height:500, width:500,     
       }} 
         
       >
         <img src={inputlogo} alt=""
       style={{
-        height:500, width:500}}
+        height:500, width:500
+      }}
       />
       </View>
     }else{
@@ -10413,7 +10411,38 @@ style={{
           color:localStorage.getItem('themecolor5'),
         }}
         >LOGO</Text>
-
+<View
+style={{
+  height: window.innerHeight-180,
+  width: window.innerWidth-50,
+  alignItems:'center',
+}}
+> 
+<ReactFileReader fileTypes={[".png"]} base64={true} handleFiles={handleFiles2}>
+          {MYIMAGES}
+</ReactFileReader>
+<View
+style={{
+  height:20
+}}
+></View>
+<Button
+style={{
+  backgroundColor:localStorage.getItem('themecolor2'),
+  width:100,
+  height:40
+}}
+onClick={()=>{
+UpdateLogo() 
+}}
+><Text
+style={{
+  fontWeight:'bold',
+  fontSize:parseInt(localStorage.getItem("themefontsizetext"), 0) + 0,
+  color:localStorage.getItem('themecolor5'),
+}}
+>UPDATE</Text></Button>
+</View>
     </View>
 </Typography>
   }
