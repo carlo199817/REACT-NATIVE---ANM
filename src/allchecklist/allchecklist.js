@@ -31,6 +31,12 @@ import { BiZoomIn, BiZoomOut } from "react-icons/bi";
 
 export const Allchecklist = props => {
 
+  var Menu
+  if(localStorage.getItem('rolesNumber')==="1"){
+    Menu = ['FLIGHT LIST','CHECKLIST']
+ }else{ 
+   Menu =  ['FLIGHT LIST','CHECKLIST','SWITCH USER']
+ }
   let  [myquestionid, setQuestionID] = useState("");  
   let  [myquestion, setQuestion] = useState("");  
   let  [myquestiontype, setQuestionType] = useState("");  
@@ -77,7 +83,6 @@ export const Allchecklist = props => {
       const json = await response.json();
       choicesID=json['id']
 
-      DeleteChoices()
       if(response.status==200){ 
         toast(
           'Update',
@@ -85,7 +90,7 @@ export const Allchecklist = props => {
          theme:'success'
           })
         )
-       
+             DeleteChoices()
       }
    
     } catch (error) { 
@@ -120,7 +125,7 @@ export const Allchecklist = props => {
       setSingleChoices("")
       setChoices([])
       setTimeout(() => { 
-        getChecklist2()
+       // getChecklist2()
         localStorage.setItem('allow', "on");
        }, 3000);
         }
@@ -196,7 +201,7 @@ var h =0
         setSingleChoices("")
         setChoices([]) 
         setChoicesID([])
-        getChecklist2()
+      //  getChecklist2()
       }
       
  
@@ -364,10 +369,6 @@ async function addQuestion(){
         setOverAll("DECLINED")
       }
 
-      getClient()
-      if(response.status==200){ 
-   
-      }
       return json.movies;   
     } catch (error) { 
     }
@@ -458,7 +459,7 @@ async function addQuestion(){
         setOverAll("DECLINED")
       }
 
-      getClient()
+
       if(response.status==200){ 
    
       }
@@ -483,7 +484,7 @@ async function addQuestion(){
       if(response.status==200){ 
       setClient(JSON.stringify(json))
       }
-      return json.movies;   
+      return json.movies;    
     } catch (error) { 
     }
   }
@@ -1850,14 +1851,6 @@ style={{
 }}
 >CHECKLIST</Text>
     </td>
-    <td>
-    <Button>
-    <IoAdd
-      size={40}
-      color="white"
-      ></IoAdd>
-    </Button>
-      </td>
       <td>
     <Button
     onClick={()=>{
@@ -2258,6 +2251,6 @@ paddingLeft:50,
 
 
 var choicesID = "";
-  var Menu = ['FLIGHT LIST','CHECKLIST','SWITCH USER']
+
 
   

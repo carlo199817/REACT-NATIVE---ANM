@@ -42,11 +42,30 @@ async function login(){
        theme:'success'
         })
       ) 
-
       localStorage.setItem('roles',JSON.stringify(json[0]['roles_user_id']))
-
+      
+      var orp = json[0]['roles_user_id']
+      localStorage.setItem('rolesNumber', orp.length);
       setTimeout(() => {
-         props.navigation.navigate('Lobby');
+        if(orp.length===0){
+          toast( 
+            "No roles assign yet",
+            toastConfig({
+           theme:'success'
+            })
+          ) 
+        }else if(orp.length===1){ 
+         if(orp[0]['roles_description_id']['description']==="USER"){
+          props.navigation.navigate('Client');
+         }else if(orp[0]['roles_description_id']['description']==="ADMIN"){
+          props.navigation.navigate('Admin');
+         }else{
+          localStorage.setItem("MainRoles",orp[0]['roles_description_id']['description'])
+          props.navigation.navigate('Allchecklist');
+         }
+        }else{ 
+          props.navigation.navigate('Lobby');
+        }
         }, 2000);
       }else if(response.status==401) {
         toast( 
@@ -263,7 +282,7 @@ document.body.style = 'background:'+localStorage.getItem('themecolor1');
       );
   
   }
- 
+  localStorage.setItem('rolesNumber', "");
   localStorage.setItem('roles', "");
   localStorage.setItem('allow', "on");
   localStorage.setItem('themecolor1', "#1D3D4C");
@@ -290,6 +309,7 @@ document.body.style = 'background:'+localStorage.getItem('themecolor1');
   localStorage.setItem('APIdeparture', "https://core01.ameliteaviation.com:19987/origin_destination/");
   localStorage.setItem('APIbook', "https://core01.ameliteaviation.com:19987/client/");
   localStorage.setItem('APIbook2', "https://core01.ameliteaviation.com:19987/clientfiltered/");
+  localStorage.setItem('APIbook3', "https://core01.ameliteaviation.com:19987/clientfilteredall/");
   
   localStorage.setItem('APIpassenger', "https://core01.ameliteaviation.com:19987/passenger/");
   localStorage.setItem('APImultirole', "https://core01.ameliteaviation.com:19987/multiroles/");
@@ -318,3 +338,6 @@ document.body.style = 'background:'+localStorage.getItem('themecolor1');
   localStorage.setItem('APImobile_themes_activator', "https://core01.ameliteaviation.com:19987/mobile_themes_activate/"); 
   localStorage.setItem('APIweb_themes', "https://core01.ameliteaviation.com:19987/web_themes/"); 
   localStorage.setItem('APIweb_themes_activator', "https://core01.ameliteaviation.com:19987/web_themes_activate/"); 
+
+  
+  

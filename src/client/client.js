@@ -35,6 +35,15 @@ import { keys } from "@mui/system";
 
 
 export const Client = props => {
+
+var Menu
+  if(localStorage.getItem('rolesNumber')==="1"){
+     Menu = ['BOOK','MANAGE']
+  }else{ 
+    Menu = ['BOOK','MANAGE','SWITCH USER']
+  }
+
+
   let  [mytest, setTest] = useState("");  
 
   let  [myreview, setReview] = useState(false);  
@@ -723,9 +732,9 @@ async function addQuestion(){
   }
   async function getClient(){
 
-    try {
+    try { 
       const response = await fetch(
-        localStorage.getItem("APIbook"), {
+        localStorage.getItem("APIbook3"), { 
           method: 'GET',
           headers: {
             'Content-type': 'application/json',
@@ -739,10 +748,10 @@ async function addQuestion(){
       setClient(JSON.stringify(json))
       }
       return json.movies;   
-    } catch (error) { 
+    } catch (error) {  
     }
   }
-getClient()
+
   async function getAllchecklist(){
 
     try {
@@ -1239,7 +1248,558 @@ onClick={()=>{
 
 
 
-   if(mychooser==="BOOK"){
+ if(mychooser==="MANAGE"){
+  if(getClientID!=""){
+    var STATUS;
+    if(getOverAll==="PENDING"){
+STATUS=<Text
+style={{
+  color:'yellow'
+}}
+>
+  PENDING
+</Text>
+    }else if(getOverAll==="DECLINED"){
+      STATUS=<Text
+      style={{
+        color:'red'
+      }}
+      >
+        DECLINED
+      </Text>
+          }else if(getOverAll==="COMPLETED"){
+            STATUS=<Text
+            style={{
+              color:'cyan'
+            }}
+            >
+              COMPLETED
+            </Text>
+                }
+
+
+                DETAILS2 = <View
+                style={{
+                  overflowY:"scroll",
+                  height: window.innerHeight-50,
+                  width: window.innerWidth-1200,
+                
+                }} 
+                >
+               {
+ JSON.parse(mychecklist).map((str) => {
+  var Status1 
+  if(str.checklist_status==="PENDING"){
+    Status1 =  <Text
+    style={{
+      fontSize:parseInt(localStorage.getItem("themefontsizetitle"), 0) + 0,
+      fontWeight:'400',
+      color:'yellow'
+    }}
+    >{str.checklist_status}</Text>
+  }  if(str.checklist_status==="DECLINED"){
+    Status1 =  <Text
+    style={{
+      fontSize:parseInt(localStorage.getItem("themefontsizetitle"), 0) + 0,
+      fontWeight:'400',
+      color:'red'
+    }}
+    >{str.checklist_status}</Text>
+  } if(str.checklist_status==="COMPLETED"){
+    Status1 =  <Text
+    style={{
+      fontSize:parseInt(localStorage.getItem("themefontsizetitle"), 0) + 0,
+      fontWeight:'400',
+      color:'cyan'
+    }}
+    >{str.checklist_status}</Text>
+  }
+          return (
+            <table>
+              <tr>
+        <td
+        style={{
+          width:350
+        }}
+        > <Text
+style={{
+fontSize:parseInt(localStorage.getItem("themefontsizetitle"), 0) + 0,
+color:localStorage.getItem('themecolor5'),
+fontWeight:'400',
+}}
+>{str.checklist_group}</Text></td>
+<td>{Status1}</td>
+
+            </tr>
+            <tr>
+             
+              </tr>
+            </table>
+          );
+        })}
+                </View>  
+
+
+DETAILS = <View
+style={{
+overflowY:"scroll",
+height: window.innerHeight-50,
+
+}}
+>
+<table
+ style={{
+}}>
+<tr>
+<td>
+<Text
+style={{
+color:localStorage.getItem('themecolor5'),
+fontWeight:'200',
+fontSize:parseInt(localStorage.getItem("themefontsizetitle"), 0) + 0, 
+}}
+>DETAILS :</Text>
+</td>
+
+</tr>
+<tr
+>
+<td
+style={{
+paddingLeft:30
+}}
+>
+<Text
+style={{
+color:localStorage.getItem('themecolor5'),
+fontWeight:localStorage.getItem('themefontweight'),
+fontSize:parseInt(localStorage.getItem("themefontsizetitle"), 0) + 0, 
+}}
+>{getAircraft}</Text>
+</td>
+
+</tr>
+<tr
+>
+<td
+style={{
+paddingLeft:30
+}}
+>
+<Text
+style={{
+color:localStorage.getItem('themecolor5'),
+fontWeight:localStorage.getItem('themefontweight'),
+fontSize:parseInt(localStorage.getItem("themefontsizetitle"), 0) + 0, 
+}}
+>{getOrigin+"  >  "+getDestination}</Text>
+</td>
+
+</tr>
+<tr
+>
+<td
+style={{
+paddingLeft:30
+}}
+>
+<Text
+style={{
+color:localStorage.getItem('themecolor5'),
+fontWeight:localStorage.getItem('themefontweight'),
+fontSize:parseInt(localStorage.getItem("themefontsizetitle"), 0) + 0, 
+}}
+>{getOption}</Text>
+</td>
+
+</tr>
+<tr
+>
+<td
+style={{
+paddingLeft:30
+}}
+>
+<Text
+style={{
+color:localStorage.getItem('themecolor5'),
+fontWeight:localStorage.getItem('themefontweight'),
+fontSize:parseInt(localStorage.getItem("themefontsizetitle"), 0) + 0, 
+}}
+>{"DEPART. : "+dateFormat(getTimeDeparture, "UTC:mmmm dd, yyyy h:MM TT")}</Text>
+</td>
+
+</tr>
+<tr>
+<View
+style={{
+  height:10
+}}
+>
+  
+</View>
+</tr>
+<tr
+>
+<td
+style={{
+
+}}
+>
+<Text
+style={{
+color:localStorage.getItem('themecolor5'),
+fontWeight:'200',
+fontSize:parseInt(localStorage.getItem("themefontsizetitle"), 0) + 0, 
+}}
+>PASSENGER</Text>
+</td>
+
+</tr>
+<tr
+>
+<td
+style={{
+paddingLeft:30
+}}
+>
+<Text
+style={{
+color:localStorage.getItem('themecolor5'),
+fontWeight:localStorage.getItem('themefontweight'),
+fontSize:parseInt(localStorage.getItem("themefontsizetitle"), 0) + 0, 
+}}
+>{getPassenger}</Text>
+</td>
+
+</tr>
+<tr>
+<View
+style={{
+  height:10
+}}
+>
+  
+</View>
+</tr>
+<tr
+>
+<td
+style={{
+
+}}
+>
+<Text
+style={{
+color:localStorage.getItem('themecolor5'),
+fontWeight:'200',
+fontSize:parseInt(localStorage.getItem("themefontsizetitle"), 0) + 0, 
+}}
+>OVERALL STATUS :</Text>
+</td>
+
+</tr>
+<tr
+>
+<td
+style={{
+paddingLeft:30
+}}
+>
+<Text
+style={{
+fontWeight:localStorage.getItem('themefontweight'),
+fontSize:parseInt(localStorage.getItem("themefontsizetitle"), 0) + 0, 
+}}
+>{STATUS}</Text>
+</td>
+
+</tr>
+</table>
+</View>    
+
+
+
+setInit= <Text
+style={{
+fontSize:25,
+
+color:localStorage.getItem('themecolor5'),
+}}
+>CLIENT VIEW</Text>
+
+
+
+
+  }
+  
+  MyUI =   MyUI = <Typography>
+  <View>
+
+  <tbody>
+  <tr>
+    <td>
+    <Text
+      style={{
+        color:localStorage.getItem('themecolor5'),
+        fontWeight:'bold',
+        fontSize:parseInt(localStorage.getItem("themefontsizeheader"), 0) + 0, 
+      }}
+      >FLIGHT INFORMATION</Text>
+    </td>
+    <td>
+      <View
+      style={{
+width:286
+      }}>
+
+      </View>
+    </td>
+    <td>
+    <Text
+      style={{
+
+
+        color:localStorage.getItem('themecolor5'),
+        fontWeight:localStorage.getItem("themefontweight"),
+        fontSize:parseInt(localStorage.getItem("themefontsizeheader"), 0) + 0, 
+      }}
+      >{setInit}</Text>
+    </td>
+    <td>
+      <View
+      style={{
+width:360
+      }}>
+
+      </View>
+    </td>
+    <td>
+      <View
+      style={{
+width:10
+      }}>
+
+      </View>
+    </td>
+  
+  </tr>
+  <tr>
+    <td> </td>
+    <td></td>
+  </tr>
+</tbody>
+
+
+<View
+style={{
+height:20
+}}
+/>
+      
+<table>
+<tr>
+<td>
+<View
+  style={{
+    overflowY:"scroll",
+    height: window.innerHeight-50,
+alignItems:'left' ,
+paddingLeft:50,
+
+  }}
+>
+ {
+ JSON.parse(myclient).map((str) => {
+  var STATUS;
+  if(str['final_administrator_id']==="PENDING"){
+STATUS=<Text
+style={{
+color:'yellow',
+fontWeight:localStorage.getItem("themefontweight"),
+fontSize:parseInt(localStorage.getItem("themefontsizetitle"), 0) + 0, 
+}}
+>
+PENDING
+</Text>
+  }else if(str['final_administrator_id']==="DECLINED"){
+    STATUS=<Text
+    style={{
+      color:'red',
+      fontWeight:localStorage.getItem("themefontweight"),
+      fontSize:parseInt(localStorage.getItem("themefontsizetitle"), 0) + 0, 
+    }}
+    >
+      DECLINED
+    </Text>
+        }else if(str['final_administrator_id']==="COMPLETED"){
+          STATUS=<Text
+          style={{
+            color:'cyan',
+            fontWeight:localStorage.getItem("themefontweight"),
+            fontSize:parseInt(localStorage.getItem("themefontsizetitle"), 0) + 0, 
+          }}
+          >
+            COMPLETED
+          </Text>
+              }
+          return (
+            <tr>
+                      
+              <td>
+             
+           
+                              
+              
+                              
+                                <Button
+                                        activeOpacity={0.9}
+                                        underlayColor="#9c9c9c"
+                                        
+                                        style={{
+                                          
+                                            alignItems: 'center', 
+                                 
+                                            justifyContent: "center",
+                                        }}
+                                     
+                                        onClick={()=>{ 
+                                          setClientID(str.id)
+                                          setAircraft(str.aircraft_id.description)
+                                          setOrigin(str.origin_id)
+                                          setDestination(str.destination_id)
+                                          setOption(str.option_id) 
+                                          setTimeDeparture(str.time_departure)
+                                          var g = str.passenger_id
+                                          var h = []
+                                          for(var i=0;i<g.length;i++){
+                                            h.push(g[i]['first_name']+" "+g[i]['last_name'])
+                                          }
+                                          setPassenger(h.join("\n"))
+                                          setOverAll(str.final_administrator_id)
+                                          setChecklist(JSON.stringify(str.checklist_client))
+                                          
+                                          setQuestionlist(JSON.stringify(str.question_client_status_id))
+
+                                        }}
+                                         
+                                        > 
+                                          
+                                           <View
+                                                                    > 
+                                                                 
+                                                                    
+                                                         <td>
+                                                
+                                                      
+
+        <tr>
+          
+          <td
+        
+          >   <Text
+                                                            style={{
+                                                              color:localStorage.getItem('themecolor5'),
+                                                              fontWeight:localStorage.getItem("themefontweight"),
+                                                              fontSize:parseInt(localStorage.getItem("themefontsizetitle"), 0) + 0, 
+                                            
+                                                            }}
+                                                         >
+                                                          {dateFormat(str['time_departure'], "mm/dd/yyyy")}
+                                                         </Text></td>
+                                                         <td><View
+                                                         style={{
+                                                          width:50
+                                                          
+                                                         }}
+                                                         ></View></td>
+                                                         <td>   <Text
+                                                            style={{
+                                                              color:localStorage.getItem('themecolor5'),
+                                                              fontWeight:localStorage.getItem("themefontweight"),
+                                                              fontSize:parseInt(localStorage.getItem("themefontsizetitle"), 0) + 0, 
+                                                
+                                                            }}
+                                                         >
+                                                          {str['destination_id']}
+                                                         </Text></td>
+                                                         <td><View
+                                                         style={{
+                                                          width:50
+                                                         }}
+                                                         ></View></td>
+                                                         <td>   <Text
+                                                            style={{
+                                                              color:localStorage.getItem('themecolor5'),
+                                                              fontWeight:localStorage.getItem("themefontweight"),
+                                                              fontSize:parseInt(localStorage.getItem("themefontsizetitle"), 0) + 0, 
+                                                
+                                                            }}
+                                                         >
+                                                          {STATUS}
+                                                         </Text></td>
+        </tr>
+                                                         
+                                        
+                      
+
+
+
+                        
+
+
+                                                         </td>
+                                                         
+                                                          
+                                                                    </View>
+                                    </Button>
+
+
+                               
+              </td>
+           
+            </tr>
+          );
+        })}
+        
+     
+</View>
+
+</td>
+<td >
+<View
+style={{
+backgroundColor:'yellow',
+width:160
+}}
+>
+
+</View>
+  </td>   
+<td >
+{DETAILS}
+  </td>    
+  <td >
+<View
+style={{
+backgroundColor:'yellow',
+width:160
+}}
+>
+
+</View>
+  </td> 
+  <td >
+{DETAILS2}
+  </td>    
+</tr>
+</table>
+
+
+  </View>
+  
+</Typography>
+ }else if(mychooser==="BOOK"){
     
 var opt1 = []
 var opt = JSON.parse(getplanedata)
@@ -4637,7 +5197,6 @@ fontWeight:'400',
 setInit= <Text
 style={{
   fontSize:25,
-
   color:localStorage.getItem('themecolor5'),
 }}
 >CLIENT VIEW</Text>
@@ -4992,7 +5551,10 @@ paddingLeft:50,
         
             }}onClick={()=>{
             setChooser(str)
-            setTimeArrival(false)   
+            if(str==="MANAGE"){
+              getClient()
+            }
+  
             }}>
               
              
@@ -5053,7 +5615,7 @@ paddingLeft:50,
 
 
 var choicesID = "";
-  var Menu = ['BOOK','MANAGE','SWITCH USER']
+  
   var count = 0
 
 var opt4

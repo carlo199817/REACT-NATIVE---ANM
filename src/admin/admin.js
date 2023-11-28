@@ -34,6 +34,12 @@ import { BiZoomIn, BiZoomOut } from "react-icons/bi";
 
 
 export const Admin = props => {
+  var Menu
+  if(localStorage.getItem('rolesNumber')==="1"){
+    Menu = ['FLIGHT LIST','USER MANAGEMENT','ADD PLANE','ADD DESTINATION','ADD ROLES','THEMES','LOGO']
+ }else{ 
+   Menu = ['FLIGHT LIST','USER MANAGEMENT','ADD PLANE','ADD DESTINATION','ADD ROLES','THEMES','LOGO','SWITCH USER']
+ }
   const [images, setImages] = useState([]);
 
   const [images2, setImages2] = useState([]);
@@ -9655,7 +9661,7 @@ style={{
         }else{
         addFontFamily()
         }
-        }}
+        }} 
         ><Text
         style={{
           fontWeight:'bold',
@@ -10580,7 +10586,7 @@ style={{
 
 var RolesID = "";
 var EmailID = "";
-  var Menu = ['FLIGHT LIST','USER MANAGEMENT','ADD PLANE','ADD DESTINATION','ADD ROLES','THEMES','LOGO','SWITCH USER']
+
 
   var niag = []
   

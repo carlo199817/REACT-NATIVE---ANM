@@ -172,7 +172,6 @@ export const Lobby = props => {
               props.navigation.navigate('Client');
             }else{
               localStorage.setItem("MainRoles",keys.roles_description_id.description)
-              console.log(localStorage.getItem('MainRoles'))
               props.navigation.navigate('Allchecklist');
             }
           }}>
