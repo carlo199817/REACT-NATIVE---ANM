@@ -658,9 +658,26 @@ const secondColumnStart = Math.ceil( JSON.parse(mainquestiontype).length/ -2);
           fontWeight:'bold',
           color:localStorage.getItem('themecolor5'),
         }}
-        >{localStorage.getItem("MainRoles")+" CHECKLIST"}</Text>
+        >{localStorage.getItem("MainRoles")}</Text>
       </td>
-      
+      <td>
+        <View
+        style={{
+
+          width:370
+        }}
+        >
+
+        </View>
+      </td>
+      <td>
+      <Text
+        style={{
+          fontSize:parseInt(localStorage.getItem("themefontsizeheader"), 0) + 0,
+          color:localStorage.getItem('themecolor5'),
+        }}
+        >CHECKLIST</Text>
+      </td>
     </tr>
     <tr>
       <td> </td>
