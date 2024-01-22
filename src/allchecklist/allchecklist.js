@@ -652,6 +652,11 @@ const secondColumnStart = Math.ceil( JSON.parse(mainquestiontype).length/ -2);
     <tbody>
     <tr>
       <td>
+      <View
+    style={{
+      width:500
+    }}
+    >
       <Text
         style={{
           fontSize:parseInt(localStorage.getItem("themefontsizeheader"), 0) + 0,
@@ -659,12 +664,13 @@ const secondColumnStart = Math.ceil( JSON.parse(mainquestiontype).length/ -2);
           color:localStorage.getItem('themecolor5'),
         }}
         >{localStorage.getItem("MainRoles")}</Text>
+        </View>
       </td>
       <td>
         <View
         style={{
 
-          width:370
+          width:300
         }}
         >
 
