@@ -811,7 +811,7 @@ style={{
 style={{
   overflowY:"scroll",
   height: window.innerHeight-50,
-  width: window.innerWidth-1300,
+  width: 500
 
 }}
 >
@@ -1218,8 +1218,8 @@ width:350
                   DETAILS2 = <View
                   style={{
                     overflowY:"scroll",
-                    height: window.innerHeight-50,
-                    width: window.innerWidth-1200,
+                    height: window.innerHeight-200,
+                    width: 500,
                   
                   }} 
                   >
@@ -1654,7 +1654,7 @@ style={{
 DETAILS = <View
 style={{
   overflowY:"scroll",
-  height: window.innerHeight-50,
+  height: window.innerHeight-200,
 
 }}
 >
@@ -1875,23 +1875,35 @@ style={{
     <tbody>
     <tr>
       <td>
-      <Text
+    <View
+    style={{
+      width:500
+    }}
+    >
+    <Text
         style={{
+        
           color:localStorage.getItem('themecolor5'),
           fontWeight:'bold',
           fontSize:parseInt(localStorage.getItem("themefontsizeheader"), 0) + 0, 
         }}
         >{localStorage.getItem('MainRoles')}</Text>
+    </View>
       </td>
       <td>
         <View
         style={{
-width:440
+          width:180
         }}>
 
         </View>
       </td>
       <td>
+      <View
+    style={{
+      width:400
+    }}
+    >
       <Text
         style={{
           color:localStorage.getItem('themecolor5'),
@@ -1899,16 +1911,22 @@ width:440
           fontSize:parseInt(localStorage.getItem("themefontsizeheader"), 0) + 0, 
         }}
         >{setInit}</Text>
+        </View>
       </td>
       <td>
         <View
         style={{
-width:360
+          width:40
         }}>
 
         </View>
       </td>
       <td>
+      <View
+    style={{
+
+    }}
+    >
       <Text
         style={{
           color:localStorage.getItem('themecolor5'),
@@ -1916,6 +1934,7 @@ width:360
           fontSize:parseInt(localStorage.getItem("themefontsizeheader"), 0) + 0,
         }}
         >{setInit2}</Text>
+        </View>
       </td>
       <td>
         <View
@@ -1946,9 +1965,9 @@ style={{
 <View
     style={{
       overflowY:"scroll",
-      height: window.innerHeight-50,
+      height: window.innerHeight-200,
 alignItems:'left' ,
-paddingLeft:50,
+
 
     }}
   >
@@ -2033,6 +2052,12 @@ paddingLeft:50,
                                                     > 
                                                       
                                                        <View
+
+style={{
+        
+  width:500,
+                        alignItems:'left'
+                            }}
                                                                                 > 
                                                                              
                                                                                 
@@ -2056,7 +2081,7 @@ paddingLeft:50,
                                                                      </Text></td>
                                                                      <td><View
                                                                      style={{
-                                                                      width:50
+                                                                      width:10
                                                                      }}
                                                                      ></View></td>
                                                                      <td>   <Text
@@ -2071,7 +2096,7 @@ paddingLeft:50,
                                                                      </Text></td>
                                                                      <td><View
                                                                      style={{
-                                                                      width:50
+                                                                      width:10
                                                                      }}
                                                                      ></View></td>
                                                                      <td>   <Text

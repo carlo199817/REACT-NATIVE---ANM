@@ -101,6 +101,7 @@ export const Admin = props => {
 
   let  [inputdestination, inputDestination] = useState("");  
   let  [inputplane, inputPlane] = useState("");  
+  let  [inputcapacity, inputCapacity] = useState("0");  
   let  [getusersdata, setUsersData] = useState("[]"); 
   
   let  [mythemes, setThemes] = useState("1");  
@@ -1381,6 +1382,7 @@ async function UpdatePlane(){
       }, 
       body: JSON.stringify({ 
         description: inputplane,
+        capacity:inputcapacity
       })
       } 
     );  
@@ -1394,6 +1396,7 @@ async function UpdatePlane(){
       )
       getPlaneAPI()
       inputPlane("")
+      inputCapacity("0")
     }else if(response.status==400){
       toast(
         'PLANE ALREADY EXIST',
@@ -1762,6 +1765,7 @@ async function addPlane(){
       }, 
       body: JSON.stringify({ 
         description: inputplane,
+        capacity:inputcapacity
       })
       } 
     );   
@@ -1776,6 +1780,7 @@ async function addPlane(){
       )
       getPlaneAPI()
       inputPlane("")
+      inputCapacity("0")
 
     }else if(response.status==400){
       toast(
@@ -2479,6 +2484,7 @@ async function addWebThemes(){
         )
         getPlaneAPI()
         inputPlane("")
+        inputCapacity("0")
       }
  
     } catch (error) { 
@@ -2753,8 +2759,8 @@ async function addWebThemes(){
                   DETAILS2 = <View
                   style={{
                     overflowY:"scroll",
-                    height: window.innerHeight-50,
-                    width: window.innerWidth-1200,
+                    height: window.innerHeight-200,
+                    width: 500,
                   
                   }} 
                   >
@@ -3178,8 +3184,7 @@ ANSWER = <table>
 DETAILS = <View
 style={{
   overflowY:"scroll",
-  height: window.innerHeight-50,
-
+  height: window.innerHeight-200,
 }}
 >
 <table
@@ -3375,14 +3380,7 @@ style={{
 }}
 >CHECKLIST</Text>
     </td>
-    <td>
-    <Button>
-    <IoAdd 
-      size={parseInt(localStorage.getItem("themeiconssize"), 0) + 0}
-      color={localStorage.getItem('themecolor5')}
-      ></IoAdd>
-    </Button>
-      </td>
+
       <td>
     <Button
     onClick={()=>{
@@ -3480,9 +3478,9 @@ style={{
 <View
     style={{
       overflowY:"scroll",
-      height: window.innerHeight-50,
-alignItems:'left' ,
-paddingLeft:50,
+      height: window.innerHeight-200,
+
+
 
     }}
   >
@@ -3534,10 +3532,8 @@ style={{
                                           underlayColor="#9c9c9c"
                                           
                                           style={{
-                                            
-                                              alignItems: 'center', 
-                                   
-                                              justifyContent: "center",
+                         
+                           
                                           }}
                                        
                                           onClick={()=>{ 
@@ -3563,6 +3559,12 @@ style={{
                                           > 
                                             
                                              <View
+                                                      style={{
+        
+                                 width:500,
+                                                       alignItems:'left'
+                                                           }}
+                                            
                                                                       > 
                                                                    
                                                                       
@@ -3579,14 +3581,14 @@ style={{
                                                                 color:localStorage.getItem('themecolor5'),
                                                                 fontWeight:localStorage.getItem("themefontweight"),
                                                                 fontSize:parseInt(localStorage.getItem("themefontsizetitle"), 0) + 0, 
-                                              
+                                                          
                                                               }}
                                                            >
                                                             {dateFormat(str['time_departure'], "mm/dd/yyyy")}
                                                            </Text></td>
                                                            <td><View
                                                            style={{
-                                                            width:50
+                                                            width:10
                                                             
                                                            }}
                                                            ></View></td>
@@ -3602,7 +3604,7 @@ style={{
                                                            </Text></td>
                                                            <td><View
                                                            style={{
-                                                            width:50
+                                                            width:10
                                                            }}
                                                            ></View></td>
                                                            <td>   <Text
@@ -3647,7 +3649,7 @@ style={{
  <View
  style={{
   backgroundColor:'yellow',
-  width:160
+  width:100
  }}
  >
 
@@ -4278,6 +4280,7 @@ width:350
                     
                                 onClick={()=>{ 
                                inputPlane(str['description'])
+                               inputCapacity(str['capacity'])
                                   RolesID = str['id']
                                 }}
                                  
@@ -4351,7 +4354,22 @@ if(inputplane==="")
 if(localStorage.getItem("allow")==="on"){
 localStorage.setItem('allow', "off");
 toast(
-'Avoid blank space',
+'Plane name is required',
+toastConfig({
+theme:'dark'
+})
+)
+
+setTimeout(() => {
+localStorage.setItem('allow', "on");
+}, 3000);
+}
+}else if(inputcapacity==="")
+{
+if(localStorage.getItem("allow")==="on"){
+localStorage.setItem('allow', "off");
+toast(
+'Capacity is required',
 toastConfig({
 theme:'dark'
 })
@@ -4385,7 +4403,22 @@ if(inputplane==="")
 if(localStorage.getItem("allow")==="on"){
 localStorage.setItem('allow', "off");
 toast(
-'Avoid blank space',
+'Plane is required',
+toastConfig({
+theme:'dark'
+})
+)
+
+setTimeout(() => {
+localStorage.setItem('allow', "on");
+}, 3000);
+}
+}if(inputcapacity==="")
+{
+if(localStorage.getItem("allow")==="on"){
+localStorage.setItem('allow', "off");
+toast(
+'Capacity is required',
 toastConfig({
 theme:'dark'
 })
@@ -4472,7 +4505,33 @@ style={{
       /> 
 
 
+<View
+style={{
+  height:5 
+}}
+></View>
+<TextInput
 
+        style={
+          {
+            outlineStyle: 'none',
+            borderColor:localStorage.getItem('themecolor2'), 
+            backgroundColor:localStorage.getItem('themecolor3'),
+            height:50,
+            width:350,
+            borderWidth:2, 
+            paddingLeft: 12,
+    paddingRight: 8, 
+    fontSize:parseInt(localStorage.getItem("themefontsizetext"), 0) + 0,   
+    color:localStorage.getItem('themecolor5'),
+          }
+        }
+        
+        value={inputcapacity} 
+        placeholder="CAPACITY"
+        placeholderTextColor={localStorage.getItem('themecolor6')}
+        onChangeText={(role) => {inputCapacity(role.replace(/[^0-9]/g, ''),)}}
+      /> 
   
 
 
@@ -4766,31 +4825,22 @@ height:15
       </td>
       
     </tr>
-    <tr>
-      <td> </td>
-      <td></td>
-    </tr>
   </tbody>
   
 
-<View
-style={{
-  height:20
-}}
-/>
+
         
 <table>
 <tr>
 <td
-  style={{
-   
-  }}
+
 >
 <View
     style={{
       overflowY:"scroll",
-      height: window.innerHeight-50,
-      width: window.innerWidth-1200,
+      height: window.innerHeight-200,
+      width: 550,
+
 alignItems:'center' 
     }}
   >
@@ -4835,7 +4885,7 @@ alignItems:'center'
       paddingLeft:20,
       justifyContent:'center',
       flexGrow: 1,
-      width: 300,
+      width: 400,
     }}>
              <Text
                                                               style={{
@@ -4887,14 +4937,18 @@ style={{
 }}
 ></View>
 </td>
-
+<td>
+  <View
+  style={{width:200}}
+  ></View>
+</td>
   <td >
   <View
 style={{
   overflowY:"scroll",
 
-  height: window.innerHeight-50,
-  width: window.innerWidth-550,
+  height: window.innerHeight-200,
+  width:500,
   alignItems:'center' 
 }}
 >
@@ -10391,20 +10445,20 @@ style={{
     if(images2.length===0){
       MYIMAGES =   <View
       style={{
-        height:500, width:500,     
+        height:300, width:300,     
       }} 
         
       >
         <img src={inputlogo} alt=""
       style={{
-        height:500, width:500
+        height:300, width:300
       }}
       />
       </View>
     }else{
       MYIMAGES =   <img src={images2} alt=""
       style={{
-        height:500, width:500}}
+        height:300, width:300}}
       />
     }
     

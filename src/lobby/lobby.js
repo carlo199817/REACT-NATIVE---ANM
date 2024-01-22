@@ -130,6 +130,8 @@ export const Lobby = props => {
                                     </View> 
                                      <Text
                                      style={{
+                                      height:100,
+                                      textAlign: 'center', 
                                       color:localStorage.getItem('themecolor5'),
                                       fontSize:localStorage.getItem('themefontsize'),
                                       fontFamily:localStorage.getItem('themefont'),
@@ -185,17 +187,18 @@ export const Lobby = props => {
                                        shadowOpacity: 0.4,
                                        shadowRadius: 10,
                                        alignItems: "center", 
-                                       justifyContent: "center", 
+                                     justifyContent:'center',
+                        
                                       }}
                                       > 
                                       {}
                                       <View
                                     style={{
-                                      height:15
+                                      height:25
                                     }}
                                     >
                                     </View> 
-                                    <img src={keys.roles_description_id.image} style={{height:120, width:120}}/>
+                                    <img src={keys.roles_description_id.image} style={{height:100, width:100}}/>
                                     <View
                                     style={{
                                       height:20
@@ -203,6 +206,8 @@ export const Lobby = props => {
                                     ></View>
                                     <Text
                                      style={{
+                                      height:100,
+                                      textAlign: 'center', 
                                       color:localStorage.getItem('themecolor5'),
                                       fontSize:parseInt(localStorage.getItem("themefontsizetext"), 0) + 0, 
                                       fontFamily:localStorage.getItem('themefont'),
