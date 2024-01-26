@@ -734,7 +734,7 @@ async function addQuestion(){
 
     try { 
       const response = await fetch(
-        localStorage.getItem("APIbook3"), { 
+        localStorage.getItem("APIbook4"), { 
           method: 'GET',
           headers: {
             'Content-type': 'application/json',
@@ -1282,7 +1282,7 @@ style={{
                 style={{
                   overflowY:"scroll",
                   height: window.innerHeight-50,
-                  width: window.innerWidth-1200,
+                  width: 500,
                 
                 }} 
                 >
@@ -1605,7 +1605,6 @@ height:20
     overflowY:"scroll",
     height: window.innerHeight-50,
 alignItems:'left' ,
-paddingLeft:50,
 
   }}
 >
@@ -1663,29 +1662,52 @@ PENDING
                                             justifyContent: "center",
                                         }}
                                      
-                                        onClick={()=>{ 
-                                          setClientID(str.id)
-                                          setAircraft(str.aircraft_id.description)
-                                          setOrigin(str.origin_id)
-                                          setDestination(str.destination_id)
-                                          setOption(str.option_id) 
-                                          setTimeDeparture(str.time_departure)
-                                          var g = str.passenger_id
-                                          var h = []
-                                          for(var i=0;i<g.length;i++){
-                                            h.push(g[i]['first_name']+" "+g[i]['last_name'])
+                                        onClick={async ()=>{ 
+
+
+                                          try {
+                                            const response = await fetch(
+                                              localStorage.getItem("APIbook")+str.id+"/", {
+                                                method: 'GET',
+                                                headers: {
+                                                  'Content-type': 'application/json',
+                                                  'Authorization': `Bearer ${localStorage.getItem("tokens")}`,
+                                              }, 
+                                              } 
+                                            );  
+                                            const json = await response.json();
+                                            setClientID(json.id)
+                                            setAircraft(json .aircraft_id.description)
+                                            setOrigin(json .origin_id)
+                                            setDestination(json .destination_id)
+                                            setOption(json .option_id) 
+                                            setTimeDeparture(json.time_departure)
+                                            var g = json.passenger_id
+                                            var h = []
+                                            for(var i=0;i<g.length;i++){
+                                              h.push(g[i]['first_name']+" "+g[i]['last_name'])
+                                            }
+                                            setPassenger(h.join("\n"))
+                                            setOverAll(json.final_administrator_id)
+                                            setChecklist(JSON.stringify(json.checklist_client))
+                                            
+                                            setQuestionlist(JSON.stringify(json.question_client_status_id))
+                                          } catch (error) { 
                                           }
-                                          setPassenger(h.join("\n"))
-                                          setOverAll(str.final_administrator_id)
-                                          setChecklist(JSON.stringify(str.checklist_client))
-                                          
-                                          setQuestionlist(JSON.stringify(str.question_client_status_id))
+
 
                                         }}
                                          
                                         > 
                                           
                                            <View
+
+style={{
+        
+  width:500,
+                        alignItems:'left'
+                            }}
+             
                                                                     > 
                                                                  
                                                                     
@@ -1709,7 +1731,7 @@ PENDING
                                                          </Text></td>
                                                          <td><View
                                                          style={{
-                                                          width:50
+                                                          width:10
                                                           
                                                          }}
                                                          ></View></td>
@@ -1725,7 +1747,7 @@ PENDING
                                                          </Text></td>
                                                          <td><View
                                                          style={{
-                                                          width:50
+                                                          width:10
                                                          }}
                                                          ></View></td>
                                                          <td>   <Text
@@ -1770,7 +1792,7 @@ PENDING
 <View
 style={{
 backgroundColor:'yellow',
-width:160
+width:90
 }}
 >
 
@@ -1783,7 +1805,7 @@ width:160
 <View
 style={{
 backgroundColor:'yellow',
-width:160
+width:100
 }}
 >
 

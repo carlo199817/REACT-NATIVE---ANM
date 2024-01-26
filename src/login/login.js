@@ -310,6 +310,8 @@ document.body.style = 'background:'+localStorage.getItem('themecolor1');
   localStorage.setItem('APIbook', "https://core01.ameliteaviation.com:19987/client/");
   localStorage.setItem('APIbook2', "https://core01.ameliteaviation.com:19987/clientfiltered/");
   localStorage.setItem('APIbook3', "https://core01.ameliteaviation.com:19987/clientfilteredall/");
+  localStorage.setItem('APIbook4', "https://core01.ameliteaviation.com:19987/clientadmin/");
+  localStorage.setItem('APIbook5', "https://core01.ameliteaviation.com:19987/clientcheck/");
   
   localStorage.setItem('APIpassenger', "https://core01.ameliteaviation.com:19987/passenger/");
   localStorage.setItem('APImultirole', "https://core01.ameliteaviation.com:19987/multiroles/");

@@ -22,6 +22,7 @@ import { IoColorPaletteSharp } from "react-icons/io5";
 import { BiSelection } from "react-icons/bi";
 import { MdWebAsset } from "react-icons/md";
 import { CiMobile1 } from "react-icons/ci";
+import {decode as base64_decode, encode as base64_encode} from 'base-64';
 import {
     View,   
     Text,
@@ -36,9 +37,9 @@ import { BiZoomIn, BiZoomOut } from "react-icons/bi";
 export const Admin = props => {
   var Menu
   if(localStorage.getItem('rolesNumber')==="1"){
-    Menu = ['FLIGHT LIST','USER MANAGEMENT','ADD PLANE','ADD DESTINATION','ADD ROLES','THEMES','LOGO']
+    Menu = ['FLIGHT LIST','USER MANAGEMENT','ADD PLANE','ADD DESTINATION','ADD ROLES','THEMES','LOGO','REPORT']
  }else{ 
-   Menu = ['FLIGHT LIST','USER MANAGEMENT','ADD PLANE','ADD DESTINATION','ADD ROLES','THEMES','LOGO','SWITCH USER']
+   Menu = ['FLIGHT LIST','USER MANAGEMENT','ADD PLANE','ADD DESTINATION','ADD ROLES','THEMES','LOGO','REPORT','SWITCH USER']
  }
   const [images, setImages] = useState([]);
 
@@ -1182,7 +1183,7 @@ insertWebThemeIconSize({ value: json[0]['web_theme_icons_size_id'], label:<tr
 
     try {
       const response = await fetch(
-        localStorage.getItem("APIbook"), {
+        localStorage.getItem("APIbook4"), {
           method: 'GET',
           headers: {
             'Content-type': 'application/json',
@@ -2726,6 +2727,328 @@ async function addWebThemes(){
 
   if(mychooser==="SWITCH USER"){
     props.navigation.navigate('Lobby');
+  }else if(mychooser==="REPORT"){  
+    if(getClientID!=""){
+      var STATUS;
+      if(getOverAll==="PENDING"){
+  STATUS=<Text
+  style={{
+    color:'yellow'
+  }}
+  >
+    PENDING
+  </Text>
+      }else if(getOverAll==="DECLINED"){
+        STATUS=<Text
+        style={{
+          color:'red'
+        }}
+        >
+          DECLINED
+        </Text>
+            }else if(getOverAll==="COMPLETED"){
+              STATUS=<Text
+              style={{
+                color:'cyan'
+              }}
+              >
+                COMPLETED
+              </Text>
+                  }
+
+
+
+
+
+
+
+
+
+
+
+    }
+    
+    MyUI =   MyUI = <Typography>
+    <View>
+
+    <tbody>
+    <tr>
+      <td>
+      <Text
+        style={{
+          color:localStorage.getItem('themecolor5'),
+          fontWeight:'bold',
+          fontSize:parseInt(localStorage.getItem("themefontsizeheader"), 0) + 0, 
+        }}
+        >REPORT</Text>
+      </td>
+    
+
+    
+    </tr>
+    <tr>
+      <td> </td>
+      <td></td>
+    </tr>
+  </tbody>
+  
+
+<View
+style={{
+  height:20
+}}
+/>
+        
+<table>
+<tr>
+<td>
+<View
+    style={{
+      overflowY:"scroll",
+      height: window.innerHeight-200,
+
+
+
+    }}
+  >
+   {
+   JSON.parse(myclient).map((str) => {
+    var STATUS;
+    if(str['final_administrator_id']==="PENDING"){
+STATUS=<Text
+style={{
+  color:'yellow',
+  fontWeight:localStorage.getItem("themefontweight"),
+  fontSize:parseInt(localStorage.getItem("themefontsizetitle"), 0) + 0, 
+}}
+>
+  PENDING
+</Text>
+    }else if(str['final_administrator_id']==="DECLINED"){
+      STATUS=<Text
+      style={{
+        color:'red',
+        fontWeight:localStorage.getItem("themefontweight"),
+        fontSize:parseInt(localStorage.getItem("themefontsizetitle"), 0) + 0, 
+      }}
+      >
+        DECLINED
+      </Text>
+          }else if(str['final_administrator_id']==="COMPLETED"){
+            STATUS=<Text
+            style={{
+              color:'cyan',
+              fontWeight:localStorage.getItem("themefontweight"),
+              fontSize:parseInt(localStorage.getItem("themefontsizetitle"), 0) + 0, 
+            }}
+            >
+              COMPLETED
+            </Text>
+                }
+            return (
+              <tr>
+                        
+                <td>
+               
+             
+                                <Button
+                                style={{
+                                  backgroundColor:'grey',
+                                  color:'white'
+                                }}
+                                onClick={async ()=>{
+                          
+
+                                  try {
+                                    const response = await fetch(
+                                      localStorage.getItem("APIbook")+str.id+"/", {
+                                        method: 'GET',
+                                        headers: {
+                                          'Content-type': 'application/json',
+                                          'Authorization': `Bearer ${localStorage.getItem("tokens")}`,
+                                      }, 
+                                      } 
+                                    );  
+                                    const json = await response.json();
+                                        
+                  
+                            
+                                    var compress = [] 
+                                    compress.push(json.aircraft_id.description);
+                                    compress.push(json.origin_id);
+                                    compress.push(json.destination_id)
+                                    compress.push(json.option_id)
+                                    compress.push(json.time_departure)
+                                    compress.push(json.time_arrival)
+                                    var g = json.passenger_id
+                                    var h = []
+                                    for(var i=0;i<g.length;i++){
+                                      h.push(g[i]['first_name']+" "+g[i]['last_name'])
+                                    }
+                                    compress.push(h.join("\n"))
+                                    compress.push(json.final_administrator_id+" OVER ALL")
+                                    var g1 = json.checklist_client
+                                    var h1 = []
+                                    for(var i=0;i<g1.length;i++){
+                                      h1.push(g1[i]['checklist_status']+" "+g1[i]['checklist_group'])
+                                    }
+                                    compress.push(h1.join("\n"))
+                                    var g2 = json.question_client_status_id
+                                    var h2 = []
+                                    for(var i=0;i<g2.length;i++){
+                                      h2.push(g2[i]['answer']+" "+g2[i]['question'])
+                                    }
+                                    compress.push(h2.join("\n"))
+                                    let encoded = base64_encode(compress.join("\n"));
+                                    const anchor = document.createElement('a');
+                                    anchor.href = 'data:application;base64,' + encoded;
+                                    anchor.target = '_blank';
+                                    anchor.download = dateFormat(str['time_departure'], "mm/dd/yyyy")+" "+json.destination_id+".csv";
+                                    anchor.click();
+                                  } catch (error) { 
+                                  }
+                           
+
+
+
+
+                              
+                                }} 
+                                >Download</Button>
+                                
+                                  <Button
+                                          activeOpacity={0.9}
+                                          underlayColor="#9c9c9c"
+                                          
+                                          style={{
+                         
+                           
+                                          }}
+                                       
+                                      disabled="true"
+                                           
+                                          > 
+                                            
+                                             <View
+                                                      style={{
+        
+                                 width:500,
+                                                       alignItems:'left'
+                                                           }}
+                                            
+                                                                      > 
+                                                                   
+                                                                      
+                                                           <td>
+                                                  
+                                                        
+ 
+          <tr>
+            
+            <td
+          
+            >   <Text
+                                                              style={{
+                                                                color:localStorage.getItem('themecolor5'),
+                                                                fontWeight:localStorage.getItem("themefontweight"),
+                                                                fontSize:parseInt(localStorage.getItem("themefontsizetitle"), 0) + 0, 
+                                                          
+                                                              }}
+                                                           >
+                                                            {dateFormat(str['time_departure'], "mm/dd/yyyy")}
+                                                           </Text></td>
+                                                           <td><View
+                                                           style={{
+                                                            width:10
+                                                            
+                                                           }}
+                                                           ></View></td>
+                                                           <td>   <Text
+                                                              style={{
+                                                                color:localStorage.getItem('themecolor5'),
+                                                                fontWeight:localStorage.getItem("themefontweight"),
+                                                                fontSize:parseInt(localStorage.getItem("themefontsizetitle"), 0) + 0, 
+                                                  
+                                                              }}
+                                                           >
+                                                            {str['destination_id']}
+                                                           </Text></td>
+                                                           <td><View
+                                                           style={{
+                                                            width:10
+                                                           }}
+                                                           ></View></td>
+                                                           <td>   <Text
+                                                              style={{
+                                                                color:localStorage.getItem('themecolor5'),
+                                                                fontWeight:localStorage.getItem("themefontweight"),
+                                                                fontSize:parseInt(localStorage.getItem("themefontsizetitle"), 0) + 0, 
+                                                  
+                                                              }}
+                                                           >
+                                                            {STATUS}
+                                                           </Text></td>
+          </tr>
+                                                           
+                                          
+                        
+
+
+  
+                          
+ 
+ 
+                                                           </td>
+                                                           
+                                                            
+                                                                      </View>
+                                      </Button>
+
+
+                                 
+                </td>
+             
+              </tr>
+            );
+          })}
+          
+       
+  </View>
+
+</td>
+<td >
+ <View
+ style={{
+  backgroundColor:'yellow',
+  width:100
+ }}
+ >
+
+ </View>
+    </td>   
+  <td >
+ {DETAILS}
+    </td>    
+    <td >
+ <View
+ style={{
+  backgroundColor:'yellow',
+  width:160
+ }}
+ >
+
+ </View>
+    </td> 
+    <td >
+ {DETAILS2}
+    </td>    
+</tr>
+  </table>
+
+  
+    </View>
+    
+</Typography>
   }else if(mychooser==="FLIGHT LIST"){  
     if(getClientID!=""){
       var STATUS;
@@ -3536,23 +3859,39 @@ style={{
                            
                                           }}
                                        
-                                          onClick={()=>{ 
-                                            setClientID(str.id)
-                                            setAircraft(str.aircraft_id.description)
-                                            setOrigin(str.origin_id)
-                                            setDestination(str.destination_id)
-                                            setOption(str.option_id) 
-                                            setTimeDeparture(str.time_departure)
-                                            var g = str.passenger_id
-                                            var h = []
-                                            for(var i=0;i<g.length;i++){
-                                              h.push(g[i]['first_name']+" "+g[i]['last_name'])
+                                          onClick={async ()=>{ 
+                         
+                                            try {
+                                              const response = await fetch(
+                                                localStorage.getItem("APIbook")+str.id+"/", {
+                                                  method: 'GET',
+                                                  headers: {
+                                                    'Content-type': 'application/json',
+                                                    'Authorization': `Bearer ${localStorage.getItem("tokens")}`,
+                                                }, 
+                                                } 
+                                              );  
+                                              const json = await response.json();
+                                              setClientID(json.id)
+                                              setAircraft(json .aircraft_id.description)
+                                              setOrigin(json .origin_id)
+                                              setDestination(json .destination_id)
+                                              setOption(json .option_id) 
+                                              setTimeDeparture(json.time_departure)
+                                              var g = json.passenger_id
+                                              var h = []
+                                              for(var i=0;i<g.length;i++){
+                                                h.push(g[i]['first_name']+" "+g[i]['last_name'])
+                                              }
+                                              setPassenger(h.join("\n"))
+                                              setOverAll(json.final_administrator_id)
+                                              setChecklist(JSON.stringify(json.checklist_client))
+                                              
+                                              setQuestionlist(JSON.stringify(json.question_client_status_id))
+                                            } catch (error) { 
                                             }
-                                            setPassenger(h.join("\n"))
-                                            setOverAll(str.final_administrator_id)
-                                            setChecklist(JSON.stringify(str.checklist_client))
-                                            
-                                            setQuestionlist(JSON.stringify(str.question_client_status_id))
+                                     
+                                  
 
                                           }}
                                            
@@ -10568,6 +10907,9 @@ style={{
          }else if(str==="LOGO"){
           getlogoAPI()
          }else if(str==="FLIGHT LIST"){
+          getClient()
+         }
+         else if(str==="REPORT"){
           getClient()
          }else if(str==="THEMES"){
           insertUse("")  

@@ -471,7 +471,7 @@ async function addQuestion(){
 
     try {
       const response = await fetch(
-        localStorage.getItem("APIbook"), {
+        localStorage.getItem("APIbook5"), {
           method: 'GET',
           headers: {
             'Content-type': 'application/json',
@@ -2051,25 +2051,36 @@ alignItems:'left' ,
                                                         justifyContent: "center",
                                                     }}
                                                  
-                                                    onClick={()=>{ 
-                                                      setClientID(str.id)
-                                                      setAircraft(str.aircraft_id.description)
-                                                      setOrigin(str.origin_id)
-                                                      setDestination(str.destination_id)
-                                                      setOption(str.option_id) 
-                                                      setTimeDeparture(str.time_departure)
-                                                      var g = str.passenger_id
-                                                      var h = []
-                                                      for(var i=0;i<g.length;i++){
-                                                        h.push(g[i]['first_name']+" "+g[i]['last_name'])
+                                                    onClick={async ()=>{ 
+                                                      try {
+                                                        const response = await fetch(
+                                                          localStorage.getItem("APIbook")+str.id+"/", {
+                                                            method: 'GET',
+                                                            headers: {
+                                                              'Content-type': 'application/json',
+                                                              'Authorization': `Bearer ${localStorage.getItem("tokens")}`,
+                                                          }, 
+                                                          } 
+                                                        );  
+                                                        const json = await response.json();
+                                                        setClientID(json.id)
+                                                        setAircraft(json .aircraft_id.description)
+                                                        setOrigin(json .origin_id)
+                                                        setDestination(json .destination_id)
+                                                        setOption(json .option_id) 
+                                                        setTimeDeparture(json.time_departure)
+                                                        var g = json.passenger_id
+                                                        var h = []
+                                                        for(var i=0;i<g.length;i++){
+                                                          h.push(g[i]['first_name']+" "+g[i]['last_name'])
+                                                        }
+                                                        setPassenger(h.join("\n"))
+                                                        setOverAll(json.final_administrator_id)
+                                                        setChecklist(JSON.stringify(json.checklist_client))
+                                                        
+                                                        setQuestionlist(JSON.stringify(json.question_client_status_id))
+                                                      } catch (error) { 
                                                       }
-                                                      setPassenger(h.join("\n"))
-                                                      setOverAll(str.final_administrator_id)
-                                         
-                                                      setChecklist(JSON.stringify(str.checklist_client))
-                                                      
-                                                      setQuestionlist(JSON.stringify(str.question_client_status_id))
-                  
                                                     }}
                                                      
                                                     > 
